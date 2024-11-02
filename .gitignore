@@ -9,4 +9,6 @@ __pycache__/
 
 # Project files
 *.pdf
-*.html
+# *.html
+
+scripts/

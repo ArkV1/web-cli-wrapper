@@ -13,3 +13,7 @@ def register_routes(app):
     @app.route('/website-to-source')
     def website_to_source():
         return render_template('website-to-source.html')
+
+    @app.route('/transcription')
+    def transcription():
+        return render_template('transcription.html')

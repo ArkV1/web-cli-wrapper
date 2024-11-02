@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Web CLI Tools{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div id="side-panel" class="w-64 bg-white shadow-lg p-4">
+            <h2 class="text-lg font-semibold mb-4">Tools</h2>
+            <ul class="space-y-2">
+                <li><a href="/" class="text-blue-600 hover:text-blue-800">Home</a></li>
+                <li><a href="/transcription" class="text-blue-600 hover:text-blue-800">YouTube Transcriber</a></li>
+                <li><a href="/website-to-pdf" class="text-blue-600 hover:text-blue-800">Website to PDF</a></li>
+                <li><a href="/website-to-source" class="text-blue-600 hover:text-blue-800">Page Source Downloader</a></li>
+            </ul>
+        </div>
+        
+        <!-- Main content -->
+        <div class="flex-1 p-8 overflow-y-auto">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

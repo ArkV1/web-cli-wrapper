@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}Website to PDF{% endblock %}
+
+{% block content %}
+<div id="main-container" class="bg-white shadow-md rounded-lg p-8 w-full mx-auto transition-all duration-500 ease-in-out">
+    <h1 class="text-2xl font-bold mb-6 text-center">Website to PDF Converter</h1>
+
+    <div class="max-w-2xl mx-auto">
+        <div class="mb-4">
+            <div id="progress-bar-container" class="hidden w-full bg-gray-200 rounded-full h-2.5 mb-2">
+                <div id="progress-bar" class="bg-indigo-600 h-2.5 rounded-full transition-all duration-300 ease-in-out" style="width: 0%"></div>
+            </div>
+            <div class="space-y-1">
+                <p id="progress" class="text-sm text-gray-700 hidden"></p>
+            </div>
+            
+            <div class="mt-4">
+                <button id="toggle-logs" class="flex items-center text-sm text-gray-600 hover:text-gray-800">
+                    <svg class="w-4 h-4 mr-1 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                    Show Debug Logs
+                </button>
+                <div id="terminal-logs" class="hidden mt-2">
+                    <div class="bg-gray-900 text-gray-100 font-mono text-sm p-4 rounded-lg max-h-60 overflow-y-auto">
+                        <div id="log-content" class="space-y-1">
+                            <!-- Logs will be inserted here dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <form id="pdf-form" class="space-y-4">
+            <div>
+                <label for="url" class="block text-sm font-medium text-gray-700">Enter Website URL:</label>
+                <input type="url" id="url" name="url" required
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+            <div>
+                <label for="exclude" class="block text-sm font-medium text-gray-700">Elements to Exclude (CSS selectors, comma-separated):</label>
+                <input type="text" id="exclude" name="exclude" placeholder=".ads, #header, .nav-menu"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <p class="mt-1 text-sm text-gray-500">Example: .ads, #header, .nav-menu</p>
+            </div>
+            <div>
+                <label for="orientation" class="block text-sm font-medium text-gray-700">Select Orientation:</label>
+                <select id="orientation" name="orientation"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <option value="auto" selected>Auto</option>
+                    <option value="portrait">Portrait</option>
+                    <option value="landscape">Landscape</option>
+                </select>
+            </div>
+            <div>
+                <label for="zoom" class="block text-sm font-medium text-gray-700">Set Zoom Factor (%):</label>
+                <input type="number" id="zoom" name="zoom" value="100" step="5" min="5"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+            <div class="flex justify-center mt-4">
+                <button type="submit"
+                    class="btn px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    Convert to PDF
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div id="result-container" class="mt-8 hidden w-full">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-semibold">Converted PDF:</h2>
+            <a id="download-link" href="#" download
+                class="inline-block px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
+                Download PDF
+            </a>
+        </div>
+        <div class="w-full">
+            <iframe id="pdf-viewer" class="w-full h-[80vh] border border-gray-300 rounded-md"></iframe>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/pdf-form.js') }}"></script>
+{% endblock %}

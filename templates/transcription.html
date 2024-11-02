@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+
+{% block title %}YouTube Transcriber{% endblock %}
+
+{% block content %}
+<div id="main-container"
+    class="bg-white shadow-md rounded-lg p-8 w-full mx-auto transition-all duration-500 ease-in-out"
+    style="max-width: 672px;">
+
+    <h1 class="text-2xl font-bold mb-6 text-center">YouTube Transcriber</h1>
+
+    <div class="max-w-2xl mx-auto">
+        <div class="mb-4">
+            <div id="progress-bar-container" data-ui-state="progressBarVisible"
+                class="hidden w-full bg-gray-200 rounded-full h-2.5 mb-2">
+                <div id="progress-bar" class="bg-indigo-600 h-2.5 rounded-full transition-all duration-300 ease-in-out"
+                    style="width: 0%"></div>
+            </div>
+            <p id="progress" data-ui-state="progressBarVisible" class="text-gray-700 hidden">Waiting for input...</p>
+            <p id="download-speed" data-ui-state="progressBarVisible" class="text-gray-700 hidden"></p>
+            <p id="eta" data-ui-state="progressBarVisible" class="text-gray-700 hidden"></p>
+        </div>
+
+        <div class="mt-4 mb-4 w-full">
+            <div class="flex justify-between items-center">
+                <button id="toggle-debug" class="flex items-center text-sm text-gray-600 hover:text-gray-800 focus:outline-none">
+                    <svg class="w-4 h-4 mr-1 transform transition-transform" id="debug-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                    Debug Logs
+                </button>
+                <button id="copy-debug" class="px-2 py-1 text-sm text-gray-600 hover:text-gray-800 focus:outline-none hidden">
+                    <span class="flex items-center">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/>
+                        </svg>
+                        Copy
+                    </span>
+                </button>
+            </div>
+            <div id="debug-logs" class="hidden mt-2 mb-4 p-4 bg-gray-50 rounded-lg border border-gray-200 max-h-60 overflow-y-auto">
+                <pre id="debug-content" class="text-xs font-mono text-gray-700 whitespace-pre-wrap"></pre>
+            </div>
+        </div>
+
+        <form id="transcription-form" class="space-y-4">
+            <div>
+                <label for="url" class="block text-sm font-medium text-gray-700">Enter YouTube URL:</label>
+                <input type="text" name="url" id="url" placeholder="Enter YouTube URL"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    required>
+            </div>
+
+            <div class="mt-4">
+                <label class="block text-sm font-medium text-gray-700">Select Transcription Method:</label>
+                <div class="mt-2 space-y-2">
+                    <div>
+                        <input type="radio" id="youtube" name="method" value="YouTube" checked
+                            class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                        <label for="youtube" class="ml-3 text-sm font-medium text-gray-700">YouTube's Own
+                            Transcription</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="whisper" name="method" value="Whisper"
+                            class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                        <label for="whisper" class="ml-3 text-sm font-medium text-gray-700">OpenAI Whisper
+                            Transcription</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="both" name="method" value="Both"
+                            class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                        <label for="both" class="ml-3 text-sm font-medium text-gray-700">Compare Both
+                            Transcriptions</label>
+                    </div>
+                </div>
+            </div>
+
+            <div id="whisper-model-container" class="mt-4 hidden">
+                <label for="whisper-model" class="block text-sm font-medium text-gray-700">
+                    Select Whisper Model:
+                </label>
+                <select id="whisper-model" name="whisper-model" 
+                        class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                    <option value="tiny">Tiny (Fastest, Least Accurate)</option>
+                    <option value="base">Base</option>
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large" selected>Large (Slowest, Most Accurate)</option>
+                </select>
+            </div>
+
+            <div class="flex justify-center mt-4">
+                <button type="submit"
+                    class="btn px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div id="results-section" class="mt-8 hidden w-full">
+        <div class="w-full mb-4">
+            <div id="results-container" class="flex flex-col mt-4 space-y-4 hidden">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-semibold">Transcription Results:</h2>
+                    <button id="compare-transcripts" 
+                            class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 hidden">
+                        Compare Transcripts
+                    </button>
+                </div>
+                
+                <div id="youtube-result-box" class="result-box bg-gray-50 p-4 border border-gray-200 rounded-lg w-full min-h-[200px] hidden">
+                    <div class="flex justify-between items-center mb-2 h-8">
+                        <h4 class="font-bold text-gray-800">YouTube Transcript:</h4>
+                        <div class="flex items-center space-x-2">
+                            <button class="copy-button px-2 py-1 bg-blue-500 text-white rounded-md text-sm">Copy</button>
+                        </div>
+                    </div>
+                    <pre id="youtube-result" class="whitespace-pre-wrap w-full"></pre>
+                </div>
+
+                <div id="whisper-result-box" class="result-box bg-gray-50 p-4 border border-gray-200 rounded-lg hidden w-full min-h-[200px] hidden">
+                    <div class="flex justify-between items-center mb-2 h-8">
+                        <h4 class="font-bold text-gray-800">Whisper Transcript:</h4>
+                        <div class="flex items-center space-x-2">
+                            <button class="refresh-button px-2 py-1 bg-gray-200 text-gray-700 rounded-md text-sm hidden">Refresh</button>
+                            <button class="copy-button px-2 py-1 bg-blue-500 text-white rounded-md text-sm">Copy</button>
+                        </div>
+                    </div>
+                    <pre id="whisper-result" class="whitespace-pre-wrap w-full"></pre>
+                </div>
+
+                <div id="comparison-result-box" class="bg-gray-50 p-4 border border-gray-200 rounded-lg hidden w-full min-h-[200px]">
+                    <div class="flex justify-between items-center mb-2 h-8">
+                        <h4 class="font-bold text-gray-800">Comparison Result:</h4>
+                        <div class="flex items-center space-x-2">
+                            <button id="compare-back-button"
+                                    class="btn px-2 py-1 bg-gray-400 text-white text-sm rounded hover:bg-gray-500 focus:outline-none focus:ring-1 focus:ring-gray-300">
+                                Back to Transcripts
+                            </button>
+                        </div>
+                    </div>
+                    <pre id="comparison-result" class="whitespace-pre-wrap w-full"></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
+<script src="{{ url_for('static', filename='js/services/socketService.js') }}"></script>
+<script src="{{ url_for('static', filename='js/transcription-form.js') }}"></script>
+{% endblock %}

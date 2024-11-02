@@ -7,6 +7,28 @@ document.addEventListener('DOMContentLoaded', function() {
     const pdfViewer = document.getElementById('pdf-viewer');
     const downloadLink = document.getElementById('download-link');
 
+    // Add new progress stages
+    const progressStages = {
+        'Fetching webpage...': { start: 0, end: 33 },
+        'Converting webpage to PDF...': { start: 33, end: 66 },
+        'Finalizing PDF...': { start: 66, end: 90 },
+        'Complete': { start: 90, end: 100 }
+    };
+
+    // Add log functionality
+    const logContent = document.createElement('div');
+    logContent.id = 'log-content';
+    logContent.className = 'space-y-1';
+
+    function addLog(message, type = 'info') {
+        const logEntry = document.createElement('div');
+        logEntry.className = `log-entry ${type}`;
+        const timestamp = new Date().toLocaleTimeString();
+        logEntry.textContent = `[${timestamp}] ${message}`;
+        logContent.appendChild(logEntry);
+        logContent.scrollTop = logContent.scrollHeight;
+    }
+
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
         
@@ -19,13 +41,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Reset UI state
         progressContainer.classList.remove('hidden');
-        progressBar.style.width = '50%';
+        progressBar.style.width = '0%';
         progressBar.classList.remove('bg-red-600');
         progressBar.classList.add('bg-indigo-600');
-        progressText.textContent = 'Converting webpage to PDF...';
+        
+        addLog('Starting PDF conversion...', 'info');
+        progressBar.style.width = '33%';
+        progressText.textContent = 'Fetching webpage...';
         resultContainer.classList.add('hidden');
 
         try {
+            addLog(`Processing URL: ${formData.url}`, 'info');
+            
             const response = await fetch('/api/convert-to-pdf', {
                 method: 'POST',
                 headers: {
@@ -33,6 +60,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 body: JSON.stringify(formData)
             });
+
+            progressBar.style.width = '66%';
+            progressText.textContent = 'Converting webpage to PDF...';
+            addLog('Webpage fetched, converting to PDF...', 'info');
 
             const data = await response.json();
 
@@ -47,6 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 resultContainer.classList.remove('hidden');
                 progressBar.style.width = '100%';
                 progressText.textContent = 'Conversion complete!';
+                addLog('PDF conversion completed successfully!', 'success');
             } else {
                 throw new Error(data.error || 'Failed to convert webpage to PDF');
             }
@@ -55,6 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
             progressBar.style.width = '100%';
             progressBar.classList.remove('bg-indigo-600');
             progressBar.classList.add('bg-red-600');
+            addLog(`Error: ${error.message}`, 'error');
         }
     });
 }); 

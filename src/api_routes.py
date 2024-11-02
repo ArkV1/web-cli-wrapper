@@ -1,10 +1,112 @@
-from flask import jsonify, request, send_file
+from flask import request, send_file, jsonify
 import subprocess
 import os
 from pathlib import Path
 import uuid
+from threading import Thread, Lock
+import time
+import logging
+from .transcription import start_transcription
 
-def register_api_routes(app):
+# Configure the logger
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+def register_api_routes(app, socketio):
+    # Store for tracking tasks with thread safety
+    tasks_lock = Lock()
+
+    # Initialize the transcription tasks dictionary
+    transcription_tasks = {}
+
+    def send_progress_update(task_id, progress, message, complete=False, success=True, error=None, transcript=None, youtube_transcript=None, whisper_transcript=None):
+        socketio.emit('transcription_progress', {
+            'task_id': task_id,
+            'progress': progress,
+            'message': message,
+            'complete': complete,
+            'success': success,
+            'error': error,
+            'transcript': transcript,
+            'youtube_transcript': youtube_transcript,
+            'whisper_transcript': whisper_transcript
+        })
+
+    def process_transcription(task_id, url, method, use_whisper, model_name):
+        logger = logging.getLogger('websocket')
+        try:
+            with tasks_lock:
+                transcription_tasks[task_id] = {
+                    'progress': 0,
+                    'message': 'Starting transcription...'
+                }
+            
+            logger.info(f"Processing transcription: method={method}, use_whisper={use_whisper}")
+            
+            result = start_transcription(url, use_whisper=use_whisper, model_name=model_name)
+            
+            logger.info(f"Transcription result: {result}")  # Add debugging
+            
+            with tasks_lock:
+                if result['success']:
+                    task_data = {
+                        'progress': 100,
+                        'message': 'Transcription complete!',
+                        'complete': True,
+                        'success': True,
+                        'youtube_transcript': result.get('youtube_transcript'),
+                        'whisper_transcript': result.get('whisper_transcript')
+                    }
+                    transcription_tasks[task_id] = task_data
+                    
+                    # Send only one update
+                    send_progress_update(
+                        task_id=task_id,
+                        progress=100,
+                        message="Transcription complete!",
+                        complete=True,
+                        success=True,
+                        youtube_transcript=result.get('youtube_transcript'),
+                        whisper_transcript=result.get('whisper_transcript')
+                    )
+                else:
+                    error_msg = result.get('error', 'Unknown error')
+                    transcription_tasks[task_id] = {
+                        'progress': 100,
+                        'message': 'Transcription failed',
+                        'complete': True,
+                        'success': False,
+                        'error': error_msg
+                    }
+                    send_progress_update(
+                        task_id=task_id,
+                        progress=100,
+                        message="Transcription failed",
+                        complete=True,
+                        success=False,
+                        error=error_msg
+                    )
+            
+        except Exception as e:
+            logger.error(f"Transcription error: {str(e)}", exc_info=True)
+            error_msg = str(e)
+            with tasks_lock:
+                transcription_tasks[task_id] = {
+                    'progress': 100,
+                    'message': f'Error: {error_msg}',
+                    'complete': True,
+                    'success': False,
+                    'error': error_msg
+                }
+            send_progress_update(
+                task_id=task_id,
+                progress=100,
+                message="Transcription failed",
+                complete=True,
+                success=False,
+                error=error_msg
+            )
+
     @app.route('/api/convert-to-pdf', methods=['POST'])
     def convert_to_pdf():
         try:
@@ -162,3 +264,61 @@ def register_api_routes(app):
             return send_file(str(file_path), mimetype='application/pdf')
         except ValueError:
             return jsonify({'error': 'Invalid filename'}), 400
+
+    @app.route('/api/transcribe', methods=['POST'])
+    def transcribe():
+        try:
+            data = request.get_json()
+            
+            # Extract parameters
+            url = data.get('url')
+            method = data.get('method', 'YouTube')  # Get the method
+            use_whisper = data.get('use_whisper', False)
+            model_name = data.get('model_name', 'large')
+            
+            if not url:
+                raise ValueError("URL is required")
+                
+            task_id = str(uuid.uuid4())
+            
+            # Log the received parameters
+            logger.info(f"Starting transcription task {task_id}")
+            logger.info(f"Parameters: method={method}, use_whisper={use_whisper}, model_name={model_name}")
+            
+            # Start transcription in background thread
+            thread = Thread(
+                target=process_transcription,
+                args=(task_id, url, method, use_whisper, model_name)
+            )
+            thread.start()
+            
+            return jsonify({
+                'success': True,
+                'task_id': task_id
+            })
+            
+        except Exception as e:
+            logger.error(f"Failed to start transcription: {str(e)}")
+            return jsonify({
+                'success': False,
+                'error': str(e)
+            }), 500
+
+    @socketio.on('check_progress')
+    def handle_progress_check(data, sid=None):
+        with tasks_lock:
+            task_id = data.get('task_id')
+            if task_id in transcription_tasks:
+                task = transcription_tasks[task_id]
+                socketio.emit('transcription_progress', {
+                    'task_id': task_id,
+                    'progress': task['progress'],
+                    'message': task['message'],
+                    'complete': task.get('complete', False),
+                    'success': task.get('success', True),
+                    'error': task.get('error'),
+                    'transcript': task.get('transcript'),
+                    'youtube_transcript': task.get('youtube_transcript'),
+                    'whisper_transcript': task.get('whisper_transcript')
+                }, room=sid)
+

@@ -1,13 +1,14 @@
 services:
   web-cli:
-    build: .
+    build:
+      context: .
     ports:
       - "${FLASK_RUN_PORT}:${FLASK_RUN_PORT}"
     volumes:
       - .:/app
-      - /app/.venv
     environment:
       - NODE_ENV=production
       - PYTHONUNBUFFERED=1
+      - GUNICORN_CMD_ARGS="--timeout 600 --worker-class gevent --worker-connections 500 --keep-alive 5 --log-level info --access-logfile - --error-logfile -"
     env_file:
       - .env

@@ -20,3 +20,15 @@ pip install -r requirements.txt
 # Create requirements.txt (when adding new packages)
 pip freeze > requirements.txt
 ```
+
+### Python Development Setup
+```bash 
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+### Run Gunicorn
+```bash
+gunicorn --worker-class gevent --workers 2 --bind 0.0.0.0:3002 --reload app:app
+```

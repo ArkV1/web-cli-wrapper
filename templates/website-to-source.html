@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Website Source Downloader{% endblock %}
+
+{% block content %}
+<div id="main-container" class="bg-white shadow-md rounded-lg p-8 w-full mx-auto transition-all duration-500 ease-in-out">
+    <h1 class="text-2xl font-bold mb-6 text-center">Website Source Code Downloader</h1>
+    <div class="max-w-2xl mx-auto">
+        <form id="source-form" class="space-y-4">
+            <div>
+                <label for="url" class="block text-sm font-medium text-gray-700">Enter Website URL:</label>
+                <input type="url" 
+                       id="url" 
+                       name="url" 
+                       required
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+            <div class="flex justify-center mt-4">
+                <button type="submit" 
+                        class="btn px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    Download Source Code
+                </button>
+            </div>
+        </form>
+    </div>
+    <div id="result-container" class="mt-8 hidden w-full">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-semibold">Source Code:</h2>
+            <a id="download-link" 
+               href="#" 
+               download
+               class="inline-block px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
+                Download HTML
+            </a>
+        </div>
+        <div class="w-full">
+            <pre id="source-viewer" class="w-full h-[80vh] border border-gray-300 rounded-md p-4 overflow-auto"></pre>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/source-form.js') }}"></script>
+{% endblock %}
