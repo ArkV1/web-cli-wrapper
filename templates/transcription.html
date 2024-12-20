@@ -5,7 +5,8 @@
 {% block content %}
 <div id="main-container"
     class="bg-white shadow-md rounded-lg p-8 w-full mx-auto transition-all duration-500 ease-in-out"
-    style="max-width: 672px;">
+    style="max-width: 672px;"
+    data-expanded="false">
 
     <h1 class="text-2xl font-bold mb-6 text-center">YouTube Transcriber</h1>
 
@@ -109,30 +110,38 @@
                     </button>
                 </div>
                 
-                <div id="youtube-result-box" class="result-box bg-gray-50 p-4 border border-gray-200 rounded-lg w-full min-h-[200px] hidden">
-                    <div class="flex justify-between items-center mb-2 h-8">
-                        <h4 class="font-bold text-gray-800">YouTube Transcript:</h4>
-                        <div class="flex items-center space-x-2">
-                            <button class="copy-button px-2 py-1 bg-blue-500 text-white rounded-md text-sm">Copy</button>
+                <div id="transcripts-container" class="flex flex-col lg:flex-row gap-4">
+                    <div id="youtube-result-box" class="result-box bg-gray-50 p-4 border border-gray-200 rounded-lg w-full lg:w-1/2 min-h-[200px] hidden">
+                        <div class="flex justify-between items-center mb-2 h-8">
+                            <h4 class="font-bold text-gray-800">YouTube Transcript:</h4>
+                            <div class="flex items-center space-x-2">
+                                <button class="copy-button px-2 py-1 bg-blue-500 text-white rounded-md text-sm">Copy</button>
+                            </div>
                         </div>
+                        <pre id="youtube-result" class="whitespace-pre-wrap w-full"></pre>
                     </div>
-                    <pre id="youtube-result" class="whitespace-pre-wrap w-full"></pre>
-                </div>
 
-                <div id="whisper-result-box" class="result-box bg-gray-50 p-4 border border-gray-200 rounded-lg hidden w-full min-h-[200px] hidden">
-                    <div class="flex justify-between items-center mb-2 h-8">
-                        <h4 class="font-bold text-gray-800">Whisper Transcript:</h4>
-                        <div class="flex items-center space-x-2">
-                            <button class="refresh-button px-2 py-1 bg-gray-200 text-gray-700 rounded-md text-sm hidden">Refresh</button>
-                            <button class="copy-button px-2 py-1 bg-blue-500 text-white rounded-md text-sm">Copy</button>
+                    <div id="whisper-result-box" class="result-box bg-gray-50 p-4 border border-gray-200 rounded-lg w-full lg:w-1/2 min-h-[200px] hidden">
+                        <div class="flex justify-between items-center mb-2 h-8">
+                            <h4 class="font-bold text-gray-800">Whisper Transcript:</h4>
+                            <div class="flex items-center space-x-2">
+                                <button class="refresh-button px-2 py-1 bg-gray-200 text-gray-700 rounded-md text-sm hidden">Refresh</button>
+                                <button class="copy-button px-2 py-1 bg-blue-500 text-white rounded-md text-sm">Copy</button>
+                            </div>
                         </div>
+                        <pre id="whisper-result" class="whitespace-pre-wrap w-full"></pre>
                     </div>
-                    <pre id="whisper-result" class="whitespace-pre-wrap w-full"></pre>
                 </div>
 
                 <div id="comparison-result-box" class="bg-gray-50 p-4 border border-gray-200 rounded-lg hidden w-full min-h-[200px]">
                     <div class="flex justify-between items-center mb-2 h-8">
-                        <h4 class="font-bold text-gray-800">Comparison Result:</h4>
+                        <div class="flex items-center space-x-4">
+                            <h4 class="font-bold text-gray-800">Comparison Result:</h4>
+                            <select id="comparison-mode" class="text-sm border border-gray-300 rounded px-2 py-1">
+                                <option value="inline">Inline Diff</option>
+                                <option value="side-by-side">Side by Side</option>
+                            </select>
+                        </div>
                         <div class="flex items-center space-x-2">
                             <button id="compare-back-button"
                                     class="btn px-2 py-1 bg-gray-400 text-white text-sm rounded hover:bg-gray-500 focus:outline-none focus:ring-1 focus:ring-gray-300">
@@ -140,7 +149,21 @@
                             </button>
                         </div>
                     </div>
-                    <pre id="comparison-result" class="whitespace-pre-wrap w-full"></pre>
+                    <div id="comparison-inline" class="w-full">
+                        <pre id="comparison-result" class="whitespace-pre-wrap w-full"></pre>
+                    </div>
+                    <div id="comparison-side-by-side" class="hidden">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <h5 class="font-semibold mb-2">YouTube Transcript:</h5>
+                                <pre id="comparison-youtube" class="whitespace-pre-wrap w-full bg-white p-3 rounded border border-gray-200 max-h-[80vh] overflow-y-auto"></pre>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold mb-2">Whisper Transcript:</h5>
+                                <pre id="comparison-whisper" class="whitespace-pre-wrap w-full bg-white p-3 rounded border border-gray-200 max-h-[80vh] overflow-y-auto"></pre>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

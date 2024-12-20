@@ -4,7 +4,30 @@
 {% block content %}
 <div id="main-container" class="bg-white shadow-md rounded-lg p-8 w-full mx-auto transition-all duration-500 ease-in-out">
     <h1 class="text-2xl font-bold mb-6 text-center">Website Source Code Downloader</h1>
+
     <div class="max-w-2xl mx-auto">
+        <div class="mb-4 w-full">
+            <div class="flex justify-between items-center">
+                <button id="toggle-debug" class="flex items-center text-sm text-gray-600 hover:text-gray-800 focus:outline-none">
+                    <svg class="w-4 h-4 mr-1 transform transition-transform" id="debug-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                    Debug Logs
+                </button>
+                <button id="copy-debug" class="px-2 py-1 text-sm text-gray-600 hover:text-gray-800 focus:outline-none hidden">
+                    <span class="flex items-center">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/>
+                        </svg>
+                        Copy
+                    </span>
+                </button>
+            </div>
+            <div id="debug-logs" class="hidden mt-2 mb-4 p-4 bg-gray-50 rounded-lg border border-gray-200 max-h-60 overflow-y-auto">
+                <pre id="debug-content" class="text-xs font-mono text-gray-700 whitespace-pre-wrap"></pre>
+            </div>
+        </div>
+
         <form id="source-form" class="space-y-4">
             <div>
                 <label for="url" class="block text-sm font-medium text-gray-700">Enter Website URL:</label>
@@ -22,6 +45,7 @@
             </div>
         </form>
     </div>
+
     <div id="result-container" class="mt-8 hidden w-full">
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-xl font-semibold">Source Code:</h2>

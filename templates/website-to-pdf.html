@@ -7,28 +7,36 @@
 
     <div class="max-w-2xl mx-auto">
         <div class="mb-4">
-            <div id="progress-bar-container" class="hidden w-full bg-gray-200 rounded-full h-2.5 mb-2">
-                <div id="progress-bar" class="bg-indigo-600 h-2.5 rounded-full transition-all duration-300 ease-in-out" style="width: 0%"></div>
+            <div id="progress-container" class="mb-4 hidden">
+                <div id="progress-bar-container" class="w-full bg-gray-200 rounded-full h-2.5 mb-2">
+                    <div id="progress-bar" class="bg-indigo-600 h-2.5 rounded-full transition-all duration-300 ease-in-out" style="width: 0%"></div>
+                </div>
+                <p id="progress" class="text-sm text-gray-700"></p>
             </div>
             <div class="space-y-1">
                 <p id="progress" class="text-sm text-gray-700 hidden"></p>
             </div>
             
-            <div class="mt-4">
-                <button id="toggle-logs" class="flex items-center text-sm text-gray-600 hover:text-gray-800">
-                    <svg class="w-4 h-4 mr-1 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                    </svg>
-                    Show Debug Logs
-                </button>
-                <div id="terminal-logs" class="hidden mt-2">
-                    <div class="bg-gray-900 text-gray-100 font-mono text-sm p-4 rounded-lg max-h-60 overflow-y-auto">
-                        <div id="log-content" class="space-y-1">
-                            <!-- Logs will be inserted here dynamically -->
-                        </div>
-                    </div>
+            <div class="mt-4 mb-4 w-full">
+                <div class="flex justify-between items-center">
+                    <button id="toggle-debug" class="flex items-center text-sm text-gray-600 hover:text-gray-800 focus:outline-none">
+                        <svg class="w-4 h-4 mr-1 transform transition-transform" id="debug-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                        Debug Logs
+                    </button>
+                    <button id="copy-debug" class="px-2 py-1 text-sm text-gray-600 hover:text-gray-800 focus:outline-none hidden">
+                        <span class="flex items-center">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/>
+                            </svg>
+                            Copy
+                        </span>
+                    </button>
                 </div>
-            </div>
+                <div id="debug-logs" class="hidden mt-2 mb-4 p-4 bg-gray-50 rounded-lg border border-gray-200 max-h-60 overflow-y-auto">
+                    <pre id="debug-content" class="text-xs font-mono text-gray-700 whitespace-pre-wrap"></pre>
+                </div>
         </div>
 
         <form id="pdf-form" class="space-y-4">

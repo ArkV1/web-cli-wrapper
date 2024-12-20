@@ -28,7 +28,12 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+```warning
+!!! IMPORTANT !!!
+Only single gunicorn worker is supported at the moment.
+```
+
 ### Run Gunicorn
 ```bash
-gunicorn --worker-class gevent --workers 2 --bind 0.0.0.0:3002 --reload app:app
+gunicorn --worker-class gevent --workers 1 --bind 0.0.0.0:3003 --reload app:app
 ```

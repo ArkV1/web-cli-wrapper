@@ -4,12 +4,50 @@ document.addEventListener('DOMContentLoaded', function() {
     const sourceViewer = document.getElementById('source-viewer');
     const downloadLink = document.getElementById('download-link');
 
+    const debugLogsBtn = document.getElementById('toggle-debug');
+    const debugLogs = document.getElementById('debug-logs');
+    const debugContent = document.getElementById('debug-content');
+    const debugChevron = document.getElementById('debug-chevron');
+
+    // Add debug log toggle functionality
+    debugLogsBtn.addEventListener('click', () => {
+        debugLogs.classList.toggle('hidden');
+        debugChevron.classList.toggle('rotate-180');
+        document.getElementById('copy-debug').classList.toggle('hidden');
+    });
+
+    // Add copy functionality for debug logs
+    const copyDebugBtn = document.getElementById('copy-debug');
+    copyDebugBtn.addEventListener('click', async () => {
+        try {
+            await navigator.clipboard.writeText(debugContent.textContent);
+            const originalText = copyDebugBtn.innerHTML;
+            copyDebugBtn.innerHTML = '<span class="flex items-center"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Copied!</span>';
+            setTimeout(() => {
+                copyDebugBtn.innerHTML = originalText;
+            }, 2000);
+        } catch (err) {
+            console.error('Failed to copy text:', err);
+        }
+    });
+
+    function addDebugLog(message, data = null) {
+        const timestamp = new Date().toISOString();
+        let logMessage = `[${timestamp}] ${message}`;
+        if (data) {
+            logMessage += '\n' + JSON.stringify(data, null, 2);
+        }
+        debugContent.textContent = logMessage + '\n\n' + debugContent.textContent;
+    }
+
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
         
+        addDebugLog('Starting source code fetch...');
         const url = document.getElementById('url').value;
         
         try {
+            addDebugLog('Fetching source code', { url: url });
             const response = await fetch('/api/fetch-source', {
                 method: 'POST',
                 headers: {
@@ -45,6 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
             resultContainer.scrollIntoView({ behavior: 'smooth' });
 
         } catch (error) {
+            addDebugLog('Error occurred', { error: error.message });
             console.error('Error:', error);
             alert('Failed to fetch source code. Please try again.');
         }

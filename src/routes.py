@@ -17,3 +17,7 @@ def register_routes(app):
     @app.route('/transcription')
     def transcription():
         return render_template('transcription.html')
+    
+    @app.route('/text-compare')
+    def text_compare():
+        return render_template('text-compare.html')

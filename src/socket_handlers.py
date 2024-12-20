@@ -5,7 +5,7 @@ import logging
 # Main logger
 logger = logging.getLogger('websocket')
 
-def init_socket_handlers(socketio: SocketIO):
+def init_socket_handlers(socketio: SocketIO, transcription_tasks, tasks_lock):
     @socketio.on('connect')
     def handle_connect():
         logger.info(f'Client connected: {request.sid}')
@@ -13,46 +13,27 @@ def init_socket_handlers(socketio: SocketIO):
 
     @socketio.on('disconnect')
     def handle_disconnect():
-        logger.info('Client disconnected', extra={
-            'event': 'disconnect',
-            'client_id': request.sid,
-            'remote_addr': request.remote_addr
-        })
+        logger.info('Client disconnected')
 
     @socketio.on('check_progress')
     def handle_progress_check(data):
-        logger.debug('Progress check received', extra={
-            'event': 'check_progress',
-            'data': data,
-            'client_id': request.sid,
-            'remote_addr': request.remote_addr
-        })
-        try:
-            task_id = data.get('task_id')
-            if not task_id:
-                raise ValueError("No task_id provided")
-                
-            with tasks_lock:
-                if task_id in transcription_tasks:
-                    task = transcription_tasks[task_id]
-                    logger.debug('Task progress found', extra={
-                        'task_id': task_id,
-                        'progress': task['progress'],
-                        'status': task['message']
-                    })
-                    socketio.emit('transcription_progress', task, room=request.sid)
-                else:
-                    logger.warning('Task not found', extra={
-                        'task_id': task_id
-                    })
-                    
-        except Exception as e:
-            logger.error('Error checking progress', exc_info=True, extra={
-                'error': str(e),
-                'task_id': data.get('task_id'),
-                'client_id': request.sid
-            })
-            emit('error', {'error': str(e)})
+        task_id = data.get('task_id')
+        logger.info(f'Checking progress for task: {task_id}')
+        
+        with tasks_lock:
+            if task_id in transcription_tasks:
+                task_data = transcription_tasks[task_id].copy()
+                task_data['task_id'] = task_id
+                socketio.emit('transcription_progress', task_data, room=request.sid)
+            else:
+                socketio.emit('transcription_progress', {
+                    'task_id': task_id,
+                    'progress': 0,
+                    'message': 'Task not found',
+                    'complete': False,
+                    'success': False,
+                    'error': 'Task not found'
+                }, room=request.sid)
 
     @socketio.on_error()
     def error_handler(e):

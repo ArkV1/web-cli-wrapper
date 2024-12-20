@@ -1,12 +1,13 @@
 from flask import request, send_file, jsonify
+from flask_socketio import emit, join_room
 import subprocess
 import os
 from pathlib import Path
 import uuid
-from threading import Thread, Lock
-import time
+from threading import Lock
 import logging
-from .transcription import start_transcription
+from .transcription import start_transcription, highlight_differences
+from .text_comparison import compare_texts
 
 # Configure the logger
 logging.basicConfig(level=logging.INFO)
@@ -19,37 +20,29 @@ def register_api_routes(app, socketio):
     # Initialize the transcription tasks dictionary
     transcription_tasks = {}
 
-    def send_progress_update(task_id, progress, message, complete=False, success=True, error=None, transcript=None, youtube_transcript=None, whisper_transcript=None):
-        socketio.emit('transcription_progress', {
-            'task_id': task_id,
-            'progress': progress,
-            'message': message,
-            'complete': complete,
-            'success': success,
-            'error': error,
-            'transcript': transcript,
-            'youtube_transcript': youtube_transcript,
-            'whisper_transcript': whisper_transcript
-        })
-
-    def process_transcription(task_id, url, method, use_whisper, model_name):
-        logger = logging.getLogger('websocket')
+    def background_transcription(task_id, url, method, use_whisper, model_name, sid):
+        """Background task for handling transcription"""
         try:
+            # Update initial progress
             with tasks_lock:
                 transcription_tasks[task_id] = {
-                    'progress': 0,
-                    'message': 'Starting transcription...'
+                    'progress': 10,
+                    'message': 'Starting transcription...',
+                    'complete': False
                 }
-            
-            logger.info(f"Processing transcription: method={method}, use_whisper={use_whisper}")
-            
-            result = start_transcription(url, use_whisper=use_whisper, model_name=model_name)
-            
-            logger.info(f"Transcription result: {result}")  # Add debugging
-            
+
+            # Start transcription
+            result = start_transcription(
+                url=url,
+                use_youtube=(method in ['YouTube', 'Both']),
+                use_whisper=(method in ['Whisper', 'Both']),
+                model_name=model_name
+            )
+
+            # Store final result
             with tasks_lock:
                 if result['success']:
-                    task_data = {
+                    transcription_tasks[task_id] = {
                         'progress': 100,
                         'message': 'Transcription complete!',
                         'complete': True,
@@ -57,55 +50,29 @@ def register_api_routes(app, socketio):
                         'youtube_transcript': result.get('youtube_transcript'),
                         'whisper_transcript': result.get('whisper_transcript')
                     }
-                    transcription_tasks[task_id] = task_data
-                    
-                    # Send only one update
-                    send_progress_update(
-                        task_id=task_id,
-                        progress=100,
-                        message="Transcription complete!",
-                        complete=True,
-                        success=True,
-                        youtube_transcript=result.get('youtube_transcript'),
-                        whisper_transcript=result.get('whisper_transcript')
-                    )
                 else:
-                    error_msg = result.get('error', 'Unknown error')
                     transcription_tasks[task_id] = {
                         'progress': 100,
-                        'message': 'Transcription failed',
+                        'message': f"Error: {result.get('error', 'Unknown error')}",
                         'complete': True,
                         'success': False,
-                        'error': error_msg
+                        'error': result.get('error')
                     }
-                    send_progress_update(
-                        task_id=task_id,
-                        progress=100,
-                        message="Transcription failed",
-                        complete=True,
-                        success=False,
-                        error=error_msg
-                    )
-            
+
+            # Emit final result
+            socketio.emit('transcription_progress', transcription_tasks[task_id] | {'task_id': task_id}, room=sid)
+
         except Exception as e:
-            logger.error(f"Transcription error: {str(e)}", exc_info=True)
-            error_msg = str(e)
+            logger.error(f"Transcription error: {str(e)}")
             with tasks_lock:
                 transcription_tasks[task_id] = {
                     'progress': 100,
-                    'message': f'Error: {error_msg}',
+                    'message': f'Error: {str(e)}',
                     'complete': True,
                     'success': False,
-                    'error': error_msg
+                    'error': str(e)
                 }
-            send_progress_update(
-                task_id=task_id,
-                progress=100,
-                message="Transcription failed",
-                complete=True,
-                success=False,
-                error=error_msg
-            )
+            socketio.emit('transcription_progress', transcription_tasks[task_id] | {'task_id': task_id}, room=sid)
 
     @app.route('/api/convert-to-pdf', methods=['POST'])
     def convert_to_pdf():
@@ -269,56 +236,111 @@ def register_api_routes(app, socketio):
     def transcribe():
         try:
             data = request.get_json()
-            
-            # Extract parameters
+            if not data:
+                return jsonify({'success': False, 'error': 'No data provided'}), 400
+                
             url = data.get('url')
-            method = data.get('method', 'YouTube')  # Get the method
+            method = data.get('method')
             use_whisper = data.get('use_whisper', False)
-            model_name = data.get('model_name', 'large')
+            model_name = data.get('model_name', 'base')
+            sid = data.get('sid')
             
             if not url:
-                raise ValueError("URL is required")
-                
+                return jsonify({'success': False, 'error': 'URL is required'}), 400
+            
             task_id = str(uuid.uuid4())
             
-            # Log the received parameters
-            logger.info(f"Starting transcription task {task_id}")
-            logger.info(f"Parameters: method={method}, use_whisper={use_whisper}, model_name={model_name}")
-            
-            # Start transcription in background thread
-            thread = Thread(
-                target=process_transcription,
-                args=(task_id, url, method, use_whisper, model_name)
+            # Start background transcription using socketio
+            socketio.start_background_task(
+                target=background_transcription,
+                task_id=task_id,
+                url=url,
+                method=method,
+                use_whisper=use_whisper,
+                model_name=model_name,
+                sid=sid
             )
-            thread.start()
             
             return jsonify({
                 'success': True,
-                'task_id': task_id
+                'task_id': task_id,
+                'message': 'Transcription started'
             })
             
         except Exception as e:
-            logger.error(f"Failed to start transcription: {str(e)}")
+            if sid:
+                socketio.emit('transcription_error', {'error': str(e)}, room=sid)
             return jsonify({
                 'success': False,
                 'error': str(e)
             }), 500
 
-    @socketio.on('check_progress')
-    def handle_progress_check(data, sid=None):
-        with tasks_lock:
-            task_id = data.get('task_id')
-            if task_id in transcription_tasks:
-                task = transcription_tasks[task_id]
-                socketio.emit('transcription_progress', {
-                    'task_id': task_id,
-                    'progress': task['progress'],
-                    'message': task['message'],
-                    'complete': task.get('complete', False),
-                    'success': task.get('success', True),
-                    'error': task.get('error'),
-                    'transcript': task.get('transcript'),
-                    'youtube_transcript': task.get('youtube_transcript'),
-                    'whisper_transcript': task.get('whisper_transcript')
-                }, room=sid)
+    @app.route('/api/compare-transcripts', methods=['POST'])
+    def compare_transcripts():
+        try:
+            data = request.get_json()
+            if not data:
+                return jsonify({
+                    'success': False,
+                    'error': 'No data provided'
+                }), 400
+
+            youtube_transcript = data.get('youtube_transcript')
+            whisper_transcript = data.get('whisper_transcript')
+            mode = data.get('mode', 'inline')
+
+            if not youtube_transcript or not whisper_transcript:
+                return jsonify({
+                    'success': False,
+                    'error': 'Both transcripts are required'
+                }), 400
+
+            # Use the highlight_differences function with the specified mode
+            comparison = highlight_differences(youtube_transcript, whisper_transcript, mode=mode)
+
+            return jsonify({
+                'success': True,
+                'comparison': comparison  # This will be either a string (inline) or tuple (side-by-side)
+            })
+
+        except Exception as e:
+            logger.error(f"Error comparing transcripts: {str(e)}")
+            return jsonify({
+                'success': False,
+                'error': str(e)
+            }), 500
+
+    @app.route('/api/compare-texts', methods=['POST'])
+    def compare_texts_api():
+        try:
+            data = request.get_json()
+            if not data:
+                return jsonify({
+                    'success': False,
+                    'error': 'No data provided'
+                }), 400
+
+            text1 = data.get('text1', '')
+            text2 = data.get('text2', '')
+            mode = data.get('mode', 'side-by-side')
+
+            if not text1 or not text2:
+                return jsonify({
+                    'success': False,
+                    'error': 'Both texts are required'
+                }), 400
+
+            comparison = compare_texts(text1, text2, mode=mode)
+
+            return jsonify({
+                'success': True,
+                'comparison': comparison
+            })
+
+        except Exception as e:
+            logger.error(f"Error comparing texts: {str(e)}")
+            return jsonify({
+                'success': False,
+                'error': str(e)
+            }), 500
 
