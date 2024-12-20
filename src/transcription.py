@@ -1,21 +1,28 @@
-from youtube_transcript_api import YouTubeTranscriptApi
-
-from youtube_transcript_api.formatters import Formatter
-import yt_dlp
-import whisper
-import os
-import re
-from pathlib import Path
 import logging
-from difflib import SequenceMatcher
 import tempfile
 import shutil
+from pathlib import Path
+from typing import Dict, Optional, List
+from dataclasses import dataclass
+
+import whisper
+import yt_dlp
+from youtube_transcript_api import YouTubeTranscriptApi
+import re
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-def extract_video_id(url):
+@dataclass
+class TranscriptionResult:
+    """Simple container for transcription results."""
+    success: bool
+    transcript: Optional[str] = None
+    segments: Optional[List[Dict]] = None
+    error: Optional[str] = None
+
+def extract_video_id(url: str) -> Optional[str]:
     """Extract YouTube video ID from URL."""
     patterns = [
         r'(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)',
@@ -28,287 +35,146 @@ def extract_video_id(url):
             return match.group(1)
     return None
 
-class PlainTextFormatter(Formatter):
-    def format_transcript(self, transcript, **kwargs):
-        return ' '.join(line['text'] for line in transcript)
-
-
-def get_youtube_transcript(video_id, language='en'):
-    """Get transcript from YouTube video."""
+def get_youtube_transcript(video_id: str, language: str = 'en') -> TranscriptionResult:
+    """Get transcript directly from YouTube."""
     try:
         transcript_list = YouTubeTranscriptApi.get_transcript(video_id, languages=[language])
-        formatter = PlainTextFormatter()
-        return {
-            'success': True,
-            'transcript': formatter.format_transcript(transcript_list),
-            'segments': transcript_list
-        }
+        transcript_text = ' '.join(line['text'] for line in transcript_list)
+        
+        logger.info(f"Successfully got YouTube transcript for video {video_id}")
+        return TranscriptionResult(
+            success=True,
+            transcript=transcript_text,
+            segments=transcript_list
+        )
     except Exception as e:
-        logger.error(f"Error getting YouTube transcript: {str(e)}")
-        return {
-            'success': False,
-            'error': f"Failed to get YouTube transcript: {str(e)}"
-        }
+        error_msg = f"Failed to get YouTube transcript: {str(e)}"
+        logger.error(error_msg)
+        return TranscriptionResult(success=False, error=error_msg)
 
-def download_audio(url, output_dir):
+def download_audio(url: str, output_path: Path) -> None:
     """Download audio from YouTube video."""
-    try:
-        # Ensure output directory exists
-        output_dir = Path(output_dir)
-        output_dir.mkdir(parents=True, exist_ok=True)
-        
-        logger.info(f"Downloading audio to directory: {output_dir}")
-        
-        output_path = output_dir / '%(id)s.%(ext)s'
-        ydl_opts = {
-            'format': 'bestaudio/best',
-            'postprocessors': [{
-                'key': 'FFmpegExtractAudio',
-                'preferredcodec': 'mp3',
-                'preferredquality': '192',
-            }],
-            'outtmpl': str(output_path),
-            'quiet': True
-        }
-        
-        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            logger.info("Starting YouTube download")
-            info = ydl.extract_info(url, download=True)
-            audio_path = output_dir / f"{info['id']}.mp3"
-            
-            if not audio_path.exists():
-                raise FileNotFoundError(f"Failed to download audio file to {audio_path}")
-            
-            logger.info(f"Successfully downloaded audio: {audio_path}")
-            logger.info(f"Audio file size: {audio_path.stat().st_size} bytes")
-                
-            return str(audio_path)
-    except Exception as e:
-        logger.error(f"Error downloading audio: {str(e)}")
-        raise
+    ydl_opts = {
+        'format': 'bestaudio/best',
+        'postprocessors': [{
+            'key': 'FFmpegExtractAudio',
+            'preferredcodec': 'mp3',
+            'preferredquality': '192',
+        }],
+        'outtmpl': str(output_path),
+        'quiet': True,
+        'no_warnings': True
+    }
+    
+    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+        logger.info(f"Downloading audio from: {url}")
+        ydl.download([url])
+        logger.info(f"Successfully downloaded audio to: {output_path}")
 
-def transcribe_audio(audio_path, model_name="base"):
-    """Transcribe audio using OpenAI Whisper."""
-    try:
+# Cache Whisper models to avoid reloading
+_whisper_models: Dict[str, whisper.Whisper] = {}
+
+def get_whisper_model(model_name: str) -> whisper.Whisper:
+    """Get or load a Whisper model."""
+    if model_name not in _whisper_models:
         logger.info(f"Loading Whisper model: {model_name}")
-        model = whisper.load_model(model_name)
-        
-        # Verify file exists
-        audio_path = Path(audio_path)
-        if not audio_path.exists():
-            raise FileNotFoundError(f"Audio file not found: {audio_path}")
-            
-        logger.info(f"Starting transcription of: {audio_path}")
-        logger.info(f"Audio file size: {audio_path.stat().st_size} bytes")
-        
-        # Transcribe the audio
-        try:
-            result = model.transcribe(str(audio_path))
-        except Exception as e:
-            logger.error(f"Whisper transcription error: {str(e)}")
-            logger.error(f"Error type: {type(e).__name__}")
-            raise
-        
-        return {
-            'success': True,
-            'transcript': result['text'],
-            'segments': result['segments']
-        }
-    except Exception as e:
-        logger.error(f"Error transcribing audio: {str(e)}")
-        return {
-            'success': False,
-            'error': f"Failed to transcribe audio: {str(e)}"
-        }
+        _whisper_models[model_name] = whisper.load_model(model_name)
+        logger.info(f"Successfully loaded Whisper model: {model_name}")
+    return _whisper_models[model_name]
 
-def start_transcription(url, use_youtube=False, use_whisper=False, language='en', model_name="base"):
-    """Handles the transcription process based on selected methods."""
+def transcribe_with_whisper(video_id: str, language: str = 'en', model_name: str = 'base') -> TranscriptionResult:
+    """Transcribe video using Whisper."""
+    url = f"https://www.youtube.com/watch?v={video_id}"
     temp_dir = None
+    
     try:
-        video_id = extract_video_id(url)
-        if not video_id:
-            return {
-                'success': False, 
-                'error': 'Invalid YouTube URL',
-                'complete': True
-            }
-
-        result = {
-            'success': True,
-            'youtube_transcript': None,
-            'whisper_transcript': None,
-            'complete': False,
-            'message': 'Transcription in progress...'
-        }
-
-        # YouTube Transcription
-        if use_youtube:
-            yt_result = get_youtube_transcript(video_id, language)
-            if yt_result['success']:
-                result['youtube_transcript'] = yt_result['transcript']
-            else:
-                # Only fail if YouTube was the only method requested
-                if not use_whisper:
-                    return {
-                        'success': False,
-                        'error': yt_result['error'],
-                        'complete': True
-                    }
-
-        # Whisper Transcription
-        if use_whisper:
-            try:
-                # Create a temporary directory that will be automatically cleaned up
-                temp_dir = tempfile.mkdtemp(prefix='transcription_')
-                
-                # Download and transcribe
-                audio_path = download_audio(url, temp_dir)
-                whisper_result = transcribe_audio(audio_path, model_name)
-                
-                if whisper_result['success']:
-                    result['whisper_transcript'] = whisper_result['transcript']
-                else:
-                    # Only fail if Whisper was the only method requested
-                    if not use_youtube or not result['youtube_transcript']:
-                        return {
-                            'success': False,
-                            'error': whisper_result['error'],
-                            'complete': True
-                        }
-                    
-            except Exception as e:
-                logger.error(f"Error in Whisper transcription: {str(e)}")
-                if not use_youtube or not result['youtube_transcript']:
-                    return {
-                        'success': False,
-                        'error': f"Whisper transcription failed: {str(e)}",
-                        'complete': True
-                    }
-
-        # Check if at least one method succeeded
-        if not result['youtube_transcript'] and not result['whisper_transcript']:
-            return {
-                'success': False,
-                'error': 'Both transcription methods failed',
-                'complete': True
-            }
-
-        result['complete'] = True
-        result['message'] = 'Transcription complete!'
-        return result
-
+        # Create temporary directory
+        temp_dir = tempfile.mkdtemp(prefix='transcription_')
+        audio_path = Path(temp_dir) / 'audio.mp3'
+        
+        # Download audio
+        download_audio(url, audio_path)
+        
+        # Load model and transcribe
+        model = get_whisper_model(model_name)
+        logger.info(f"Starting Whisper transcription of {video_id}")
+        
+        result = model.transcribe(
+            str(audio_path),
+            language=language,
+            task='transcribe'
+        )
+        
+        # Convert segments to common format
+        segments = [{
+            'text': segment['text'],
+            'start': segment['start'],
+            'duration': segment['end'] - segment['start']
+        } for segment in result['segments']]
+        
+        logger.info(f"Successfully transcribed video {video_id} with Whisper")
+        return TranscriptionResult(
+            success=True,
+            transcript=result['text'],
+            segments=segments
+        )
+        
     except Exception as e:
-        logger.error(f"Transcription error: {str(e)}")
-        return {
-            'success': False,
-            'error': f"Transcription failed: {str(e)}",
-            'complete': True
-        }
+        error_msg = f"Failed to transcribe with Whisper: {str(e)}"
+        logger.error(error_msg)
+        return TranscriptionResult(success=False, error=error_msg)
+        
     finally:
-        # Clean up temporary directory if it exists
+        # Clean up temporary directory
         if temp_dir and Path(temp_dir).exists():
             try:
                 shutil.rmtree(temp_dir)
             except Exception as e:
                 logger.warning(f"Failed to remove temporary directory {temp_dir}: {str(e)}")
 
+def transcribe(url: str, method: str = 'youtube', language: str = 'en', model_name: str = 'base') -> TranscriptionResult:
+    """
+    Main transcription function that handles both YouTube and Whisper methods.
+    
+    Args:
+        url: YouTube video URL
+        method: 'youtube', 'whisper', or 'both'
+        language: Target language code
+        model_name: Whisper model name (only used if method includes Whisper)
+    """
+    video_id = extract_video_id(url)
+    if not video_id:
+        return TranscriptionResult(success=False, error="Invalid YouTube URL")
 
-def highlight_differences(text1, text2, mode='inline'):
-    def preprocess_text(text):
-        # Normalize whitespace and convert to lowercase
-        text = ' '.join(text.split())
-        # Split into words while preserving punctuation
-        return re.findall(r'\w+\'?\w*|[^\w\s]', text.lower())
-
-    def smart_tokenize(text):
-        # Handle contractions and compound words better
-        tokens = preprocess_text(text)
-        # Merge certain split tokens (e.g., don't, isn't, etc.)
-        merged = []
-        i = 0
-        while i < len(tokens):
-            if i + 2 < len(tokens) and tokens[i+1] == "'" and tokens[i+2] in ['t', 'll', 've', 're', 's']:
-                merged.append(tokens[i] + "'" + tokens[i+2])
-                i += 3
-            else:
-                merged.append(tokens[i])
-                i += 1
-        return merged
-
-    words1, words2 = smart_tokenize(text1), smart_tokenize(text2)
-    matcher = SequenceMatcher(None, words1, words2)
-    result = []
-
-    for op, i1, i2, j1, j2 in matcher.get_opcodes():
-        if op == 'equal':
-            result.extend(words1[i1:i2])
-        elif op == 'delete':
-            result.append('<span class="bg-red-200 px-1 rounded">')
-            result.extend(words1[i1:i2])
-            result.append('</span>')
-        elif op == 'insert':
-            result.append('<span class="bg-green-200 px-1 rounded">')
-            result.extend(words2[j1:j2])
-            result.append('</span>')
-        elif op == 'replace':
-            result.append('<span class="bg-red-200 px-1 rounded">')
-            result.extend(words1[i1:i2])
-            result.append('</span>')
-            result.append('<span class="bg-green-200 px-1 rounded">')
-            result.extend(words2[j1:j2])
-            result.append('</span>')
-
-    def reconstruct(tokens):
-        reconstructed = []
-        capitalize_next = True
-        skip_space = False
-
-        for token in tokens:
-            if token.startswith('<span'):
-                reconstructed.append(token)
-                skip_space = False
-            elif token.endswith('</span>'):
-                reconstructed.append(token)
-                skip_space = False
-            elif token in '.!?':
-                reconstructed.append(token)
-                capitalize_next = True
-                skip_space = False
-            elif re.match(r'\w', token):
-                if capitalize_next:
-                    token = token.capitalize()
-                    capitalize_next = False
-                if not skip_space and reconstructed and not reconstructed[-1].endswith(('</span>', "'", "-")):
-                    reconstructed.append(' ')
-                reconstructed.append(token)
-                skip_space = False
-            else:
-                reconstructed.append(token)
-                skip_space = token in ["'", "-"]
-
-        return ''.join(reconstructed)
-
-    if mode == 'inline':
-        return reconstruct(result)
-    else:  # side-by-side mode
-        result1, result2 = [], []
-        for op, i1, i2, j1, j2 in matcher.get_opcodes():
-            if op == 'equal':
-                result1.extend(words1[i1:i2])
-                result2.extend(words2[j1:j2])
-            elif op == 'delete':
-                result1.append('<span class="bg-red-200 px-1 rounded">')
-                result1.extend(words1[i1:i2])
-                result1.append('</span>')
-            elif op == 'insert':
-                result2.append('<span class="bg-green-200 px-1 rounded">')
-                result2.extend(words2[j1:j2])
-                result2.append('</span>')
-            elif op == 'replace':
-                result1.append('<span class="bg-red-200 px-1 rounded">')
-                result1.extend(words1[i1:i2])
-                result1.append('</span>')
-                result2.append('<span class="bg-green-200 px-1 rounded">')
-                result2.extend(words2[j1:j2])
-                result2.append('</span>')
-        return reconstruct(result1), reconstruct(result2)
+    if method == 'youtube':
+        return get_youtube_transcript(video_id, language)
+    elif method == 'whisper':
+        return transcribe_with_whisper(video_id, language, model_name)
+    elif method == 'both':
+        # Get both transcripts
+        yt_result = get_youtube_transcript(video_id, language)
+        whisper_result = transcribe_with_whisper(video_id, language, model_name)
+        
+        # If both succeed, combine them
+        if yt_result.success and whisper_result.success:
+            return TranscriptionResult(
+                success=True,
+                transcript=whisper_result.transcript,  # Prefer Whisper's transcript
+                segments=[
+                    {'youtube': yt_result.segments, 'whisper': whisper_result.segments}
+                ]
+            )
+        # If YouTube fails but Whisper succeeds, return Whisper
+        elif whisper_result.success:
+            return whisper_result
+        # If YouTube succeeds but Whisper fails, return YouTube
+        elif yt_result.success:
+            return yt_result
+        # If both fail, return error
+        else:
+            return TranscriptionResult(
+                success=False,
+                error=f"Both methods failed. YouTube: {yt_result.error}, Whisper: {whisper_result.error}"
+            )
+    else:
+        return TranscriptionResult(success=False, error=f"Invalid method: {method}")
