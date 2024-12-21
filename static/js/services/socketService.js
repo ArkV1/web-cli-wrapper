@@ -1,115 +1,190 @@
 class WebSocketService {
     constructor(options = {}) {
         this.socket = null;
-        this.reconnectAttempts = 0;
         this.options = {
-            maxReconnectAttempts: options.maxReconnectAttempts || 3,
-            reconnectDelay: options.reconnectDelay || 1000,
+            debug: options.debug || false,
             timeout: options.timeout || 60000,
-            debug: options.debug || false
+            reconnectionAttempts: options.reconnectionAttempts || 10,
+            reconnectionDelay: options.reconnectionDelay || 1000,
+            maxReconnectionDelay: 30000  // Maximum delay between reconnection attempts
         };
-        this.eventHandlers = new Map();
-        this.connectionPromise = null;
-        this.heartbeatInterval = null;
-        this.isConnecting = false;
         this.onDebug = options.onDebug || console.log;
+        this.currentTaskId = null;
+        this.reconnectAttempts = 0;
+        this.isConnecting = false;
+        this.reconnectTimeout = null;
+        this.lastEventTime = Date.now();
+        this.eventListeners = new Map();
+        this.lastProgressUpdate = null;
     }
 
     async connect(url = window.location.origin) {
+        // Prevent multiple simultaneous connection attempts
+        if (this.isConnecting) {
+            this.log('Connection attempt already in progress');
+            return;
+        }
+
         if (this.socket?.connected) {
             return Promise.resolve(this.socket);
         }
 
-        if (this.isConnecting) {
-            return this.connectionPromise;
-        }
-
         this.isConnecting = true;
-        this.connectionPromise = new Promise((resolve, reject) => {
+
+        return new Promise((resolve, reject) => {
             try {
+                // Clear any existing socket
+                if (this.socket) {
+                    this.socket.removeAllListeners();
+                    this.socket.disconnect();
+                }
+
                 this.socket = io(url, {
                     transports: ['websocket'],
-                    reconnection: true,
-                    reconnectionAttempts: this.options.maxReconnectAttempts,
-                    reconnectionDelay: this.options.reconnectDelay,
-                    timeout: this.options.timeout
+                    timeout: this.options.timeout,
+                    reconnection: false,  // We'll handle reconnection ourselves
+                    forceNew: true  // Force a new connection
                 });
 
                 this.socket.on('connect', () => {
                     this.log('Connected to WebSocket server');
+                    this.reconnectAttempts = 0;
                     this.isConnecting = false;
+                    this.lastEventTime = Date.now();
+                    
+                    // Request latest status for current task if any
+                    if (this.currentTaskId) {
+                        this.emit('check_progress', { task_id: this.currentTaskId });
+                    }
+                    
                     resolve(this.socket);
                 });
 
                 this.socket.on('connect_error', (error) => {
                     this.logError('Connection error:', error);
+                    this.isConnecting = false;
                     if (!this.socket.connected) {
-                        this.isConnecting = false;
+                        this.handleReconnect();
                         reject(error);
                     }
                 });
+
+                this.setupEventListeners();
             } catch (error) {
                 this.isConnecting = false;
                 reject(error);
             }
         });
+    }
 
-        return this.connectionPromise;
+    handleReconnect() {
+        if (this.reconnectTimeout) {
+            clearTimeout(this.reconnectTimeout);
+        }
+
+        if (this.reconnectAttempts >= this.options.reconnectionAttempts) {
+            this.logError('Max reconnection attempts reached');
+            return;
+        }
+
+        // Calculate delay with exponential backoff
+        const delay = Math.min(
+            this.options.reconnectionDelay * Math.pow(1.5, this.reconnectAttempts),
+            this.options.maxReconnectionDelay
+        );
+
+        this.reconnectAttempts++;
+        this.log(`Attempting to reconnect (attempt ${this.reconnectAttempts}) in ${delay}ms`);
+
+        this.reconnectTimeout = setTimeout(() => {
+            this.connect().catch(() => {
+                // If connection fails, handleReconnect will be called again by connect_error
+            });
+        }, delay);
     }
 
     setupEventListeners() {
         this.socket.on('disconnect', () => {
             this.log('Disconnected from WebSocket server');
-            this.connectionPromise = null;
-        });
-
-        this.socket.on('reconnect_attempt', (attemptNumber) => {
-            this.log(`Reconnection attempt ${attemptNumber}`);
-            this.reconnectAttempts = attemptNumber;
+            this.handleReconnect();
         });
 
         this.socket.on('error', (error) => {
-            this.log('Socket error:', error);
+            this.logError('Socket error:', error);
+            this.handleReconnect();
+        });
+
+        // Monitor for activity
+        this.socket.on('ping', () => {
+            this.lastEventTime = Date.now();
+        });
+
+        this.socket.on('pong', () => {
+            this.lastEventTime = Date.now();
+        });
+
+        // Set up a heartbeat to detect stale connections
+        setInterval(() => {
+            const now = Date.now();
+            if (now - this.lastEventTime > this.options.timeout) {
+                this.log('Connection appears stale, attempting reconnect');
+                this.socket.disconnect();
+                this.handleReconnect();
+            }
+        }, 5000);  // Check every 5 seconds
+
+        // Handle transcription progress updates
+        this.socket.on('transcription_progress', (data) => {
+            this.lastEventTime = Date.now();
+            this.lastProgressUpdate = data;
+            this.log('Received transcription progress:', data);
+
+            // Update current task ID if not set
+            if (data.task_id && !this.currentTaskId) {
+                this.currentTaskId = data.task_id;
+            }
+
+            // Clear task ID if transcription is complete
+            if (data.complete) {
+                this.currentTaskId = null;
+            }
         });
     }
 
     on(event, callback) {
-        if (!this.eventHandlers.has(event)) {
-            this.eventHandlers.set(event, new Set());
+        // Store the callback in our map
+        if (!this.eventListeners.has(event)) {
+            this.eventListeners.set(event, new Set());
         }
-        this.eventHandlers.get(event).add(callback);
-        
-        const wrappedCallback = (...args) => {
+        this.eventListeners.get(event).add(callback);
+
+        this.socket?.on(event, (...args) => {
+            this.lastEventTime = Date.now();
             this.log(`Received event: ${event}`, ...args);
             callback(...args);
-        };
-        
-        this.socket?.on(event, wrappedCallback);
-        return () => this.off(event, wrappedCallback);
+        });
     }
 
     off(event, callback) {
-        this.socket?.off(event, callback);
-        const handlers = this.eventHandlers.get(event);
-        if (handlers) {
-            handlers.delete(callback);
+        // Remove the callback from our map
+        if (this.eventListeners.has(event)) {
+            this.eventListeners.get(event).delete(callback);
         }
+        this.socket?.off(event, callback);
     }
 
     emit(event, data, callback) {
-        this.log(`Emitting event: ${event}`, data);
         if (!this.socket?.connected) {
-            return this.connect().then(() => {
-                this.socket.emit(event, data, (...args) => {
-                    this.log(`Response for ${event}:`, ...args);
-                    if (callback) callback(...args);
-                });
-            }).catch(error => {
-                this.logError(`Failed to emit ${event}:`, error);
-                throw error;
-            });
+            return this.connect().then(() => this.emit(event, data, callback));
         }
         
+        // Store task ID if this is a transcription request
+        if (data && data.task_id) {
+            this.currentTaskId = data.task_id;
+        }
+        
+        this.log(`Emitting event: ${event}`, data);
+        this.lastEventTime = Date.now();
         this.socket.emit(event, data, (...args) => {
             this.log(`Response for ${event}:`, ...args);
             if (callback) callback(...args);
@@ -118,15 +193,14 @@ class WebSocketService {
 
     disconnect() {
         if (this.socket) {
-            // Clear any existing heartbeat interval
-            if (this.heartbeatInterval) {
-                clearInterval(this.heartbeatInterval);
-                this.heartbeatInterval = null;
+            if (this.reconnectTimeout) {
+                clearTimeout(this.reconnectTimeout);
+                this.reconnectTimeout = null;
             }
-            
-            // Disconnect the socket
+            this.currentTaskId = null;
+            this.reconnectAttempts = 0;
             this.socket.disconnect();
-            console.log('[WebSocket] Disconnected from server');
+            this.log('Disconnected from server');
         }
     }
 
@@ -137,29 +211,8 @@ class WebSocketService {
     }
 
     logError(...args) {
-        this.onDebug('ERROR:', ...args);
-    }
-
-    startHeartbeat(taskId) {
-        // Clear any existing heartbeat first
-        if (this.heartbeatInterval) {
-            clearInterval(this.heartbeatInterval);
-        }
-        
-        this.heartbeatInterval = setInterval(() => {
-            if (this.socket && this.socket.connected) {
-                this.emit('check_progress', { task_id: taskId });
-            } else {
-                clearInterval(this.heartbeatInterval);
-            }
-        }, 5000);
-    }
-
-    stopHeartbeat() {
-        if (this.heartbeatInterval) {
-            clearInterval(this.heartbeatInterval);
-            this.heartbeatInterval = null;
-        }
+        console.error(...args);
+        this.log(...args);
     }
 }
 

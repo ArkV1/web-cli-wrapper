@@ -1,14 +1,21 @@
+version: '3.8'
+
 services:
-  web-cli:
+  web:
     build:
       context: .
+      dockerfile: Dockerfile
     ports:
-      - "${FLASK_RUN_PORT}:${FLASK_RUN_PORT}"
+      - "3003:3003"
     volumes:
       - .:/app
     environment:
-      - NODE_ENV=production
       - PYTHONUNBUFFERED=1
-      - GUNICORN_CMD_ARGS="--timeout 600 --worker-class gevent --worker-connections 500 --keep-alive 5 --log-level info --access-logfile - --error-logfile -"
-    env_file:
-      - .env
+      - FLASK_ENV=development
+    deploy:
+      resources:
+        limits:
+          memory: 8G
+        reservations:
+          memory: 4G
+    command: gunicorn --worker-class gevent --workers 2 --bind 0.0.0.0:3003 --timeout 300 --reload app:app

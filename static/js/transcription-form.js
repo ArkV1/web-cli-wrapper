@@ -80,70 +80,103 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function handleTranscriptionProgress(data) {
-        // Skip if we've already processed this task's completion
-        if (data.complete && processedTaskIds.has(data.task_id)) {
+        if (!data || !data.task_id) {
             return;
         }
-        
-        if (data.task_id !== currentTaskId) return;
-        
-        // Update progress bar
-        progressBar.style.width = `${data.progress}%`;
-        progressText.textContent = data.message || `Progress: ${data.progress}%`;
-        
+
+        // Don't process updates for tasks we've already completed
+        if (processedTaskIds.has(data.task_id) && data.complete) {
+            return;
+        }
+
+        // Hide any previous error messages
+        const errorContainer = document.getElementById('error-container');
+        if (errorContainer) {
+            errorContainer.classList.add('hidden');
+        }
+
+        // Show progress container if hidden
+        const progressBarContainer = document.getElementById('progress-bar-container');
+        if (progressBarContainer) {
+            progressBarContainer.classList.remove('hidden');
+        }
+
+        const progressBar = document.getElementById('progress-bar');
+        const progressText = document.getElementById('progress');
+        const downloadSpeed = document.getElementById('download-speed');
+        const eta = document.getElementById('eta');
+
+        if (data.error) {
+            handleTranscriptionError(data.error);
+            return;
+        }
+
+        // Update progress bar and text
+        if (progressBar && progressText) {
+            progressBar.style.width = `${data.progress}%`;
+            progressBar.setAttribute('aria-valuenow', data.progress);
+            progressText.textContent = data.message || `${Math.round(data.progress)}%`;
+            progressText.classList.remove('hidden');
+        }
+
+        // Update download speed and ETA if available
+        if (downloadSpeed && data.download_speed) {
+            downloadSpeed.textContent = data.download_speed;
+            downloadSpeed.classList.remove('hidden');
+        }
+        if (eta && data.eta) {
+            eta.textContent = formatETA(data.eta);
+            eta.classList.remove('hidden');
+        }
+
+        // Handle completion
         if (data.complete) {
-            // Mark this task as processed
-            processedTaskIds.add(data.task_id);
-            
             if (data.success) {
-                progressText.textContent = 'Transcription complete!';
-                
-                // Show results section and container
-                document.getElementById('results-section').classList.remove('hidden');
-                resultsContainer.classList.remove('hidden');
-                
-                // Expand container if both transcripts will be shown
-                const method = document.querySelector('input[name="method"]:checked').value;
-                if (method === 'Both') {
-                    toggleContainerWidth(true);
-                }
-                
-                // Handle YouTube transcript
-                if (data.youtube_transcript) {
-                    const youtubeBox = document.getElementById('youtube-result-box');
-                    youtubeResult.textContent = data.youtube_transcript;
-                    youtubeBox.classList.remove('hidden');
-                    currentYoutubeTranscript = data.youtube_transcript;
-                }
-                
-                // Handle Whisper transcript
-                if (data.whisper_transcript) {
-                    const whisperBox = document.getElementById('whisper-result-box');
-                    whisperResult.textContent = data.whisper_transcript;
-                    whisperBox.classList.remove('hidden');
-                    currentWhisperTranscript = data.whisper_transcript;
-                }
-                
-                // Show compare button if both transcripts are available
-                if (data.youtube_transcript && data.whisper_transcript) {
-                    compareButton.classList.remove('hidden');
-                }
+                handleTranscriptionComplete(data);
+                processedTaskIds.add(data.task_id);
             } else {
-                progressText.textContent = `Error: ${data.error || 'Unknown error occurred'}`;
+                handleTranscriptionError(data.error || 'Transcription failed');
             }
-            
-            // Disconnect socket after completion
-            socketService.disconnect();
         }
     }
+
+    function formatETA(eta) {
+        // If eta is already formatted (e.g. "37s"), return as is
+        if (typeof eta === 'string' && eta.includes('s')) {
+            return eta;
+        }
+        
+        // Otherwise format the number of seconds
+        const seconds = parseInt(eta);
+        if (isNaN(seconds)) return '';
+        
+        if (seconds < 60) {
+            return `${Math.round(seconds)}s`;
+        } else if (seconds < 3600) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = Math.round(seconds % 60);
+            return `${minutes}m ${remainingSeconds}s`;
+        }
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        return `${hours}h ${minutes}m`;
+    }
+
+    // Add smooth transitions for progress updates
+    document.addEventListener('DOMContentLoaded', function() {
+        const progressBar = document.getElementById('progress-bar');
+        if (progressBar) {
+            progressBar.style.transition = 'width 0.5s ease-in-out';
+        }
+    });
 
     async function initializeWebSocket() {
         if (!socketService) {
             socketService = new WebSocketService({
                 debug: true,
-                maxReconnectAttempts: 5,
-                reconnectDelay: 2000,
-                onDebug: addDebugLog
+                onDebug: addDebugLog,
+                reconnectionAttempts: 10,
+                reconnectionDelay: 3000
             });
         }
 
@@ -154,10 +187,18 @@ document.addEventListener('DOMContentLoaded', function() {
             // Register progress handler
             socketService.on('transcription_progress', handleTranscriptionProgress);
             
+            // If we have a current task, request its status
+            if (currentTaskId) {
+                socketService.emit('check_progress', { task_id: currentTaskId });
+            }
+            
         } catch (error) {
             addDebugLog('WebSocket connection failed:', error);
             console.error('Failed to initialize WebSocket:', error);
-            progressText.textContent = 'Failed to connect to server';
+            const progressText = document.getElementById('progress-text');
+            if (progressText) {
+                progressText.textContent = 'Failed to connect to server';
+            }
             throw error;
         }
     }
@@ -240,11 +281,24 @@ document.addEventListener('DOMContentLoaded', function() {
         
         try {
             // Reset UI state
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress');
+            const progressBarContainer = document.getElementById('progress-bar-container');
+            const downloadSpeedText = document.getElementById('download-speed');
+            const etaText = document.getElementById('eta');
+            
             progressBar.style.width = '0%';
             progressText.textContent = 'Starting transcription...';
-            toggleContainerWidth(false);
+            downloadSpeedText.textContent = '';
+            etaText.textContent = '';
             
-            // Hide all result containers
+            // Show progress elements
+            progressBarContainer.classList.remove('hidden');
+            progressText.classList.remove('hidden');
+            downloadSpeedText.classList.add('hidden');
+            etaText.classList.add('hidden');
+            
+            // Hide results
             document.getElementById('results-section').classList.add('hidden');
             document.getElementById('results-container').classList.add('hidden');
             document.getElementById('youtube-result-box').classList.add('hidden');
@@ -253,10 +307,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (compareButton) {
                 compareButton.classList.add('hidden');
             }
-            
-            // Show progress elements
-            progressBarContainer.classList.remove('hidden');
-            progressText.classList.remove('hidden');
             
             const url = document.getElementById('url').value;
             const method = document.querySelector('input[name="method"]:checked').value;
@@ -286,13 +336,8 @@ document.addEventListener('DOMContentLoaded', function() {
             currentTaskId = data.task_id;
             await initializeWebSocket();
             
-            // Start heartbeat to check progress
-            socketService.startHeartbeat(currentTaskId);
-            
         } catch (error) {
-            console.error('Error starting transcription:', error);
-            progressText.textContent = `Error: ${error.message}`;
-            progressText.classList.remove('hidden');
+            handleTranscriptionError(error.message);
         }
     });
 
@@ -307,4 +352,167 @@ document.addEventListener('DOMContentLoaded', function() {
             mainContainer.dataset.expanded = 'false';
         }
     }
+
+    function handleTranscriptionComplete(data) {
+        // Show results section and container
+        document.getElementById('results-section').classList.remove('hidden');
+        document.getElementById('results-container').classList.remove('hidden');
+
+        // Hide progress indicators
+        const progressContainer = document.getElementById('progress-container');
+        if (progressContainer) {
+            progressContainer.classList.add('hidden');
+        }
+
+        // Store current transcripts for comparison
+        if (data.youtube_transcript) {
+            currentYoutubeTranscript = data.youtube_transcript;
+            const youtubeBox = document.getElementById('youtube-result-box');
+            const youtubeResult = document.getElementById('youtube-result');
+            if (youtubeBox && youtubeResult) {
+                youtubeBox.classList.remove('hidden');
+                youtubeResult.textContent = data.youtube_transcript;
+            }
+        }
+
+        if (data.whisper_transcript) {
+            currentWhisperTranscript = data.whisper_transcript;
+            const whisperBox = document.getElementById('whisper-result-box');
+            const whisperResult = document.getElementById('whisper-result');
+            if (whisperBox && whisperResult) {
+                whisperBox.classList.remove('hidden');
+                whisperResult.textContent = data.whisper_transcript;
+            }
+        }
+
+        // Enable compare button if both transcripts are available
+        const compareButton = document.getElementById('compare-transcripts');
+        if (compareButton && data.youtube_transcript && data.whisper_transcript) {
+            compareButton.classList.remove('hidden');
+        }
+
+        // Re-enable form
+        const form = document.getElementById('transcription-form');
+        if (form) {
+            form.classList.remove('processing');
+            const submitButton = form.querySelector('button[type="submit"]');
+            if (submitButton) {
+                submitButton.disabled = false;
+            }
+        }
+
+        // Clear current task ID since we're done
+        currentTaskId = null;
+    }
+
+    function handleTranscriptionError(error) {
+        // Show error message
+        const errorContainer = document.getElementById('error-container');
+        const errorMessage = document.getElementById('error-message');
+        if (errorContainer && errorMessage) {
+            errorMessage.textContent = error;
+            errorContainer.classList.remove('hidden');
+        }
+
+        // Hide progress indicators
+        const progressBarContainer = document.getElementById('progress-bar-container');
+        if (progressBarContainer) {
+            progressBarContainer.classList.add('hidden');
+        }
+
+        // Hide results containers
+        document.getElementById('results-section')?.classList.add('hidden');
+        document.getElementById('results-container')?.classList.add('hidden');
+        document.getElementById('youtube-result-box')?.classList.add('hidden');
+        document.getElementById('whisper-result-box')?.classList.add('hidden');
+        document.getElementById('compare-transcripts')?.classList.add('hidden');
+
+        // Re-enable form
+        const form = document.getElementById('transcription-form');
+        if (form) {
+            form.classList.remove('processing');
+            const submitButton = form.querySelector('button[type="submit"]');
+            if (submitButton) {
+                submitButton.disabled = false;
+            }
+        }
+
+        // Clear current task ID since we're done
+        currentTaskId = null;
+    }
+
+    // Initialize WebSocket connection
+    const socket = new WebSocketService({
+        debug: true,
+        onDebug: (message, ...args) => {
+            const debugContent = document.getElementById('debug-content');
+            if (debugContent) {
+                const timestamp = new Date().toISOString();
+                const formattedMessage = typeof message === 'object' ? JSON.stringify(message, null, 2) : message;
+                const formattedArgs = args.map(arg => typeof arg === 'object' ? JSON.stringify(arg, null, 2) : arg).join(' ');
+                debugContent.textContent += `[${timestamp}] ${formattedMessage} ${formattedArgs}\n`;
+                debugContent.scrollTop = debugContent.scrollHeight;
+            }
+        }
+    });
+
+    // Set up event listeners
+    socket.on('transcription_progress', handleTranscriptionProgress);
+
+    // Handle form submission
+    document.getElementById('transcription-form')?.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        // Clear previous results and errors
+        document.getElementById('youtube-result-box')?.classList.add('hidden');
+        document.getElementById('whisper-result-box')?.classList.add('hidden');
+        document.getElementById('error-container')?.classList.add('hidden');
+        document.getElementById('compare-button')?.classList.add('hidden');
+
+        // Show progress container
+        const progressContainer = document.getElementById('progress-container');
+        if (progressContainer) {
+            progressContainer.classList.remove('hidden');
+        }
+
+        // Disable form while processing
+        this.classList.add('processing');
+        const submitButton = this.querySelector('button[type="submit"]');
+        if (submitButton) {
+            submitButton.disabled = true;
+        }
+
+        try {
+            // Get form data
+            const url = document.getElementById('video-url').value;
+            const method = Array.from(document.getElementsByName('transcription-method'))
+                .find(radio => radio.checked)?.value || 'YouTube';
+            const modelName = document.getElementById('whisper-model')?.value || 'base';
+
+            // Ensure socket is connected
+            await socket.connect();
+
+            // Make API request
+            const response = await fetch('/api/transcribe', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    url,
+                    method,
+                    model_name: modelName,
+                    sid: socket.socket.id
+                })
+            });
+
+            const data = await response.json();
+            if (!data.success) {
+                throw new Error(data.error || 'Failed to start transcription');
+            }
+
+        } catch (error) {
+            handleTranscriptionError(error.message);
+        }
+    });
 });

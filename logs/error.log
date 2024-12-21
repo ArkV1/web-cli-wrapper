@@ -1,0 +1,11 @@
+[2024-12-22T00:13:37.fZ] ERROR [src.transcription_manager.process_transcription:222] Error in transcription process: A process in the process pool was terminated abruptly while the future was running or pending.
+Traceback (most recent call last):
+  File "/Users/ark/Development/Tools/web-toolkit/src/transcription_manager.py", line 207, in process_transcription
+    result = future.result()
+             ^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.7_1/Frameworks/Python.framework/Versions/3.12/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.7_1/Frameworks/Python.framework/Versions/3.12/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+concurrent.futures.process.BrokenProcessPool: A process in the process pool was terminated abruptly while the future was running or pending.

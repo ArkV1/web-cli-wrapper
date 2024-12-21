@@ -1,94 +1,56 @@
-from flask import request
-from flask_socketio import SocketIO, emit
 import logging
+from flask_socketio import emit, join_room, disconnect
+from flask import request
+from threading import Lock
 
-# Main logger
-logger = logging.getLogger('websocket')
+logger = logging.getLogger(__name__)
 
-def init_socket_handlers(socketio: SocketIO, transcription_tasks, tasks_lock):
+def init_socket_handlers(socketio, manager):
+    # Track active clients
+    active_clients = {}
+    active_clients_lock = Lock()
+
     @socketio.on('connect')
     def handle_connect():
-        logger.info(f'Client connected: {request.sid}')
+        client_id = request.sid
+        logger.info(f'WebSocket connected successfully')
+        logger.info(f'Client ID: {client_id}')
+        
+        with active_clients_lock:
+            active_clients[client_id] = {'connected': True}
+        
+        join_room(client_id)
         emit('connection_established', {'status': 'connected'})
+        logger.info('Sent connection_established event')
 
     @socketio.on('disconnect')
     def handle_disconnect():
-        logger.info('Client disconnected')
+        client_id = request.sid
+        logger.info(f'WebSocket disconnected (Client ID: {client_id})')
+        
+        with active_clients_lock:
+            if client_id in active_clients:
+                active_clients[client_id]['connected'] = False
+                del active_clients[client_id]
 
     @socketio.on('check_progress')
-    def handle_progress_check(data):
+    def handle_check_progress(data):
+        """Handle progress check requests from clients."""
         task_id = data.get('task_id')
-        logger.info(f'Checking progress for task: {task_id}')
+        client_id = request.sid
         
-        with tasks_lock:
-            if task_id in transcription_tasks:
-                task_data = transcription_tasks[task_id].copy()
-                task_data['task_id'] = task_id
-                socketio.emit('transcription_progress', task_data, room=request.sid)
-            else:
-                socketio.emit('transcription_progress', {
-                    'task_id': task_id,
-                    'progress': 0,
-                    'message': 'Task not found',
-                    'complete': False,
-                    'success': False,
-                    'error': 'Task not found'
-                }, room=request.sid)
+        logger.info(f"Received check_progress event for task {task_id} from client {client_id}")
+        
+        # Get current progress from manager
+        progress = manager.get_progress(task_id)
+        if progress:
+            emit('transcription_progress', progress)
 
     @socketio.on_error()
     def error_handler(e):
-        logger.error('WebSocket error occurred', exc_info=True, extra={
+        error_info = {
             'error': str(e),
             'client_id': request.sid,
             'remote_addr': request.remote_addr
-        })
-        emit('error', {'error': str(e)})
-
-def check_task_progress(task_id):
-    """Check the progress of a transcription task."""
-    try:
-        task_result = AsyncResult(task_id)
-        
-        if task_result.ready():
-            if task_result.successful():
-                result = task_result.get()
-                return {
-                    'task_id': task_id,
-                    'complete': True,
-                    'success': True,
-                    'progress': 100,
-                    'message': 'Transcription complete!',
-                    **result  # Unpack the result data, should include 'transcript'
-                }
-            else:
-                error = str(task_result.result)
-                return {
-                    'task_id': task_id,
-                    'complete': True,
-                    'success': False,
-                    'progress': 100,
-                    'message': f'Task failed: {error}',
-                    'error': error
-                }
-        else:
-            # Get progress info if available
-            progress_info = task_result.info or {}
-            return {
-                'task_id': task_id,
-                'complete': False,
-                'success': None,
-                'progress': progress_info.get('progress', 0),
-                'message': progress_info.get('message', 'Processing...'),
-                'download_speed': progress_info.get('download_speed'),
-                'eta': progress_info.get('eta')
-            }
-    except Exception as e:
-        logger.error(f"Error checking task progress: {str(e)}", exc_info=True)
-        return {
-            'task_id': task_id,
-            'complete': True,
-            'success': False,
-            'progress': 100,
-            'message': f'Error checking progress: {str(e)}',
-            'error': str(e)
         }
+        logger.error(f'WebSocket error: {str(e)}', extra=error_info)

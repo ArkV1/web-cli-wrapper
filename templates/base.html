@@ -5,26 +5,116 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Web CLI Tools{% endblock %}</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .sidebar-transition {
+            transition: all 0.3s ease;
+        }
+        .sidebar-content {
+            transition: opacity 0.2s ease;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        .content-transition {
+            transition: all 0.3s ease;
+        }
+    </style>
 </head>
 <body class="bg-gray-100">
     <div class="flex h-screen">
         <!-- Sidebar -->
-        <div id="side-panel" class="w-64 bg-white shadow-lg p-4">
-            <h2 class="text-lg font-semibold mb-4">Tools</h2>
-            <ul class="space-y-2">
-                <li><a href="/" class="text-blue-600 hover:text-blue-800">Home</a></li>
-                <li><a href="/transcription" class="text-blue-600 hover:text-blue-800">YouTube Transcriber</a></li>
-                <li><a href="/website-to-pdf" class="text-blue-600 hover:text-blue-800">Website to PDF</a></li>
-                <li><a href="/website-to-source" class="text-blue-600 hover:text-blue-800">Page Source Downloader</a></li>
-                <li><a href="/text-compare" class="text-blue-600 hover:text-blue-800">Text Comparison</a></li>
-            </ul>
+        <div id="side-panel" class="sidebar-transition relative w-64 bg-white shadow-lg flex flex-col">
+            <!-- Toggle button - now outside the sidebar -->
+            <button id="toggle-sidebar" class="absolute -right-3 top-4 z-50 bg-white shadow-md rounded-full p-1.5 hover:bg-gray-50 focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
+                </svg>
+            </button>
+            
+            <!-- Sidebar content -->
+            <div class="sidebar-content h-full">
+                <div class="p-4">
+                    <h2 class="text-lg font-semibold text-gray-800">Tools</h2>
+                </div>
+                <nav class="flex-1">
+                    <ul class="px-3 space-y-1">
+                        <li>
+                            <a href="/" class="flex items-center px-3 py-2 text-gray-700 rounded-lg hover:bg-gray-100 hover:text-gray-900">
+                                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                                </svg>
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/transcription" class="flex items-center px-3 py-2 text-gray-700 rounded-lg hover:bg-gray-100 hover:text-gray-900">
+                                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                                </svg>
+                                YouTube Transcriber
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/website-to-pdf" class="flex items-center px-3 py-2 text-gray-700 rounded-lg hover:bg-gray-100 hover:text-gray-900">
+                                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                </svg>
+                                Website to PDF
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/website-to-source" class="flex items-center px-3 py-2 text-gray-700 rounded-lg hover:bg-gray-100 hover:text-gray-900">
+                                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                                </svg>
+                                Page Source
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/text-compare" class="flex items-center px-3 py-2 text-gray-700 rounded-lg hover:bg-gray-100 hover:text-gray-900">
+                                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                                Text Comparison
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
         
         <!-- Main content -->
-        <div class="flex-1 p-8 overflow-y-auto">
+        <div id="main-content" class="flex-1 p-8 overflow-y-auto content-transition">
             {% block content %}{% endblock %}
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidePanel = document.getElementById('side-panel');
+            const mainContent = document.getElementById('main-content');
+            const toggleButton = document.getElementById('toggle-sidebar');
+            const sidebarContent = document.querySelector('.sidebar-content');
+            let isCollapsed = false;
+
+            toggleButton.addEventListener('click', function() {
+                isCollapsed = !isCollapsed;
+                if (isCollapsed) {
+                    sidePanel.style.width = '16px';
+                    sidebarContent.style.opacity = '0';
+                    toggleButton.style.transform = 'rotate(180deg)';
+                    toggleButton.classList.add('-right-3');
+                    toggleButton.classList.remove('-right-4');
+                } else {
+                    sidePanel.style.width = '16rem';
+                    sidebarContent.style.opacity = '1';
+                    toggleButton.style.transform = 'rotate(0deg)';
+                    toggleButton.classList.remove('-right-3');
+                    toggleButton.classList.add('-right-4');
+                }
+            });
+        });
+    </script>
+
     {% block scripts %}{% endblock %}
 </body>
 </html>

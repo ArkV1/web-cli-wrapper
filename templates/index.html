@@ -1,0 +1,80 @@
+<!-- Progress Section -->
+<div id="progress-container" class="mt-4 mb-4" style="display: none;">
+    <div class="progress" style="height: 25px;">
+        <div id="progress-bar" 
+             class="progress-bar progress-bar-striped progress-bar-animated" 
+             role="progressbar" 
+             style="width: 0%" 
+             aria-valuenow="0" 
+             aria-valuemin="0" 
+             aria-valuemax="100">
+        </div>
+    </div>
+    <div class="text-center mt-2">
+        <span id="progress-text" class="text-muted">Initializing...</span>
+    </div>
+</div>
+
+<!-- Results Section -->
+<div id="results-section" class="mt-4 hidden">
+    <div class="row">
+        <div class="col">
+            <div id="youtube-result-box" class="result-box hidden">
+                <h4>YouTube Transcript</h4>
+                <div class="transcript-container">
+                    <pre id="youtube-result" class="transcript"></pre>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div id="whisper-result-box" class="result-box hidden">
+                <h4>Whisper Transcript</h4>
+                <div class="transcript-container">
+                    <pre id="whisper-result" class="transcript"></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center mt-3">
+        <button id="compare-button" class="btn btn-primary hidden">Compare Transcripts</button>
+    </div>
+</div>
+
+<!-- Add some CSS for the progress bar -->
+<style>
+.progress {
+    border-radius: 15px;
+    background-color: #f0f0f0;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.progress-bar {
+    border-radius: 15px;
+    background-color: #007bff;
+    transition: width 0.5s ease-in-out;
+}
+
+.progress-bar.bg-success {
+    background-color: #28a745 !important;
+}
+
+#progress-text {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.transcript-container {
+    max-height: 500px;
+    overflow-y: auto;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 15px;
+    background-color: #f8f9fa;
+}
+
+.transcript {
+    white-space: pre-wrap;
+    margin: 0;
+    font-family: monospace;
+}
+</style> 

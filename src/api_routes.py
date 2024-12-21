@@ -1,78 +1,80 @@
-from flask import request, send_file, jsonify
-from flask_socketio import emit, join_room
+from flask import Blueprint, request, jsonify, send_file
+from flask_socketio import SocketIO
+import logging
+import uuid
+from pathlib import Path
 import subprocess
 import os
-from pathlib import Path
-import uuid
-from threading import Lock
-import logging
-from .transcription import start_transcription, highlight_differences
+import tempfile
+from .transcription_manager import manager
 from .text_comparison import compare_texts
 
-# Configure the logger
-logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 def register_api_routes(app, socketio):
-    # Store for tracking tasks with thread safety
-    tasks_lock = Lock()
-
-    # Initialize the transcription tasks dictionary
-    transcription_tasks = {}
-
-    def background_transcription(task_id, url, method, use_whisper, model_name, sid):
+    def background_transcription(task_id: str, url: str, method: str, model_name: str, sid: str):
         """Background task for handling transcription"""
+        def progress_callback(data):
+            data['task_id'] = task_id
+            socketio.emit('transcription_progress', data, room=sid)
+        
         try:
-            # Update initial progress
-            with tasks_lock:
-                transcription_tasks[task_id] = {
-                    'progress': 10,
-                    'message': 'Starting transcription...',
-                    'complete': False
-                }
-
-            # Start transcription
-            result = start_transcription(
+            manager.process_transcription(
+                task_id=task_id,
                 url=url,
-                use_youtube=(method in ['YouTube', 'Both']),
-                use_whisper=(method in ['Whisper', 'Both']),
-                model_name=model_name
+                method=method,
+                model_name=model_name,
+                progress_callback=progress_callback
             )
-
-            # Store final result
-            with tasks_lock:
-                if result['success']:
-                    transcription_tasks[task_id] = {
-                        'progress': 100,
-                        'message': 'Transcription complete!',
-                        'complete': True,
-                        'success': True,
-                        'youtube_transcript': result.get('youtube_transcript'),
-                        'whisper_transcript': result.get('whisper_transcript')
-                    }
-                else:
-                    transcription_tasks[task_id] = {
-                        'progress': 100,
-                        'message': f"Error: {result.get('error', 'Unknown error')}",
-                        'complete': True,
-                        'success': False,
-                        'error': result.get('error')
-                    }
-
-            # Emit final result
-            socketio.emit('transcription_progress', transcription_tasks[task_id] | {'task_id': task_id}, room=sid)
-
         except Exception as e:
-            logger.error(f"Transcription error: {str(e)}")
-            with tasks_lock:
-                transcription_tasks[task_id] = {
-                    'progress': 100,
-                    'message': f'Error: {str(e)}',
-                    'complete': True,
-                    'success': False,
-                    'error': str(e)
-                }
-            socketio.emit('transcription_progress', transcription_tasks[task_id] | {'task_id': task_id}, room=sid)
+            logger.error(f"Error in background transcription: {str(e)}", exc_info=True)
+            socketio.emit('transcription_progress', {
+                'task_id': task_id,
+                'progress': 100,
+                'complete': True,
+                'success': False,
+                'error': str(e)
+            }, room=sid)
+
+    @app.route('/api/transcribe', methods=['POST'])
+    def start_transcription():
+        try:
+            data = request.get_json()
+            if not data:
+                return jsonify({'success': False, 'error': 'No data provided'}), 400
+                
+            url = data.get('url')
+            if not url:
+                return jsonify({'success': False, 'error': 'No URL provided'}), 400
+                
+            method = data.get('method', 'YouTube')
+            model_name = data.get('model_name', 'base')
+            sid = data.get('sid')
+            
+            task_id = str(uuid.uuid4())
+            
+            # Submit transcription task to thread pool
+            manager._thread_pool.submit(
+                background_transcription, 
+                task_id, 
+                url, 
+                method, 
+                model_name, 
+                sid
+            )
+            
+            return jsonify({
+                'success': True,
+                'task_id': task_id,
+                'message': 'Transcription started'
+            })
+            
+        except Exception as e:
+            logger.error(f"Error starting transcription: {str(e)}", exc_info=True)
+            return jsonify({
+                'success': False,
+                'error': str(e)
+            }), 500
 
     @app.route('/api/convert-to-pdf', methods=['POST'])
     def convert_to_pdf():
@@ -93,9 +95,6 @@ def register_api_routes(app, socketio):
             output_path = output_dir / filename
             script_dir = base_dir / 'scripts' / 'website-to-pdf'
             script_path = script_dir / 'convert.js'
-
-            print(f"Script path: {script_path}")  # Debug print
-            print(f"Output path: {output_path}")  # Debug print
 
             # Ensure directories exist
             output_dir.mkdir(parents=True, exist_ok=True)
@@ -218,12 +217,10 @@ def register_api_routes(app, socketio):
 
     @app.route('/output/<filename>', methods=['GET'])
     def serve_pdf(filename):
-        # Get absolute path to output directory
         current_dir = Path(__file__).resolve().parent
         output_dir = current_dir / 'output'
         file_path = output_dir / filename
 
-        # Verify file exists and is within output directory
         try:
             file_path.resolve().relative_to(output_dir.resolve())
             if not file_path.exists():
@@ -231,49 +228,6 @@ def register_api_routes(app, socketio):
             return send_file(str(file_path), mimetype='application/pdf')
         except ValueError:
             return jsonify({'error': 'Invalid filename'}), 400
-
-    @app.route('/api/transcribe', methods=['POST'])
-    def transcribe():
-        try:
-            data = request.get_json()
-            if not data:
-                return jsonify({'success': False, 'error': 'No data provided'}), 400
-                
-            url = data.get('url')
-            method = data.get('method')
-            use_whisper = data.get('use_whisper', False)
-            model_name = data.get('model_name', 'base')
-            sid = data.get('sid')
-            
-            if not url:
-                return jsonify({'success': False, 'error': 'URL is required'}), 400
-            
-            task_id = str(uuid.uuid4())
-            
-            # Start background transcription using socketio
-            socketio.start_background_task(
-                target=background_transcription,
-                task_id=task_id,
-                url=url,
-                method=method,
-                use_whisper=use_whisper,
-                model_name=model_name,
-                sid=sid
-            )
-            
-            return jsonify({
-                'success': True,
-                'task_id': task_id,
-                'message': 'Transcription started'
-            })
-            
-        except Exception as e:
-            if sid:
-                socketio.emit('transcription_error', {'error': str(e)}, room=sid)
-            return jsonify({
-                'success': False,
-                'error': str(e)
-            }), 500
 
     @app.route('/api/compare-transcripts', methods=['POST'])
     def compare_transcripts():
@@ -295,12 +249,12 @@ def register_api_routes(app, socketio):
                     'error': 'Both transcripts are required'
                 }), 400
 
-            # Use the highlight_differences function with the specified mode
-            comparison = highlight_differences(youtube_transcript, whisper_transcript, mode=mode)
+            # Compare the texts using the specified mode
+            comparison = compare_texts(youtube_transcript, whisper_transcript, mode=mode)
 
             return jsonify({
                 'success': True,
-                'comparison': comparison  # This will be either a string (inline) or tuple (side-by-side)
+                'comparison': comparison
             })
 
         except Exception as e:
@@ -344,3 +298,6 @@ def register_api_routes(app, socketio):
                 'error': str(e)
             }), 500
 
+    # Register socket handlers
+    from .socket_handlers import init_socket_handlers
+    init_socket_handlers(socketio, manager)

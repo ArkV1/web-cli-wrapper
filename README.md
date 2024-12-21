@@ -35,5 +35,5 @@ Only single gunicorn worker is supported at the moment.
 
 ### Run Gunicorn
 ```bash
-gunicorn --worker-class gevent --workers 1 --bind 0.0.0.0:3003 --reload app:app
+gunicorn -c gunicorn.conf.py app:app
 ```
