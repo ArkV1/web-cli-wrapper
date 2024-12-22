@@ -17,6 +17,8 @@ class WebSocketService {
         this.eventListeners = new Map();
         this.lastProgressUpdate = null;
         this.cleanDisconnect = false;  // Flag to indicate a clean disconnect
+        this.isCompleting = false;  // Flag to indicate we're in the completion process
+        this.heartbeatInterval = null;  // Store interval reference for cleanup
     }
 
     async connect(url = window.location.origin) {
@@ -129,9 +131,10 @@ class WebSocketService {
         });
 
         // Set up a heartbeat to detect stale connections
-        setInterval(() => {
+        this.heartbeatInterval = setInterval(() => {
             const now = Date.now();
-            if (now - this.lastEventTime > this.options.timeout) {
+            // Only check for stale connections if we're not in the process of completing
+            if (!this.isCompleting && now - this.lastEventTime > this.options.timeout) {
                 this.log('Connection appears stale, attempting reconnect');
                 this.socket.disconnect();
                 this.handleReconnect();
@@ -148,10 +151,26 @@ class WebSocketService {
                 this.currentTaskId = data.task_id;
             }
 
-            // Clear task ID and set clean disconnect if transcription is complete
+            // If this is a completion message, set the flag
             if (data.complete) {
-                this.currentTaskId = null;
-                this.cleanDisconnect = true;
+                this.isCompleting = true;
+            }
+
+            // Notify all registered listeners first
+            const listeners = this.eventListeners.get('transcription_progress') || new Set();
+            for (const listener of listeners) {
+                listener(data);
+            }
+
+            // Only after listeners have processed the data, handle completion
+            if (data.complete) {
+                // Small delay to ensure UI updates are complete
+                setTimeout(() => {
+                    this.currentTaskId = null;
+                    this.cleanDisconnect = true;
+                    this.isCompleting = false;
+                    this.disconnect();
+                }, 2000);  // Increased delay to 2 seconds
             }
         });
     }
@@ -201,9 +220,14 @@ class WebSocketService {
                 clearTimeout(this.reconnectTimeout);
                 this.reconnectTimeout = null;
             }
+            if (this.heartbeatInterval) {
+                clearInterval(this.heartbeatInterval);
+                this.heartbeatInterval = null;
+            }
             this.currentTaskId = null;
             this.reconnectAttempts = 0;
             this.cleanDisconnect = true;  // Set the clean disconnect flag
+            this.isCompleting = false;  // Reset completion flag
             this.socket.disconnect();
             this.log('Disconnected from server');  // This will be the only disconnect message
         }

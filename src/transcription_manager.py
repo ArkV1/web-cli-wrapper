@@ -179,11 +179,20 @@ class TranscriptionManager:
         # store ephemeral task states
         self.tasks: Dict[str, Dict] = {}
 
-        # A thread pool so you can offload process_transcription calls:
+        # A thread pool so you can offload non-CPU-bound tasks:
         self._thread_pool = ThreadPoolExecutor(max_workers=4)
 
-        # A thread pool for CPU-bound tasks (replacing process pool)
-        self._whisper_pool = ThreadPoolExecutor(max_workers=1)
+        # A process pool for CPU-bound tasks like Whisper transcription
+        self._whisper_pool = ProcessPoolExecutor(max_workers=2, mp_context=ctx)
+
+        # Ensure executors are shutdown gracefully
+        import atexit
+        atexit.register(self.shutdown)
+
+    def shutdown(self):
+        """Shutdown the executors gracefully."""
+        self._whisper_pool.shutdown(wait=True)
+        self._thread_pool.shutdown(wait=True)
 
     def update_progress(self, task_id: str, progress_data: dict):
         """Store ephemeral progress data in an in-memory dictionary."""
@@ -233,7 +242,7 @@ class TranscriptionManager:
             # Ensure URL is properly quoted
             safe_url = shlex.quote(url)
             
-            ydl_opts = get_yt_dlp_opts(output_path)
+            ydl_opts = get_yt_dlp_opts(str(output_path))
             if progress_cb:
                 ydl_opts['progress_hooks'] = [lambda d: self._yt_dlp_hook(d, progress_cb)]
             
@@ -360,8 +369,8 @@ class TranscriptionManager:
                 # We'll store the child's progress lines in this file
                 progress_file = str(temp_dir / "progress.jsonl")
 
-                # Spawn thread for transcription
-                logger.debug("Starting thread for Whisper transcription, task_id=%s", task_id)
+                # Submit transcription task to ProcessPoolExecutor
+                logger.debug("Submitting transcription task to ProcessPoolExecutor, task_id=%s", task_id)
                 future = self._whisper_pool.submit(
                     _transcribe_in_process,
                     str(audio_path),
@@ -451,21 +460,32 @@ class TranscriptionManager:
         # Update in-memory state
         self.update_progress(task_id, data)
         
+        # Use more retries and longer delays for completion messages
+        is_completion = extra and extra.get('complete', False)
+        max_retries = 5 if is_completion else 3
+        retry_delay = 2 if is_completion else 1
+        
         # Try to send the update with retry logic
-        max_retries = 3
-        retry_delay = 1
         for attempt in range(max_retries):
             try:
                 callback(data)
+                if is_completion:
+                    # For completion messages, send twice with a delay to ensure delivery
+                    import time
+                    time.sleep(1)
+                    callback(data)
                 break
             except Exception as e:
                 if attempt == max_retries - 1:
-                    logger.error("Failed to send progress update after %d attempts: %s", 
+                    logger.error("Failed to send %s update after %d attempts: %s",
+                               "completion" if is_completion else "progress",
                                max_retries, str(e))
                 else:
-                    logger.warning("Failed to send progress update (attempt %d): %s", 
+                    logger.warning("Failed to send %s update (attempt %d): %s",
+                                 "completion" if is_completion else "progress",
                                  attempt + 1, str(e))
                     time.sleep(retry_delay)
                     retry_delay *= 2  # Exponential backoff
 
+# Instantiate the TranscriptionManager
 manager = TranscriptionManager()

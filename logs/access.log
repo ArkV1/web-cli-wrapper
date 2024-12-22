@@ -302,3 +302,84 @@ RuntimeError: Failed to download audio: Download completed but file not found at
 [2024-12-22T21:06:17.fZ] [INFO] root: Application logging configured.
 [2024-12-22T21:07:15.fZ] [INFO] root: Application logging configured.
 [2024-12-22T21:07:28.fZ] [INFO] root: Application logging configured.
+################################################################################
+2024-12-22 21:25:47 - APPLICATION START
+################################################################################
+[2024-12-22T21:25:47.fZ] [INFO] root: Application logging configured.
+[2024-12-22T21:25:57.fZ] [INFO] src.socket_handlers: WebSocket connected: oCegSw67AjicdEaIAAAB
+[2024-12-22T21:25:58.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T21:25:58.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = xpcdeHSAsIPlVrSxm ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T21:25:58.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T21:25:58.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = WOE3wxcl464s7JiW8 ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T21:27:02.fZ] [INFO] src.socket_handlers: WebSocket disconnected: oCegSw67AjicdEaIAAAB
+[2024-12-22T21:27:06.fZ] [INFO] src.socket_handlers: WebSocket connected: NdEFbtE6MKQPcqhsAAAD
+[2024-12-22T21:28:06.fZ] [INFO] src.socket_handlers: WebSocket disconnected: NdEFbtE6MKQPcqhsAAAD
+[2024-12-22T21:28:08.fZ] [INFO] src.transcription_manager: Transcription completed successfully, task_id=f74c51de-058c-4f2c-8947-a20787cedba9
+[2024-12-22T21:30:48.fZ] [INFO] src.socket_handlers: WebSocket connected: JRIkjYSxsiRCpx7AAAAF
+[2024-12-22T21:30:50.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T21:30:50.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = qUYOkYabROQUT1jmh ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T21:30:50.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T21:30:50.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = Gd_vi3f4k_a1FhzLL ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T21:31:53.fZ] [INFO] src.socket_handlers: WebSocket disconnected: JRIkjYSxsiRCpx7AAAAF
+[2024-12-22T21:31:58.fZ] [INFO] src.socket_handlers: WebSocket connected: SxgyLBPH1ARETPBMAAAH
+[2024-12-22T21:32:58.fZ] [INFO] src.socket_handlers: WebSocket disconnected: SxgyLBPH1ARETPBMAAAH
+[2024-12-22T21:33:08.fZ] [INFO] src.transcription_manager: Transcription completed successfully, task_id=fd894d42-8757-4b56-8c80-9fc864d9f69c
+[2024-12-22T21:34:46.fZ] [INFO] root: Application logging configured.
+[2024-12-22T21:35:10.fZ] [INFO] root: Application logging configured.
+################################################################################
+2024-12-22 21:35:17 - APPLICATION START
+################################################################################
+[2024-12-22T21:35:17.fZ] [INFO] root: Application logging configured.
+[2024-12-22T21:35:21.fZ] [INFO] src.socket_handlers: WebSocket connected: DbrV14o8KW3i9z0wAAAB
+[2024-12-22T21:35:22.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T21:35:22.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = XMA8NSgIFvjGAWONa ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T21:35:22.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T21:35:22.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = hg9AB71SlAt8cNorF ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T21:36:26.fZ] [INFO] src.socket_handlers: WebSocket disconnected: DbrV14o8KW3i9z0wAAAB
+[2024-12-22T21:36:30.fZ] [INFO] src.socket_handlers: WebSocket connected: 1StjlT2rj2ogd2VQAAAD
+[2024-12-22T21:37:30.fZ] [INFO] src.socket_handlers: WebSocket disconnected: 1StjlT2rj2ogd2VQAAAD
+[2024-12-22T21:38:13.fZ] [INFO] src.transcription_manager: Transcription completed successfully, task_id=3363956c-7c1c-4387-8a33-694ad093f790
+################################################################################
+2024-12-22 21:40:39 - APPLICATION START
+################################################################################
+[2024-12-22T21:40:39.fZ] [INFO] root: Application logging configured.
+[2024-12-22T21:40:42.fZ] [INFO] src.socket_handlers: WebSocket connected: mF6zncZJ8mx7XCOQAAAB
+[2024-12-22T21:40:44.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T21:40:44.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = uG5AeA7VHL8R3YSQz ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T21:40:44.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T21:40:44.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = P29Nuzd5KM01mOJZa ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T21:41:48.fZ] [INFO] src.socket_handlers: WebSocket disconnected: mF6zncZJ8mx7XCOQAAAB
+[2024-12-22T21:41:52.fZ] [INFO] src.socket_handlers: WebSocket connected: V_ED9FcCS_ynG4vXAAAD
+[2024-12-22T21:42:52.fZ] [INFO] src.socket_handlers: WebSocket disconnected: V_ED9FcCS_ynG4vXAAAD
+[2024-12-22T21:43:16.fZ] [INFO] src.transcription_manager: Transcription completed successfully, task_id=9d0972c9-9810-4fed-bb94-3ef410d0d78b
+################################################################################
+2024-12-22 22:16:01 - APPLICATION START
+################################################################################
+[2024-12-22T22:16:02.fZ] [INFO] root: Application logging configured.
+[2024-12-22T22:16:14.fZ] [INFO] src.socket_handlers: WebSocket connected: yCrJRrYbQtNHVzPQAAAB
+[2024-12-22T22:16:15.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T22:16:15.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = ZH_gNtmUMkrmAEi59 ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T22:16:15.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T22:16:15.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = vH4g9U0pkARfDCFv3 ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T22:17:19.fZ] [INFO] src.socket_handlers: WebSocket disconnected: yCrJRrYbQtNHVzPQAAAB
+[2024-12-22T22:19:05.fZ] [INFO] src.transcription_manager: Transcription completed successfully, task_id=8f94e80e-ef8e-4de6-a4c5-29880ac6cf56

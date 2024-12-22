@@ -207,3 +207,55 @@ RuntimeError: Failed to download audio: Download completed but file not found at
 ################################################################################
 2024-12-22 21:06:17 - APPLICATION START
 ################################################################################
+################################################################################
+2024-12-22 21:25:47 - APPLICATION START
+################################################################################
+[2024-12-22T21:25:58.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T21:25:58.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = xpcdeHSAsIPlVrSxm ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T21:25:58.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T21:25:58.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = WOE3wxcl464s7JiW8 ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T21:30:50.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T21:30:50.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = qUYOkYabROQUT1jmh ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T21:30:50.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T21:30:50.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = Gd_vi3f4k_a1FhzLL ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+################################################################################
+2024-12-22 21:35:17 - APPLICATION START
+################################################################################
+[2024-12-22T21:35:22.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T21:35:22.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = XMA8NSgIFvjGAWONa ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T21:35:22.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T21:35:22.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = hg9AB71SlAt8cNorF ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+################################################################################
+2024-12-22 21:40:39 - APPLICATION START
+################################################################################
+[2024-12-22T21:40:44.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T21:40:44.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = uG5AeA7VHL8R3YSQz ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T21:40:44.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T21:40:44.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = P29Nuzd5KM01mOJZa ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+################################################################################
+2024-12-22 22:16:01 - APPLICATION START
+################################################################################
+[2024-12-22T22:16:15.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T22:16:15.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = ZH_gNtmUMkrmAEi59 ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T22:16:15.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T22:16:15.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = vH4g9U0pkARfDCFv3 ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js

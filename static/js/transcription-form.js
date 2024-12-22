@@ -417,12 +417,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // Clear current task ID and disconnect socket since we're done
+        // Clear current task ID - socket disconnection is now handled by socketService
         currentTaskId = null;
-        if (socketService) {
-            socketService.disconnect();
-            socketService = null;
-        }
     }
 
     function handleTranscriptionError(error) {
