@@ -27,7 +27,7 @@ import whisper
 import yt_dlp
 from youtube_transcript_api import YouTubeTranscriptApi
 
-from .yt_dlp_logger import YTDLPLogger
+from src.loggers.yt_dlp_logger import YTDLPLogger
 
 ##############################################################################
 # We'll create a spawn context for child processes, but avoid Manager-based IPC
@@ -56,11 +56,25 @@ def get_yt_dlp_opts(output_path: str) -> dict:
         'postprocessors': [{
             'key': 'FFmpegExtractAudio',
             'preferredcodec': 'mp3',
+            'preferredquality': '192',
         }],
-        'outtmpl': output_path,
-        'quiet': True,
-        'no_warnings': True,
-        'logger': YTDLPLogger()
+        'outtmpl': '%(id)s.%(ext)s',  # Use video ID as filename
+        'paths': {'home': str(Path(output_path).parent)},  # Set download directory
+        'quiet': False,
+        'no_warnings': False,
+        'logger': YTDLPLogger(),
+        'progress_hooks': [],
+        'verbose': True,
+        'extract_flat': False,
+        'retries': 3,
+        'fragment_retries': 3,
+        'skip_unavailable_fragments': False,
+        'keepvideo': False,
+        'writethumbnail': False,
+        'postprocessor_args': [
+            '-ar', '44100',
+            '-ac', '2',
+        ],
     }
 
 def _transcribe_in_process(audio_path: str, model_name: str, verbose: bool,
@@ -168,8 +182,8 @@ class TranscriptionManager:
         # A thread pool so you can offload process_transcription calls:
         self._thread_pool = ThreadPoolExecutor(max_workers=4)
 
-        # A process pool for CPU-bound tasks
-        self._process_pool = ProcessPoolExecutor(max_workers=1, mp_context=ctx)
+        # A thread pool for CPU-bound tasks (replacing process pool)
+        self._whisper_pool = ThreadPoolExecutor(max_workers=1)
 
     def update_progress(self, task_id: str, progress_data: dict):
         """Store ephemeral progress data in an in-memory dictionary."""
@@ -213,16 +227,68 @@ class TranscriptionManager:
         """
         try:
             import yt_dlp
+            import shlex
+            import glob
 
-            ydl_opts = get_yt_dlp_opts(str(output_path))
+            # Ensure URL is properly quoted
+            safe_url = shlex.quote(url)
+            
+            ydl_opts = get_yt_dlp_opts(output_path)
+            if progress_cb:
+                ydl_opts['progress_hooks'] = [lambda d: self._yt_dlp_hook(d, progress_cb)]
+            
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-                logger.debug("Starting YouTube audio download: %s", url)
-                ydl.download([url])
+                logger.debug("Starting YouTube audio download: %s", safe_url)
+                
+                # First extract info to verify video is accessible
+                try:
+                    info = ydl.extract_info(url, download=True)  # Changed to download=True
+                    if not info:
+                        raise RuntimeError("Failed to extract video info")
+                    
+                    # The file will be named video_id.mp3 in the output directory
+                    video_id = info['id']
+                    expected_file = output_path.parent / f"{video_id}.mp3"
+                    
+                    # If the file exists, move it to the desired location
+                    if expected_file.exists():
+                        shutil.move(str(expected_file), str(output_path))
+                    else:
+                        # Look for any mp3 files in the directory
+                        mp3_files = list(output_path.parent.glob("*.mp3"))
+                        if mp3_files:
+                            # Move the first mp3 file found to the desired location
+                            shutil.move(str(mp3_files[0]), str(output_path))
+                        else:
+                            raise RuntimeError(f"Download completed but no MP3 file found in {output_path.parent}")
+                    
+                    # Final verification
+                    if not output_path.exists():
+                        raise RuntimeError(f"Failed to move audio file to {output_path}")
+                    if output_path.stat().st_size == 0:
+                        raise RuntimeError("Downloaded file is empty")
+                    
+                except yt_dlp.utils.DownloadError as e:
+                    logger.error("yt-dlp download error: %s", str(e))
+                    raise RuntimeError(f"Failed to download video: {str(e)}")
+                
             if progress_cb:
                 progress_cb({"progress": 100})
+                
         except Exception as e:
-            logger.exception("Error downloading audio from %s", url)
-            raise
+            logger.exception("Error downloading audio from %s: %s", url, str(e))
+            # Clean up any partially downloaded files
+            try:
+                if output_path.exists():
+                    output_path.unlink()
+                # Also clean up any intermediate files
+                for f in output_path.parent.glob(f"*.mp3"):
+                    f.unlink()
+                for f in output_path.parent.glob(f"*.webm"):
+                    f.unlink()
+            except Exception as cleanup_error:
+                logger.warning("Failed to clean up partial download: %s", str(cleanup_error))
+            raise RuntimeError(f"Failed to download audio: {str(e)}")
 
     def _yt_dlp_hook(self, d: dict, cb: Optional[Callable]):
         if d["status"] == "downloading":
@@ -261,19 +327,14 @@ class TranscriptionManager:
             # Maybe fetch YouTube transcript
             youtube_result = None
             if method in ["YouTube", "Both"]:
-                progress_callback({"task_id": task_id, "progress": 0,
-                                   "message": "Fetching YouTube transcript..."})
+                self._send_progress(task_id, progress_callback, 0, "Fetching YouTube transcript...")
                 youtube_result = self.get_youtube_transcript(vid_id)
                 if youtube_result["success"] and method == "YouTube":
                     # We can return early
                     logger.info("YouTube transcript only method complete for task_id=%s", task_id)
-                    progress_callback({
-                        "task_id": task_id,
-                        "progress": 100,
-                        "complete": True,
-                        "success": True,
-                        "youtube_transcript": youtube_result["text"]
-                    })
+                    self._send_progress(task_id, progress_callback, 100, "Complete", 
+                                      extra={"complete": True, "success": True, 
+                                            "youtube_transcript": youtube_result["text"]})
                     return
 
             if method in ["Whisper", "Both"]:
@@ -285,38 +346,23 @@ class TranscriptionManager:
                 def dl_cb(data):
                     p = data.get("progress", 0)
                     scaled = start_progress + (p * 0.3)
-                    # ephemeral in-memory update
-                    self.update_progress(task_id, {
-                        "progress": scaled, "message": "Downloading audio..."
-                    })
-                    progress_callback({
-                        "task_id": task_id,
-                        "progress": scaled,
-                        "message": "Downloading audio...",
-                        "download_speed": data.get("download_speed"),
-                        "eta": data.get("eta")
-                    })
+                    self._send_progress(task_id, progress_callback, scaled, "Downloading audio...",
+                                      extra={"download_speed": data.get("download_speed"),
+                                            "eta": data.get("eta")})
 
                 # Download the audio
                 logger.debug("Downloading audio to %s for task_id=%s", audio_path, task_id)
                 self.download_audio(url, audio_path, dl_cb)
 
-                progress_callback({
-                    "task_id": task_id,
-                    "progress": start_progress + 30,
-                    "message": "Starting transcription..."
-                })
-                self.update_progress(task_id, {
-                    "progress": start_progress + 30,
-                    "message": "Starting transcription..."
-                })
+                self._send_progress(task_id, progress_callback, start_progress + 30, 
+                                  "Starting transcription...")
 
                 # We'll store the child's progress lines in this file
                 progress_file = str(temp_dir / "progress.jsonl")
 
-                # Spawn child process
-                logger.debug("Spawning child process for Whisper transcription, task_id=%s", task_id)
-                future = self._process_pool.submit(
+                # Spawn thread for transcription
+                logger.debug("Starting thread for Whisper transcription, task_id=%s", task_id)
+                future = self._whisper_pool.submit(
                     _transcribe_in_process,
                     str(audio_path),
                     model_name,
@@ -325,6 +371,7 @@ class TranscriptionManager:
                 )
 
                 last_pos = 0
+                last_progress_time = time.time()
                 while not future.done():
                     # Read any new lines from progress_file
                     if os.path.exists(progress_file):
@@ -335,69 +382,54 @@ class TranscriptionManager:
                                 if update["type"] == "progress":
                                     pct = update["progress"]
                                     scaled_progress = start_progress + 30 + (pct * 0.4)
-
-                                    # ephemeral in-memory update
-                                    self.update_progress(task_id, {
-                                        "progress": scaled_progress, "message": "Transcribing..."
-                                    })
-
-                                    progress_callback({
-                                        "task_id": task_id,
-                                        "progress": scaled_progress,
-                                        "message": "Transcribing...",
-                                        "output": update.get("output", "")
-                                    })
+                                    
+                                    # Only send progress updates every 2 seconds to reduce WebSocket load
+                                    current_time = time.time()
+                                    if current_time - last_progress_time >= 2:
+                                        self._send_progress(task_id, progress_callback, scaled_progress,
+                                                          "Transcribing...", 
+                                                          extra={"output": update.get("output", "")})
+                                        last_progress_time = current_time
+                                        
                                 elif update["type"] == "output":
-                                    progress_callback({
-                                        "task_id": task_id,
-                                        "output": update["output"]
-                                    })
+                                    # Only send output updates every 2 seconds
+                                    current_time = time.time()
+                                    if current_time - last_progress_time >= 2:
+                                        self._send_progress(task_id, progress_callback, None, None,
+                                                          extra={"output": update["output"]})
+                                        last_progress_time = current_time
                                 elif update["type"] == "error":
                                     logger.error("Child process error: %s", update["error"])
-                                    progress_callback({
-                                        "task_id": task_id,
-                                        "error": update["error"]
-                                    })
+                                    self._send_progress(task_id, progress_callback, None, None,
+                                                      extra={"error": update["error"]})
                             last_pos = f.tell()
 
                     # If using gevent, yield control
                     import gevent
-                    gevent.sleep(0.1)
+                    gevent.sleep(0.5)  # Increased sleep time to reduce CPU usage
 
                 # Retrieve final result
                 result = future.result()
                 if result["success"]:
                     logger.info("Transcription completed successfully, task_id=%s", task_id)
-                    self.update_progress(task_id, {
-                        "progress": 100, "message": "Complete"
-                    })
-                    progress_callback({
-                        "task_id": task_id,
-                        "progress": 100,
-                        "complete": True,
-                        "success": True,
-                        "youtube_transcript": (
-                            youtube_result["text"] if (youtube_result and youtube_result["success"]) else None
-                        ),
-                        "whisper_transcript": result["text"],
-                        "segments": result["segments"]
-                    })
+                    self._send_progress(task_id, progress_callback, 100, "Complete",
+                                      extra={
+                                          "complete": True,
+                                          "success": True,
+                                          "youtube_transcript": (
+                                              youtube_result["text"] if (youtube_result and youtube_result["success"]) else None
+                                          ),
+                                          "whisper_transcript": result["text"],
+                                          "segments": result["segments"]
+                                      })
                 else:
                     logger.error("Transcription failed for task_id=%s: %s", task_id, result.get("error"))
                     raise RuntimeError(result.get("error", "Transcription failed"))
 
         except Exception as e:
             logger.exception("Error in process_transcription (task_id=%s, url=%s)", task_id, url)
-            self.update_progress(task_id, {
-                "progress": 100, "message": "Error", "error": str(e)
-            })
-            progress_callback({
-                "task_id": task_id,
-                "progress": 100,
-                "complete": True,
-                "success": False,
-                "error": str(e)
-            })
+            self._send_progress(task_id, progress_callback, 100, "Error",
+                              extra={"complete": True, "success": False, "error": str(e)})
         finally:
             if temp_dir and temp_dir.exists():
                 try:
@@ -405,5 +437,35 @@ class TranscriptionManager:
                 except Exception as ex:
                     logger.warning("Error cleaning up temp files in %s: %s", temp_dir, ex)
 
+    def _send_progress(self, task_id: str, callback: Callable, progress: Optional[float], 
+                      message: Optional[str], extra: Optional[dict] = None):
+        """Helper method to send progress updates with retry logic"""
+        data = {"task_id": task_id}
+        if progress is not None:
+            data["progress"] = progress
+        if message is not None:
+            data["message"] = message
+        if extra:
+            data.update(extra)
+            
+        # Update in-memory state
+        self.update_progress(task_id, data)
+        
+        # Try to send the update with retry logic
+        max_retries = 3
+        retry_delay = 1
+        for attempt in range(max_retries):
+            try:
+                callback(data)
+                break
+            except Exception as e:
+                if attempt == max_retries - 1:
+                    logger.error("Failed to send progress update after %d attempts: %s", 
+                               max_retries, str(e))
+                else:
+                    logger.warning("Failed to send progress update (attempt %d): %s", 
+                                 attempt + 1, str(e))
+                    time.sleep(retry_delay)
+                    retry_delay *= 2  # Exponential backoff
 
 manager = TranscriptionManager()

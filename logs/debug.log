@@ -1,48 +1,48 @@
-[2024-12-22T19:51:02.fZ] [INFO] root: Application logging configured.
-[2024-12-22T19:51:18.fZ] [INFO] root: Application logging configured.
-[2024-12-22T19:51:51.fZ] [INFO] root: Application logging configured.
-[2024-12-22T19:51:51.fZ] [INFO] root: Application logging configured.
-[2024-12-22T19:51:51.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
-[2024-12-22T19:51:52.fZ] [DEBUG] app: Registering Flask routes...
-[2024-12-22T19:51:52.fZ] [DEBUG] app: Routes registered successfully.
-[2024-12-22T19:51:58.fZ] [INFO] src.socket_handlers: WebSocket connected: ACoZ8YI2_fyAX5W9AAAB
-[2024-12-22T19:51:58.fZ] [DEBUG] src.transcription_manager: Started process_transcription, method=Whisper, task_id=1a2c38e7-5d70-42f3-b809-b478b53cb9cd
-[2024-12-22T19:51:58.fZ] [DEBUG] src.transcription_manager: Downloading audio to /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_xn8jlpo8/audio.mp3 for task_id=1a2c38e7-5d70-42f3-b809-b478b53cb9cd
-[2024-12-22T19:51:58.fZ] [DEBUG] src.transcription_manager: Starting YouTube audio download: https://www.youtube.com/watch?v=WsFOcu-yHTY
-[2024-12-22T19:51:58.fZ] [DEBUG] yt-dlp: [youtube] Extracting URL: https://www.youtube.com/watch?v=WsFOcu-yHTY
-[2024-12-22T19:51:58.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading webpage
-[2024-12-22T19:51:59.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading ios player API JSON
-[2024-12-22T19:51:59.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading mweb player API JSON
-[2024-12-22T19:51:59.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading player 03dbdfab
-[2024-12-22T19:52:00.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+################################################################################
+2024-12-22 20:09:21 - APPLICATION START
+################################################################################
+[2024-12-22T20:09:21.fZ] [INFO] root: Application logging configured.
+[2024-12-22T20:09:21.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+[2024-12-22T20:09:22.fZ] [DEBUG] app: Registering Flask routes...
+[2024-12-22T20:09:22.fZ] [DEBUG] app: Routes registered successfully.
+[2024-12-22T20:09:39.fZ] [INFO] src.socket_handlers: WebSocket connected: uRT0V56ZuP-kP-QuAAAB
+[2024-12-22T20:09:39.fZ] [DEBUG] src.transcription_manager: Started process_transcription, method=Whisper, task_id=ca8d2363-c50f-483d-8fc1-e93758d1c966
+[2024-12-22T20:09:39.fZ] [DEBUG] src.transcription_manager: Downloading audio to /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_98o3hgkj/audio.mp3 for task_id=ca8d2363-c50f-483d-8fc1-e93758d1c966
+[2024-12-22T20:09:39.fZ] [DEBUG] src.transcription_manager: Starting YouTube audio download: https://www.youtube.com/watch?v=WsFOcu-yHTY
+[2024-12-22T20:09:39.fZ] [DEBUG] yt-dlp: [youtube] Extracting URL: https://www.youtube.com/watch?v=WsFOcu-yHTY
+[2024-12-22T20:09:39.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading webpage
+[2024-12-22T20:09:40.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading ios player API JSON
+[2024-12-22T20:09:40.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading mweb player API JSON
+[2024-12-22T20:09:40.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading player 03dbdfab
+[2024-12-22T20:09:41.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
          player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T19:52:00.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
-         n = Jc46cokOggF5sqCOV ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T19:52:00.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+[2024-12-22T20:09:41.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = QDFW0uE6xUm7oCPit ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:09:41.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
          player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T19:52:00.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
-         n = F_NmR6UftZ0Rj9coM ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T19:52:00.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading m3u8 information
-[2024-12-22T19:52:00.fZ] [DEBUG] yt-dlp: [info] WsFOcu-yHTY: Downloading 1 format(s): 251
-[2024-12-22T19:52:01.fZ] [DEBUG] yt-dlp: [download] Destination: /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_xn8jlpo8/audio.mp3
-[2024-12-22T19:52:01.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.0%[0m of    4.25MiB at [0;32m 409.52KiB/s[0m ETA [0;33m00:10[0m
-[2024-12-22T19:52:01.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.1%[0m of    4.25MiB at [0;32m 816.28KiB/s[0m ETA [0;33m00:05[0m
-[2024-12-22T19:52:01.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.2%[0m of    4.25MiB at [0;32m   1.46MiB/s[0m ETA [0;33m00:02[0m
-[2024-12-22T19:52:01.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.3%[0m of    4.25MiB at [0;32m   2.59MiB/s[0m ETA [0;33m00:01[0m
-[2024-12-22T19:52:01.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.7%[0m of    4.25MiB at [0;32m   3.35MiB/s[0m ETA [0;33m00:01[0m
-[2024-12-22T19:52:01.fZ] [DEBUG] yt-dlp: [download] [0;94m  1.4%[0m of    4.25MiB at [0;32m   4.55MiB/s[0m ETA [0;33m00:00[0m
-[2024-12-22T19:52:01.fZ] [DEBUG] yt-dlp: [download] [0;94m  2.9%[0m of    4.25MiB at [0;32m   5.34MiB/s[0m ETA [0;33m00:00[0m
-[2024-12-22T19:52:01.fZ] [DEBUG] yt-dlp: [download] [0;94m  5.9%[0m of    4.25MiB at [0;32m   7.44MiB/s[0m ETA [0;33m00:00[0m
-[2024-12-22T19:52:01.fZ] [DEBUG] yt-dlp: [download] [0;94m 11.7%[0m of    4.25MiB at [0;32m  11.32MiB/s[0m ETA [0;33m00:00[0m
-[2024-12-22T19:52:01.fZ] [DEBUG] yt-dlp: [download] [0;94m 23.5%[0m of    4.25MiB at [0;32m  16.91MiB/s[0m ETA [0;33m00:00[0m
-[2024-12-22T19:52:01.fZ] [DEBUG] yt-dlp: [download] [0;94m 47.0%[0m of    4.25MiB at [0;32m  25.40MiB/s[0m ETA [0;33m00:00[0m
-[2024-12-22T19:52:01.fZ] [DEBUG] yt-dlp: [download] [0;94m 94.1%[0m of    4.25MiB at [0;32m  13.46MiB/s[0m ETA [0;33m00:00[0m
-[2024-12-22T19:52:01.fZ] [DEBUG] yt-dlp: [download] [0;94m100.0%[0m of    4.25MiB at [0;32m  13.95MiB/s[0m ETA [0;33m00:00[0m
-[2024-12-22T19:52:01.fZ] [DEBUG] yt-dlp: [download] 100% of    4.25MiB in [1;37m00:00:00[0m at [0;32m10.06MiB/s[0m
-[2024-12-22T19:52:01.fZ] [DEBUG] yt-dlp: [ExtractAudio] Destination: /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_xn8jlpo8/audio.mp3.mp3
-[2024-12-22T19:52:03.fZ] [DEBUG] yt-dlp: Deleting original file /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_xn8jlpo8/audio.mp3 (pass -k to keep)
-[2024-12-22T19:52:03.fZ] [DEBUG] src.transcription_manager: Spawning child process for Whisper transcription, task_id=1a2c38e7-5d70-42f3-b809-b478b53cb9cd
-[2024-12-22T19:52:13.fZ] [ERROR] src.transcription_manager: Child process error: Failed to load audio: ffmpeg version 7.1 Copyright (c) 2000-2024 the FFmpeg developers
+[2024-12-22T20:09:41.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = KIYqycsLmrdUJT9vM ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:09:41.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading m3u8 information
+[2024-12-22T20:09:41.fZ] [DEBUG] yt-dlp: [info] WsFOcu-yHTY: Downloading 1 format(s): 251
+[2024-12-22T20:09:41.fZ] [DEBUG] yt-dlp: [download] Destination: /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_98o3hgkj/audio.mp3
+[2024-12-22T20:09:41.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.0%[0m of    4.25MiB at [0;32m 408.17KiB/s[0m ETA [0;33m00:10[0m
+[2024-12-22T20:09:41.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.1%[0m of    4.25MiB at [0;32m 858.84KiB/s[0m ETA [0;33m00:05[0m
+[2024-12-22T20:09:41.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.2%[0m of    4.25MiB at [0;32m   1.57MiB/s[0m ETA [0;33m00:02[0m
+[2024-12-22T20:09:41.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.3%[0m of    4.25MiB at [0;32m   2.82MiB/s[0m ETA [0;33m00:01[0m
+[2024-12-22T20:09:41.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.7%[0m of    4.25MiB at [0;32m   4.00MiB/s[0m ETA [0;33m00:01[0m
+[2024-12-22T20:09:41.fZ] [DEBUG] yt-dlp: [download] [0;94m  1.4%[0m of    4.25MiB at [0;32m   4.15MiB/s[0m ETA [0;33m00:01[0m
+[2024-12-22T20:09:41.fZ] [DEBUG] yt-dlp: [download] [0;94m  2.9%[0m of    4.25MiB at [0;32m   5.77MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:09:41.fZ] [DEBUG] yt-dlp: [download] [0;94m  5.9%[0m of    4.25MiB at [0;32m   8.09MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:09:41.fZ] [DEBUG] yt-dlp: [download] [0;94m 11.7%[0m of    4.25MiB at [0;32m  12.08MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:09:42.fZ] [DEBUG] yt-dlp: [download] [0;94m 23.5%[0m of    4.25MiB at [0;32m  17.24MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:09:42.fZ] [DEBUG] yt-dlp: [download] [0;94m 47.0%[0m of    4.25MiB at [0;32m  25.69MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:09:42.fZ] [DEBUG] yt-dlp: [download] [0;94m 94.1%[0m of    4.25MiB at [0;32m  34.72MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:09:42.fZ] [DEBUG] yt-dlp: [download] [0;94m100.0%[0m of    4.25MiB at [0;32m  33.40MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:09:42.fZ] [DEBUG] yt-dlp: [download] 100% of    4.25MiB in [1;37m00:00:00[0m at [0;32m20.56MiB/s[0m
+[2024-12-22T20:09:42.fZ] [DEBUG] yt-dlp: [ExtractAudio] Destination: /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_98o3hgkj/audio.mp3.mp3
+[2024-12-22T20:09:44.fZ] [DEBUG] yt-dlp: Deleting original file /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_98o3hgkj/audio.mp3 (pass -k to keep)
+[2024-12-22T20:09:44.fZ] [DEBUG] src.transcription_manager: Spawning child process for Whisper transcription, task_id=ca8d2363-c50f-483d-8fc1-e93758d1c966
+[2024-12-22T20:09:53.fZ] [ERROR] src.transcription_manager: Child process error: Failed to load audio: ffmpeg version 7.1 Copyright (c) 2000-2024 the FFmpeg developers
   built with Apple clang version 16.0.0 (clang-1600.0.26.4)
   configuration: --prefix=/opt/homebrew/Cellar/ffmpeg/7.1_1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags='-Wl,-ld_classic' --enable-ffplay --enable-gnutls --enable-gpl --enable-libaom --enable-libaribb24 --enable-libbluray --enable-libdav1d --enable-libharfbuzz --enable-libjxl --enable-libmp3lame --enable-libopus --enable-librav1e --enable-librist --enable-librubberband --enable-libsnappy --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtesseract --enable-libtheora --enable-libvidstab --enable-libvmaf --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libxvid --enable-lzma --enable-libfontconfig --enable-libfreetype --enable-frei0r --enable-libass --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libspeex --enable-libsoxr --enable-libzmq --enable-libzimg --disable-libjack --disable-indev=jack --enable-videotoolbox --enable-audiotoolbox --enable-neon
   libavutil      59. 39.100 / 59. 39.100
@@ -53,11 +53,11 @@
   libswscale      8.  3.100 /  8.  3.100
   libswresample   5.  3.100 /  5.  3.100
   libpostproc    58.  3.100 / 58.  3.100
-[in#0 @ 0x141104560] Error opening input: No such file or directory
-Error opening input file /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_xn8jlpo8/audio.mp3.
+[in#0 @ 0x14701e470] Error opening input: No such file or directory
+Error opening input file /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_98o3hgkj/audio.mp3.
 Error opening input files: No such file or directory
 
-[2024-12-22T19:52:13.fZ] [ERROR] src.transcription_manager: Transcription failed for task_id=1a2c38e7-5d70-42f3-b809-b478b53cb9cd: Failed to load audio: ffmpeg version 7.1 Copyright (c) 2000-2024 the FFmpeg developers
+[2024-12-22T20:09:53.fZ] [ERROR] src.transcription_manager: Transcription failed for task_id=ca8d2363-c50f-483d-8fc1-e93758d1c966: Failed to load audio: ffmpeg version 7.1 Copyright (c) 2000-2024 the FFmpeg developers
   built with Apple clang version 16.0.0 (clang-1600.0.26.4)
   configuration: --prefix=/opt/homebrew/Cellar/ffmpeg/7.1_1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags='-Wl,-ld_classic' --enable-ffplay --enable-gnutls --enable-gpl --enable-libaom --enable-libaribb24 --enable-libbluray --enable-libdav1d --enable-libharfbuzz --enable-libjxl --enable-libmp3lame --enable-libopus --enable-librav1e --enable-librist --enable-librubberband --enable-libsnappy --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtesseract --enable-libtheora --enable-libvidstab --enable-libvmaf --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libxvid --enable-lzma --enable-libfontconfig --enable-libfreetype --enable-frei0r --enable-libass --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libspeex --enable-libsoxr --enable-libzmq --enable-libzimg --disable-libjack --disable-indev=jack --enable-videotoolbox --enable-audiotoolbox --enable-neon
   libavutil      59. 39.100 / 59. 39.100
@@ -68,11 +68,11 @@ Error opening input files: No such file or directory
   libswscale      8.  3.100 /  8.  3.100
   libswresample   5.  3.100 /  5.  3.100
   libpostproc    58.  3.100 / 58.  3.100
-[in#0 @ 0x141104560] Error opening input: No such file or directory
-Error opening input file /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_xn8jlpo8/audio.mp3.
+[in#0 @ 0x14701e470] Error opening input: No such file or directory
+Error opening input file /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_98o3hgkj/audio.mp3.
 Error opening input files: No such file or directory
 
-[2024-12-22T19:52:13.fZ] [ERROR] src.transcription_manager: Error in process_transcription (task_id=1a2c38e7-5d70-42f3-b809-b478b53cb9cd, url=https://www.youtube.com/watch?v=WsFOcu-yHTY)
+[2024-12-22T20:09:53.fZ] [ERROR] src.transcription_manager: Error in process_transcription (task_id=ca8d2363-c50f-483d-8fc1-e93758d1c966, url=https://www.youtube.com/watch?v=WsFOcu-yHTY)
 Traceback (most recent call last):
   File "/Users/ark/Development/Tools/web-toolkit/src/transcription_manager.py", line 387, in process_transcription
     raise RuntimeError(result.get("error", "Transcription failed"))
@@ -87,100 +87,714 @@ RuntimeError: Failed to load audio: ffmpeg version 7.1 Copyright (c) 2000-2024 t
   libswscale      8.  3.100 /  8.  3.100
   libswresample   5.  3.100 /  5.  3.100
   libpostproc    58.  3.100 / 58.  3.100
-[in#0 @ 0x141104560] Error opening input: No such file or directory
-Error opening input file /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_xn8jlpo8/audio.mp3.
+[in#0 @ 0x14701e470] Error opening input: No such file or directory
+Error opening input file /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_98o3hgkj/audio.mp3.
 Error opening input files: No such file or directory
 
-[2024-12-22T19:52:13.fZ] [INFO] src.socket_handlers: WebSocket disconnected: ACoZ8YI2_fyAX5W9AAAB
-[2024-12-22T19:52:39.fZ] [INFO] root: Application logging configured.
-[2024-12-22T19:52:39.fZ] [INFO] root: Application logging configured.
-[2024-12-22T19:52:39.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
-[2024-12-22T19:52:40.fZ] [DEBUG] app: Registering Flask routes...
-[2024-12-22T19:52:40.fZ] [DEBUG] app: Routes registered successfully.
-[2024-12-22T19:52:46.fZ] [INFO] src.socket_handlers: WebSocket connected: u8itOQzwfuXEjH1GAAAB
-[2024-12-22T19:52:46.fZ] [DEBUG] src.transcription_manager: Started process_transcription, method=Whisper, task_id=a9106f93-ea50-43dd-8743-9bf6c3869b1c
-[2024-12-22T19:52:46.fZ] [DEBUG] src.transcription_manager: Downloading audio to /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_3_yvzsys/audio.mp3 for task_id=a9106f93-ea50-43dd-8743-9bf6c3869b1c
-[2024-12-22T19:52:46.fZ] [DEBUG] src.transcription_manager: Starting YouTube audio download: https://www.youtube.com/watch?v=WsFOcu-yHTY
-[2024-12-22T19:52:46.fZ] [DEBUG] yt-dlp: [youtube] Extracting URL: https://www.youtube.com/watch?v=WsFOcu-yHTY
-[2024-12-22T19:52:46.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading webpage
-[2024-12-22T19:52:47.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading ios player API JSON
-[2024-12-22T19:52:47.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading mweb player API JSON
-[2024-12-22T19:52:47.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading player 03dbdfab
-[2024-12-22T19:52:47.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+[2024-12-22T20:09:53.fZ] [INFO] src.socket_handlers: WebSocket disconnected: uRT0V56ZuP-kP-QuAAAB
+[2024-12-22T20:10:49.fZ] [INFO] root: Application logging configured.
+[2024-12-22T20:10:49.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+[2024-12-22T20:10:50.fZ] [DEBUG] app: Registering Flask routes...
+[2024-12-22T20:10:50.fZ] [DEBUG] app: Routes registered successfully.
+[2024-12-22T20:10:56.fZ] [INFO] root: Application logging configured.
+[2024-12-22T20:10:56.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+[2024-12-22T20:10:57.fZ] [DEBUG] app: Registering Flask routes...
+[2024-12-22T20:10:57.fZ] [DEBUG] app: Routes registered successfully.
+[2024-12-22T20:10:57.fZ] [INFO] src.socket_handlers: WebSocket connected: OYCvD-1bdVPvAwMcAAAB
+################################################################################
+2024-12-22 20:11:01 - APPLICATION START
+################################################################################
+[2024-12-22T20:11:01.fZ] [INFO] root: Application logging configured.
+[2024-12-22T20:11:01.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+[2024-12-22T20:11:02.fZ] [DEBUG] app: Registering Flask routes...
+[2024-12-22T20:11:02.fZ] [DEBUG] app: Routes registered successfully.
+[2024-12-22T20:11:02.fZ] [INFO] src.socket_handlers: WebSocket connected: 29JIsmjONenG5JtuAAAB
+[2024-12-22T20:11:04.fZ] [INFO] src.socket_handlers: WebSocket disconnected: 29JIsmjONenG5JtuAAAB
+[2024-12-22T20:11:05.fZ] [INFO] src.socket_handlers: WebSocket connected: BWLU2A-DvZs3VApKAAAD
+[2024-12-22T20:11:05.fZ] [DEBUG] src.transcription_manager: Started process_transcription, method=Whisper, task_id=a31e0e65-b93f-4e6c-a9c3-07c34f95eef7
+[2024-12-22T20:11:05.fZ] [DEBUG] src.transcription_manager: Downloading audio to /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_lgi2z7az/audio.mp3 for task_id=a31e0e65-b93f-4e6c-a9c3-07c34f95eef7
+[2024-12-22T20:11:05.fZ] [DEBUG] yt-dlp:  Encodings: locale UTF-8, fs utf-8, pref UTF-8, out utf-8, error utf-8, screen utf-8
+[2024-12-22T20:11:05.fZ] [DEBUG] yt-dlp:  yt-dlp version stable@2024.10.22 from yt-dlp/yt-dlp [67adeb7ba] (pip) API
+[2024-12-22T20:11:05.fZ] [DEBUG] yt-dlp:  params: {'format': 'bestaudio/best', 'postprocessors': [{'key': 'FFmpegExtractAudio', 'preferredcodec': 'mp3'}], 'outtmpl': '/var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_lgi2z7az/audio.mp3', 'quiet': False, 'no_warnings': False, 'logger': <src.loggers.yt_dlp_logger.YTDLPLogger object at 0x115b51850>, 'progress_hooks': [<function TranscriptionManager.download_audio.<locals>.<lambda> at 0x115b0e0c0>], 'verbose': True, 'compat_opts': set(), 'http_headers': {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.164 Safari/537.36', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Sec-Fetch-Mode': 'navigate'}}
+[2024-12-22T20:11:05.fZ] [DEBUG] yt-dlp:  Python 3.12.7 (CPython arm64 64bit) - macOS-15.1.1-arm64-arm-64bit (OpenSSL 3.4.0 22 Oct 2024)
+[2024-12-22T20:11:05.fZ] [DEBUG] yt-dlp:  exe versions: ffmpeg 7.1 (setts), ffprobe 7.1
+[2024-12-22T20:11:05.fZ] [DEBUG] yt-dlp:  Optional libraries: Cryptodome-3.21.0, brotli-1.1.0, certifi-2024.08.30, mutagen-1.47.0, requests-2.32.3, sqlite3-3.47.0, urllib3-2.2.3, websockets-13.1
+[2024-12-22T20:11:05.fZ] [DEBUG] yt-dlp:  Proxy map: {}
+[2024-12-22T20:11:05.fZ] [DEBUG] yt-dlp:  Request Handlers: urllib, requests, websockets
+[2024-12-22T20:11:05.fZ] [DEBUG] yt-dlp:  Loaded 1839 extractors
+[2024-12-22T20:11:05.fZ] [DEBUG] src.transcription_manager: Starting YouTube audio download: https://www.youtube.com/watch?v=WsFOcu-yHTY
+[2024-12-22T20:11:05.fZ] [DEBUG] yt-dlp: [youtube] Extracting URL: https://www.youtube.com/watch?v=WsFOcu-yHTY
+[2024-12-22T20:11:05.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading webpage
+[2024-12-22T20:11:05.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading ios player API JSON
+[2024-12-22T20:11:06.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading mweb player API JSON
+[2024-12-22T20:11:06.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading player 03dbdfab
+[2024-12-22T20:11:06.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
          player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T19:52:47.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
-         n = _YUd4ESlscc-vVZWJ ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T19:52:48.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+[2024-12-22T20:11:06.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = APFsM7PfGvV_3EbYB ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:11:06.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:11:06.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
          player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T19:52:48.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
-         n = VNDobNGCTR4thGzbO ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T19:52:48.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading m3u8 information
-[2024-12-22T19:52:48.fZ] [DEBUG] yt-dlp: [info] WsFOcu-yHTY: Downloading 1 format(s): 251
-[2024-12-22T19:52:48.fZ] [DEBUG] yt-dlp: [download] Destination: /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_3_yvzsys/audio.mp3
-[2024-12-22T19:52:48.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.0%[0m of    4.25MiB at [0;32m 371.60KiB/s[0m ETA [0;33m00:11[0m
-[2024-12-22T19:52:48.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.1%[0m of    4.25MiB at [0;32m 763.57KiB/s[0m ETA [0;33m00:05[0m
-[2024-12-22T19:52:48.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.2%[0m of    4.25MiB at [0;32m   1.37MiB/s[0m ETA [0;33m00:03[0m
-[2024-12-22T19:52:48.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.3%[0m of    4.25MiB at [0;32m   2.48MiB/s[0m ETA [0;33m00:01[0m
-[2024-12-22T19:52:48.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.7%[0m of    4.25MiB at [0;32m   4.46MiB/s[0m ETA [0;33m00:00[0m
-[2024-12-22T19:52:48.fZ] [DEBUG] yt-dlp: [download] [0;94m  1.4%[0m of    4.25MiB at [0;32m   4.66MiB/s[0m ETA [0;33m00:00[0m
-[2024-12-22T19:52:48.fZ] [DEBUG] yt-dlp: [download] [0;94m  2.9%[0m of    4.25MiB at [0;32m   5.69MiB/s[0m ETA [0;33m00:00[0m
-[2024-12-22T19:52:48.fZ] [DEBUG] yt-dlp: [download] [0;94m  5.9%[0m of    4.25MiB at [0;32m   8.03MiB/s[0m ETA [0;33m00:00[0m
-[2024-12-22T19:52:48.fZ] [DEBUG] yt-dlp: [download] [0;94m 11.7%[0m of    4.25MiB at [0;32m  12.00MiB/s[0m ETA [0;33m00:00[0m
-[2024-12-22T19:52:48.fZ] [DEBUG] yt-dlp: [download] [0;94m 23.5%[0m of    4.25MiB at [0;32m  16.65MiB/s[0m ETA [0;33m00:00[0m
-[2024-12-22T19:52:48.fZ] [DEBUG] yt-dlp: [download] [0;94m 47.0%[0m of    4.25MiB at [0;32m  24.27MiB/s[0m ETA [0;33m00:00[0m
-[2024-12-22T19:52:48.fZ] [DEBUG] yt-dlp: [download] [0;94m 94.1%[0m of    4.25MiB at [0;32m  33.62MiB/s[0m ETA [0;33m00:00[0m
-[2024-12-22T19:52:48.fZ] [DEBUG] yt-dlp: [download] [0;94m100.0%[0m of    4.25MiB at [0;32m  34.32MiB/s[0m ETA [0;33m00:00[0m
-[2024-12-22T19:52:48.fZ] [DEBUG] yt-dlp: [download] 100% of    4.25MiB in [1;37m00:00:00[0m at [0;32m16.95MiB/s[0m
-[2024-12-22T19:52:49.fZ] [DEBUG] yt-dlp: [ExtractAudio] Destination: /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_3_yvzsys/audio.mp3.mp3
-[2024-12-22T19:52:51.fZ] [DEBUG] yt-dlp: Deleting original file /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_3_yvzsys/audio.mp3 (pass -k to keep)
-[2024-12-22T19:52:51.fZ] [DEBUG] src.transcription_manager: Spawning child process for Whisper transcription, task_id=a9106f93-ea50-43dd-8743-9bf6c3869b1c
-[2024-12-22T19:53:00.fZ] [ERROR] src.transcription_manager: Child process error: Failed to load audio: ffmpeg version 7.1 Copyright (c) 2000-2024 the FFmpeg developers
-  built with Apple clang version 16.0.0 (clang-1600.0.26.4)
-  configuration: --prefix=/opt/homebrew/Cellar/ffmpeg/7.1_1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags='-Wl,-ld_classic' --enable-ffplay --enable-gnutls --enable-gpl --enable-libaom --enable-libaribb24 --enable-libbluray --enable-libdav1d --enable-libharfbuzz --enable-libjxl --enable-libmp3lame --enable-libopus --enable-librav1e --enable-librist --enable-librubberband --enable-libsnappy --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtesseract --enable-libtheora --enable-libvidstab --enable-libvmaf --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libxvid --enable-lzma --enable-libfontconfig --enable-libfreetype --enable-frei0r --enable-libass --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libspeex --enable-libsoxr --enable-libzmq --enable-libzimg --disable-libjack --disable-indev=jack --enable-videotoolbox --enable-audiotoolbox --enable-neon
-  libavutil      59. 39.100 / 59. 39.100
-  libavcodec     61. 19.100 / 61. 19.100
-  libavformat    61.  7.100 / 61.  7.100
-  libavdevice    61.  3.100 / 61.  3.100
-  libavfilter    10.  4.100 / 10.  4.100
-  libswscale      8.  3.100 /  8.  3.100
-  libswresample   5.  3.100 /  5.  3.100
-  libpostproc    58.  3.100 / 58.  3.100
-[in#0 @ 0x145f044e0] Error opening input: No such file or directory
-Error opening input file /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_3_yvzsys/audio.mp3.
-Error opening input files: No such file or directory
-
-[2024-12-22T19:53:00.fZ] [ERROR] src.transcription_manager: Transcription failed for task_id=a9106f93-ea50-43dd-8743-9bf6c3869b1c: Failed to load audio: ffmpeg version 7.1 Copyright (c) 2000-2024 the FFmpeg developers
-  built with Apple clang version 16.0.0 (clang-1600.0.26.4)
-  configuration: --prefix=/opt/homebrew/Cellar/ffmpeg/7.1_1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags='-Wl,-ld_classic' --enable-ffplay --enable-gnutls --enable-gpl --enable-libaom --enable-libaribb24 --enable-libbluray --enable-libdav1d --enable-libharfbuzz --enable-libjxl --enable-libmp3lame --enable-libopus --enable-librav1e --enable-librist --enable-librubberband --enable-libsnappy --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtesseract --enable-libtheora --enable-libvidstab --enable-libvmaf --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libxvid --enable-lzma --enable-libfontconfig --enable-libfreetype --enable-frei0r --enable-libass --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libspeex --enable-libsoxr --enable-libzmq --enable-libzimg --disable-libjack --disable-indev=jack --enable-videotoolbox --enable-audiotoolbox --enable-neon
-  libavutil      59. 39.100 / 59. 39.100
-  libavcodec     61. 19.100 / 61. 19.100
-  libavformat    61.  7.100 / 61.  7.100
-  libavdevice    61.  3.100 / 61.  3.100
-  libavfilter    10.  4.100 / 10.  4.100
-  libswscale      8.  3.100 /  8.  3.100
-  libswresample   5.  3.100 /  5.  3.100
-  libpostproc    58.  3.100 / 58.  3.100
-[in#0 @ 0x145f044e0] Error opening input: No such file or directory
-Error opening input file /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_3_yvzsys/audio.mp3.
-Error opening input files: No such file or directory
-
-[2024-12-22T19:53:00.fZ] [ERROR] src.transcription_manager: Error in process_transcription (task_id=a9106f93-ea50-43dd-8743-9bf6c3869b1c, url=https://www.youtube.com/watch?v=WsFOcu-yHTY)
+[2024-12-22T20:11:06.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = 6l4LRoGkX37isftao ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:11:06.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:11:06.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:11:06.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:11:06.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:11:06.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:11:06.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:11:06.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading m3u8 information
+[2024-12-22T20:11:07.fZ] [DEBUG] yt-dlp:  Sort order given by extractor: quality, res, fps, hdr:12, source, vcodec:vp9.2, channels, acodec, lang, proto
+[2024-12-22T20:11:07.fZ] [DEBUG] yt-dlp:  Formats sorted by: hasvid, ie_pref, quality, res, fps, hdr:12(7), source, vcodec:vp9.2(10), channels, acodec, lang, proto, size, br, asr, vext, aext, hasaud, id
+[2024-12-22T20:11:07.fZ] [DEBUG] yt-dlp: [youtube] Extracting URL: https://www.youtube.com/watch?v=WsFOcu-yHTY
+[2024-12-22T20:11:07.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading webpage
+[2024-12-22T20:11:07.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading ios player API JSON
+[2024-12-22T20:11:07.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading mweb player API JSON
+[2024-12-22T20:11:08.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:11:08.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = FfYpFqdnxWrzDfcNc ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:11:08.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:11:08.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:11:08.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = qOwFOdDeZFoILr4d_ ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:11:08.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:11:08.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:11:08.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:11:08.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:11:08.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:11:08.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:11:08.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading m3u8 information
+[2024-12-22T20:11:08.fZ] [DEBUG] yt-dlp:  Sort order given by extractor: quality, res, fps, hdr:12, source, vcodec:vp9.2, channels, acodec, lang, proto
+[2024-12-22T20:11:08.fZ] [DEBUG] yt-dlp:  Formats sorted by: hasvid, ie_pref, quality, res, fps, hdr:12(7), source, vcodec:vp9.2(10), channels, acodec, lang, proto, size, br, asr, vext, aext, hasaud, id
+[2024-12-22T20:11:08.fZ] [DEBUG] yt-dlp: [info] WsFOcu-yHTY: Downloading 1 format(s): 251
+[2024-12-22T20:11:08.fZ] [DEBUG] yt-dlp:  Invoking http downloader on "https://rr5---sn-ivuoxu-ua86.googlevideo.com/videoplayback?expire=1734912668&ei=PFZoZ9FN18mYsA_5lfWgDA&ip=2a00%3Aa041%3Ae660%3Ad800%3Af13d%3A8ca5%3Aa37b%3A925c&id=o-AAy_iAYFP8Ljnpr6F_gtTPrAUpXmjnKtnazwze1JO7UG&itag=251&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&met=1734891068%2C&mh=3k&mm=31%2C29&mn=sn-ivuoxu-ua86%2Csn-ua87zn7l&ms=au%2Crdu&mv=m&mvi=5&pcm2cms=yes&pl=48&rms=au%2Cau&initcwndbps=3411250&bui=AfMhrI9MEO_RbUrY4c9l0CZVyvsLny2fhuwvKFnkDEpcQS6LFyKDmJQaCfa0HF8qmgWegsWUKLSTM8k5&spc=x-caUFVCljq6sR8PLV0SpReM0DxT3lD0KV6tDxeeV-l9o3wYA_S1&vprv=1&svpuc=1&mime=audio%2Fwebm&rqh=1&gir=yes&clen=4456559&dur=292.581&lmt=1734748461111523&mt=1734890471&fvip=4&keepalive=yes&fexp=51326932%2C51335594%2C51371294&c=IOS&txp=6308224&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cbui%2Cspc%2Cvprv%2Csvpuc%2Cmime%2Crqh%2Cgir%2Cclen%2Cdur%2Clmt&sig=AJfQdSswRgIhAKExeX334Y8WnpCqVKxGpgZuwROQO96SuK2L2rSMUfiFAiEAxd_eeqMSd0Bm7f_NIhbWoCwEeSu5pTY-PATK_osmnrw%3D&lsparams=met%2Cmh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpcm2cms%2Cpl%2Crms%2Cinitcwndbps&lsig=AGluJ3MwRgIhAIvbVarYiVT91ksVh1oWDUO1WMknUTpHzOxpZRA1DDqpAiEA0ncW2T5y-LojBOLSVDylqnn9_6GBmUnJgtDnzvksasA%3D"
+[2024-12-22T20:11:08.fZ] [DEBUG] yt-dlp: [download] Destination: /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_lgi2z7az/audio.mp3
+[2024-12-22T20:11:08.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.0%[0m of    4.25MiB at [0;32m Unknown B/s[0m ETA [0;33mUnknown[0m
+[2024-12-22T20:11:08.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.1%[0m of    4.25MiB at [0;32m   1.83MiB/s[0m ETA [0;33m00:02[0m
+[2024-12-22T20:11:08.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.2%[0m of    4.25MiB at [0;32m   2.92MiB/s[0m ETA [0;33m00:01[0m
+[2024-12-22T20:11:08.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.3%[0m of    4.25MiB at [0;32m   4.86MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:11:08.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.7%[0m of    4.25MiB at [0;32m   3.98MiB/s[0m ETA [0;33m00:01[0m
+[2024-12-22T20:11:08.fZ] [DEBUG] yt-dlp: [download] [0;94m  1.4%[0m of    4.25MiB at [0;32m   5.18MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:11:08.fZ] [DEBUG] yt-dlp: [download] [0;94m  2.9%[0m of    4.25MiB at [0;32m   5.71MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:11:08.fZ] [DEBUG] yt-dlp: [download] [0;94m  5.9%[0m of    4.25MiB at [0;32m   7.42MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:11:08.fZ] [DEBUG] yt-dlp: [download] [0;94m 11.7%[0m of    4.25MiB at [0;32m  11.17MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:11:08.fZ] [DEBUG] yt-dlp: [download] [0;94m 23.5%[0m of    4.25MiB at [0;32m  18.02MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:11:08.fZ] [DEBUG] yt-dlp: [download] [0;94m 47.0%[0m of    4.25MiB at [0;32m  27.62MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:11:08.fZ] [DEBUG] yt-dlp: [download] [0;94m 94.1%[0m of    4.25MiB at [0;32m  37.40MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:11:08.fZ] [DEBUG] yt-dlp: [download] [0;94m100.0%[0m of    4.25MiB at [0;32m  38.03MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:11:08.fZ] [DEBUG] yt-dlp: [download] 100% of    4.25MiB in [1;37m00:00:00[0m at [0;32m27.62MiB/s[0m
+[2024-12-22T20:11:08.fZ] [DEBUG] yt-dlp:  ffmpeg command line: ffprobe -show_streams file:/var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_lgi2z7az/audio.mp3
+[2024-12-22T20:11:08.fZ] [DEBUG] yt-dlp: [ExtractAudio] Destination: /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_lgi2z7az/audio.mp3.mp3
+[2024-12-22T20:11:08.fZ] [DEBUG] yt-dlp:  ffmpeg command line: ffmpeg -y -loglevel repeat+info -i file:/var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_lgi2z7az/audio.mp3 -vn -acodec libmp3lame -movflags +faststart file:/var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_lgi2z7az/audio.mp3.mp3
+[2024-12-22T20:11:11.fZ] [DEBUG] yt-dlp: Deleting original file /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_lgi2z7az/audio.mp3 (pass -k to keep)
+[2024-12-22T20:11:11.fZ] [ERROR] src.transcription_manager: Error downloading audio from https://www.youtube.com/watch?v=WsFOcu-yHTY: Download completed but file not found at /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_lgi2z7az/audio.mp3
 Traceback (most recent call last):
-  File "/Users/ark/Development/Tools/web-toolkit/src/transcription_manager.py", line 387, in process_transcription
-    raise RuntimeError(result.get("error", "Transcription failed"))
-RuntimeError: Failed to load audio: ffmpeg version 7.1 Copyright (c) 2000-2024 the FFmpeg developers
-  built with Apple clang version 16.0.0 (clang-1600.0.26.4)
-  configuration: --prefix=/opt/homebrew/Cellar/ffmpeg/7.1_1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags='-Wl,-ld_classic' --enable-ffplay --enable-gnutls --enable-gpl --enable-libaom --enable-libaribb24 --enable-libbluray --enable-libdav1d --enable-libharfbuzz --enable-libjxl --enable-libmp3lame --enable-libopus --enable-librav1e --enable-librist --enable-librubberband --enable-libsnappy --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtesseract --enable-libtheora --enable-libvidstab --enable-libvmaf --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libxvid --enable-lzma --enable-libfontconfig --enable-libfreetype --enable-frei0r --enable-libass --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libspeex --enable-libsoxr --enable-libzmq --enable-libzimg --disable-libjack --disable-indev=jack --enable-videotoolbox --enable-audiotoolbox --enable-neon
-  libavutil      59. 39.100 / 59. 39.100
-  libavcodec     61. 19.100 / 61. 19.100
-  libavformat    61.  7.100 / 61.  7.100
-  libavdevice    61.  3.100 / 61.  3.100
-  libavfilter    10.  4.100 / 10.  4.100
-  libswscale      8.  3.100 /  8.  3.100
-  libswresample   5.  3.100 /  5.  3.100
-  libpostproc    58.  3.100 / 58.  3.100
-[in#0 @ 0x145f044e0] Error opening input: No such file or directory
-Error opening input file /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_3_yvzsys/audio.mp3.
-Error opening input files: No such file or directory
+  File "/Users/ark/Development/Tools/web-toolkit/src/transcription_manager.py", line 234, in download_audio
+    raise RuntimeError(f"Download completed but file not found at {output_path}")
+RuntimeError: Download completed but file not found at /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_lgi2z7az/audio.mp3
+[2024-12-22T20:11:11.fZ] [ERROR] src.transcription_manager: Error in process_transcription (task_id=a31e0e65-b93f-4e6c-a9c3-07c34f95eef7, url=https://www.youtube.com/watch?v=WsFOcu-yHTY)
+Traceback (most recent call last):
+  File "/Users/ark/Development/Tools/web-toolkit/src/transcription_manager.py", line 234, in download_audio
+    raise RuntimeError(f"Download completed but file not found at {output_path}")
+RuntimeError: Download completed but file not found at /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_lgi2z7az/audio.mp3
 
-[2024-12-22T19:53:00.fZ] [INFO] src.socket_handlers: WebSocket disconnected: u8itOQzwfuXEjH1GAAAB
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/ark/Development/Tools/web-toolkit/src/transcription_manager.py", line 318, in process_transcription
+    self.download_audio(url, audio_path, dl_cb)
+  File "/Users/ark/Development/Tools/web-toolkit/src/transcription_manager.py", line 241, in download_audio
+    raise RuntimeError(f"Failed to download audio: {str(e)}")
+RuntimeError: Failed to download audio: Download completed but file not found at /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_lgi2z7az/audio.mp3
+[2024-12-22T20:11:11.fZ] [INFO] src.socket_handlers: WebSocket disconnected: BWLU2A-DvZs3VApKAAAD
+[2024-12-22T20:12:18.fZ] [INFO] src.socket_handlers: WebSocket connected: 1dMhrUPs2D08Ru6qAAAF
+################################################################################
+2024-12-22 20:12:50 - APPLICATION START
+################################################################################
+[2024-12-22T20:12:50.fZ] [INFO] root: Application logging configured.
+[2024-12-22T20:12:50.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+[2024-12-22T20:12:51.fZ] [DEBUG] app: Registering Flask routes...
+[2024-12-22T20:12:51.fZ] [DEBUG] app: Routes registered successfully.
+[2024-12-22T20:12:51.fZ] [INFO] src.socket_handlers: WebSocket connected: M7MBjyhrZOcPiu3BAAAB
+[2024-12-22T20:12:53.fZ] [INFO] src.socket_handlers: WebSocket disconnected: M7MBjyhrZOcPiu3BAAAB
+[2024-12-22T20:12:54.fZ] [INFO] src.socket_handlers: WebSocket connected: fmcs7eo13LCtdKnlAAAD
+[2024-12-22T20:12:54.fZ] [DEBUG] src.transcription_manager: Started process_transcription, method=Whisper, task_id=22103aee-e9f5-4305-bc69-5966d71aaadb
+[2024-12-22T20:12:54.fZ] [DEBUG] src.transcription_manager: Downloading audio to /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_fjesf17f/audio.mp3 for task_id=22103aee-e9f5-4305-bc69-5966d71aaadb
+[2024-12-22T20:12:54.fZ] [DEBUG] yt-dlp:  Encodings: locale UTF-8, fs utf-8, pref UTF-8, out utf-8, error utf-8, screen utf-8
+[2024-12-22T20:12:54.fZ] [DEBUG] yt-dlp:  yt-dlp version stable@2024.10.22 from yt-dlp/yt-dlp [67adeb7ba] (pip) API
+[2024-12-22T20:12:54.fZ] [DEBUG] yt-dlp:  params: {'format': 'bestaudio/best', 'postprocessors': [{'key': 'FFmpegExtractAudio', 'preferredcodec': 'mp3', 'preferredquality': '192'}], 'outtmpl': '/var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_fjesf17f/audio.mp3', 'quiet': False, 'no_warnings': False, 'logger': <src.loggers.yt_dlp_logger.YTDLPLogger object at 0x11f351250>, 'progress_hooks': [<function TranscriptionManager.download_audio.<locals>.<lambda> at 0x11f301e40>], 'verbose': True, 'extract_flat': False, 'retries': 3, 'fragment_retries': 3, 'skip_unavailable_fragments': False, 'keepvideo': False, 'writethumbnail': False, 'postprocessor_args': ['-ar', '44100', '-ac', '2'], 'compat_opts': set(), 'http_headers': {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Sec-Fetch-Mode': 'navigate'}}
+[2024-12-22T20:12:54.fZ] [DEBUG] yt-dlp:  Python 3.12.7 (CPython arm64 64bit) - macOS-15.1.1-arm64-arm-64bit (OpenSSL 3.4.0 22 Oct 2024)
+[2024-12-22T20:12:54.fZ] [DEBUG] yt-dlp:  exe versions: ffmpeg 7.1 (setts), ffprobe 7.1
+[2024-12-22T20:12:54.fZ] [DEBUG] yt-dlp:  Optional libraries: Cryptodome-3.21.0, brotli-1.1.0, certifi-2024.08.30, mutagen-1.47.0, requests-2.32.3, sqlite3-3.47.0, urllib3-2.2.3, websockets-13.1
+[2024-12-22T20:12:54.fZ] [DEBUG] yt-dlp:  Proxy map: {}
+[2024-12-22T20:12:54.fZ] [DEBUG] yt-dlp:  Request Handlers: urllib, requests, websockets
+[2024-12-22T20:12:54.fZ] [DEBUG] yt-dlp:  Loaded 1839 extractors
+[2024-12-22T20:12:54.fZ] [DEBUG] src.transcription_manager: Starting YouTube audio download: 'https://www.youtube.com/watch?v=WsFOcu-yHTY'
+[2024-12-22T20:12:54.fZ] [DEBUG] yt-dlp: [youtube] Extracting URL: https://www.youtube.com/watch?v=WsFOcu-yHTY
+[2024-12-22T20:12:54.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading webpage
+[2024-12-22T20:12:55.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading ios player API JSON
+[2024-12-22T20:12:55.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading mweb player API JSON
+[2024-12-22T20:12:55.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading player 03dbdfab
+[2024-12-22T20:12:55.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:12:55.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = AjidgC5kMExzmH1V9 ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:12:55.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:12:56.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:12:56.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = NnZB64rFjWcTRKT4M ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:12:56.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:12:56.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:12:56.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:12:56.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:12:56.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:12:56.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:12:56.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading m3u8 information
+[2024-12-22T20:12:56.fZ] [DEBUG] yt-dlp:  Sort order given by extractor: quality, res, fps, hdr:12, source, vcodec:vp9.2, channels, acodec, lang, proto
+[2024-12-22T20:12:56.fZ] [DEBUG] yt-dlp:  Formats sorted by: hasvid, ie_pref, quality, res, fps, hdr:12(7), source, vcodec:vp9.2(10), channels, acodec, lang, proto, size, br, asr, vext, aext, hasaud, id
+[2024-12-22T20:12:56.fZ] [DEBUG] yt-dlp: [youtube] Extracting URL: https://www.youtube.com/watch?v=WsFOcu-yHTY
+[2024-12-22T20:12:56.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading webpage
+[2024-12-22T20:12:57.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading ios player API JSON
+[2024-12-22T20:12:57.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading mweb player API JSON
+[2024-12-22T20:12:57.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:12:57.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = MY9UPxc4DQEpqL3NV ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:12:57.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:12:57.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:12:57.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = Lqbf6AJOzXwTi6rRw ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:12:57.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:12:57.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:12:57.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:12:57.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:12:57.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:12:57.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:12:57.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading m3u8 information
+[2024-12-22T20:12:58.fZ] [DEBUG] yt-dlp:  Sort order given by extractor: quality, res, fps, hdr:12, source, vcodec:vp9.2, channels, acodec, lang, proto
+[2024-12-22T20:12:58.fZ] [DEBUG] yt-dlp:  Formats sorted by: hasvid, ie_pref, quality, res, fps, hdr:12(7), source, vcodec:vp9.2(10), channels, acodec, lang, proto, size, br, asr, vext, aext, hasaud, id
+[2024-12-22T20:12:58.fZ] [DEBUG] yt-dlp: [info] WsFOcu-yHTY: Downloading 1 format(s): 251
+[2024-12-22T20:12:58.fZ] [DEBUG] yt-dlp:  Invoking http downloader on "https://rr5---sn-ivuoxu-ua86.googlevideo.com/videoplayback?expire=1734912777&ei=qVZoZ9nwFKv3xN8PvonkqQM&ip=2a00%3Aa041%3Ae660%3Ad800%3Af13d%3A8ca5%3Aa37b%3A925c&id=o-AH73YH5JKI3dXxABiBhio4KhcTTBoxrFxiJmep1Hi2PU&itag=251&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&met=1734891177%2C&mh=3k&mm=31%2C29&mn=sn-ivuoxu-ua86%2Csn-ua87sn76&ms=au%2Crdu&mv=m&mvi=5&pl=48&rms=au%2Cau&initcwndbps=3323750&bui=AfMhrI_cwPf9CU88hYQQB_ujHIl7YlAESDM8w3kAmGdxVZENyoXbdnC8eP1fZerVOQ32D7N38SbhJ-wL&spc=x-caUFgFkSIPk73B8YEG8I4oMj-ocNtw7Qn4l5fKW95d38mNQ9d0&vprv=1&svpuc=1&mime=audio%2Fwebm&rqh=1&gir=yes&clen=4456559&dur=292.581&lmt=1734748461111523&mt=1734890721&fvip=4&keepalive=yes&fexp=51326932%2C51335594%2C51371294&c=IOS&txp=6308224&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cbui%2Cspc%2Cvprv%2Csvpuc%2Cmime%2Crqh%2Cgir%2Cclen%2Cdur%2Clmt&sig=AJfQdSswRQIhAN0uLo21ssPQ9syL9knKVCUwDbZeGC4K6nquYC408E9lAiBXRWQ9ohNdBScpldpWuowXGEei3KT1gma59ZGSrhiK0w%3D%3D&lsparams=met%2Cmh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Crms%2Cinitcwndbps&lsig=AGluJ3MwRQIgdCuFx00da2mVw1T8053uynr_Ov873bp51mkhMTfE7K4CIQDdXN2lc0tSqvoxrmOs4UcGrHbH-YrvOhI7HMT72EDqlA%3D%3D"
+[2024-12-22T20:12:58.fZ] [DEBUG] yt-dlp: [download] Destination: /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_fjesf17f/audio.mp3
+[2024-12-22T20:12:58.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.0%[0m of    4.25MiB at [0;32m Unknown B/s[0m ETA [0;33mUnknown[0m
+[2024-12-22T20:12:58.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.1%[0m of    4.25MiB at [0;32m   1.80MiB/s[0m ETA [0;33m00:02[0m
+[2024-12-22T20:12:58.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.2%[0m of    4.25MiB at [0;32m   2.87MiB/s[0m ETA [0;33m00:01[0m
+[2024-12-22T20:12:58.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.3%[0m of    4.25MiB at [0;32m   4.82MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:12:58.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.7%[0m of    4.25MiB at [0;32m   3.88MiB/s[0m ETA [0;33m00:01[0m
+[2024-12-22T20:12:58.fZ] [DEBUG] yt-dlp: [download] [0;94m  1.4%[0m of    4.25MiB at [0;32m   4.99MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:12:58.fZ] [DEBUG] yt-dlp: [download] [0;94m  2.9%[0m of    4.25MiB at [0;32m   5.75MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:12:58.fZ] [DEBUG] yt-dlp: [download] [0;94m  5.9%[0m of    4.25MiB at [0;32m   7.79MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:12:58.fZ] [DEBUG] yt-dlp: [download] [0;94m 11.7%[0m of    4.25MiB at [0;32m  10.96MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:12:58.fZ] [DEBUG] yt-dlp: [download] [0;94m 23.5%[0m of    4.25MiB at [0;32m  16.75MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:12:58.fZ] [DEBUG] yt-dlp: [download] [0;94m 47.0%[0m of    4.25MiB at [0;32m  24.64MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:12:58.fZ] [DEBUG] yt-dlp: [download] [0;94m 94.1%[0m of    4.25MiB at [0;32m  32.96MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:12:58.fZ] [DEBUG] yt-dlp: [download] [0;94m100.0%[0m of    4.25MiB at [0;32m  34.26MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:12:58.fZ] [DEBUG] yt-dlp: [download] 100% of    4.25MiB in [1;37m00:00:00[0m at [0;32m25.27MiB/s[0m
+[2024-12-22T20:12:58.fZ] [DEBUG] yt-dlp:  ffmpeg command line: ffprobe -show_streams file:/var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_fjesf17f/audio.mp3
+[2024-12-22T20:12:58.fZ] [DEBUG] yt-dlp: [ExtractAudio] Destination: /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_fjesf17f/audio.mp3.mp3
+[2024-12-22T20:12:58.fZ] [DEBUG] yt-dlp:  ffmpeg command line: ffmpeg -y -loglevel repeat+info -i file:/var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_fjesf17f/audio.mp3 -vn -acodec libmp3lame -b:a 192.0k -movflags +faststart -ar 44100 -ac 2 file:/var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_fjesf17f/audio.mp3.mp3
+[2024-12-22T20:13:00.fZ] [DEBUG] yt-dlp: Deleting original file /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_fjesf17f/audio.mp3 (pass -k to keep)
+[2024-12-22T20:13:00.fZ] [ERROR] src.transcription_manager: Error downloading audio from https://www.youtube.com/watch?v=WsFOcu-yHTY: Download completed but file not found at /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_fjesf17f/audio.mp3
+Traceback (most recent call last):
+  File "/Users/ark/Development/Tools/web-toolkit/src/transcription_manager.py", line 258, in download_audio
+    raise RuntimeError(f"Download completed but file not found at {output_path}")
+RuntimeError: Download completed but file not found at /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_fjesf17f/audio.mp3
+[2024-12-22T20:13:00.fZ] [ERROR] src.transcription_manager: Error in process_transcription (task_id=22103aee-e9f5-4305-bc69-5966d71aaadb, url=https://www.youtube.com/watch?v=WsFOcu-yHTY)
+Traceback (most recent call last):
+  File "/Users/ark/Development/Tools/web-toolkit/src/transcription_manager.py", line 258, in download_audio
+    raise RuntimeError(f"Download completed but file not found at {output_path}")
+RuntimeError: Download completed but file not found at /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_fjesf17f/audio.mp3
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/ark/Development/Tools/web-toolkit/src/transcription_manager.py", line 354, in process_transcription
+    self.download_audio(url, audio_path, dl_cb)
+  File "/Users/ark/Development/Tools/web-toolkit/src/transcription_manager.py", line 277, in download_audio
+    raise RuntimeError(f"Failed to download audio: {str(e)}")
+RuntimeError: Failed to download audio: Download completed but file not found at /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_fjesf17f/audio.mp3
+[2024-12-22T20:13:00.fZ] [INFO] src.socket_handlers: WebSocket disconnected: fmcs7eo13LCtdKnlAAAD
+[2024-12-22T20:13:45.fZ] [INFO] root: Application logging configured.
+[2024-12-22T20:13:45.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+[2024-12-22T20:13:45.fZ] [DEBUG] app: Registering Flask routes...
+[2024-12-22T20:13:45.fZ] [DEBUG] app: Routes registered successfully.
+[2024-12-22T20:13:59.fZ] [INFO] root: Application logging configured.
+[2024-12-22T20:13:59.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+[2024-12-22T20:13:59.fZ] [DEBUG] app: Registering Flask routes...
+[2024-12-22T20:13:59.fZ] [DEBUG] app: Routes registered successfully.
+################################################################################
+2024-12-22 20:14:02 - APPLICATION START
+################################################################################
+[2024-12-22T20:14:02.fZ] [INFO] root: Application logging configured.
+[2024-12-22T20:14:02.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+[2024-12-22T20:14:03.fZ] [DEBUG] app: Registering Flask routes...
+[2024-12-22T20:14:03.fZ] [DEBUG] app: Routes registered successfully.
+[2024-12-22T20:14:07.fZ] [INFO] src.socket_handlers: WebSocket connected: AuNYG80qf_hfqoeSAAAB
+[2024-12-22T20:14:21.fZ] [INFO] src.socket_handlers: WebSocket disconnected: AuNYG80qf_hfqoeSAAAB
+[2024-12-22T20:14:22.fZ] [INFO] src.socket_handlers: WebSocket connected: J5W3QrkGZyzIu2rLAAAD
+[2024-12-22T20:14:22.fZ] [DEBUG] src.transcription_manager: Started process_transcription, method=Whisper, task_id=bc3da6e9-ed5c-43cf-b63e-820077cfd2c8
+[2024-12-22T20:14:22.fZ] [DEBUG] src.transcription_manager: Downloading audio to /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_b2x15iha/audio.mp3 for task_id=bc3da6e9-ed5c-43cf-b63e-820077cfd2c8
+[2024-12-22T20:14:22.fZ] [DEBUG] yt-dlp:  Encodings: locale UTF-8, fs utf-8, pref UTF-8, out utf-8, error utf-8, screen utf-8
+[2024-12-22T20:14:22.fZ] [DEBUG] yt-dlp:  yt-dlp version stable@2024.10.22 from yt-dlp/yt-dlp [67adeb7ba] (pip) API
+[2024-12-22T20:14:22.fZ] [DEBUG] yt-dlp:  params: {'format': 'bestaudio/best', 'postprocessors': [{'key': 'FFmpegExtractAudio', 'preferredcodec': 'mp3', 'preferredquality': '192'}], 'outtmpl': '%(id)s.%(ext)s', 'paths': {'home': '/var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_b2x15iha'}, 'quiet': False, 'no_warnings': False, 'logger': <src.loggers.yt_dlp_logger.YTDLPLogger object at 0x124651550>, 'progress_hooks': [<function TranscriptionManager.download_audio.<locals>.<lambda> at 0x124609d00>], 'verbose': True, 'extract_flat': False, 'retries': 3, 'fragment_retries': 3, 'skip_unavailable_fragments': False, 'keepvideo': False, 'writethumbnail': False, 'postprocessor_args': ['-ar', '44100', '-ac', '2'], 'compat_opts': set(), 'http_headers': {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Sec-Fetch-Mode': 'navigate'}}
+[2024-12-22T20:14:22.fZ] [DEBUG] yt-dlp:  Python 3.12.7 (CPython arm64 64bit) - macOS-15.1.1-arm64-arm-64bit (OpenSSL 3.4.0 22 Oct 2024)
+[2024-12-22T20:14:22.fZ] [DEBUG] yt-dlp:  exe versions: ffmpeg 7.1 (setts), ffprobe 7.1
+[2024-12-22T20:14:22.fZ] [DEBUG] yt-dlp:  Optional libraries: Cryptodome-3.21.0, brotli-1.1.0, certifi-2024.08.30, mutagen-1.47.0, requests-2.32.3, sqlite3-3.47.0, urllib3-2.2.3, websockets-13.1
+[2024-12-22T20:14:22.fZ] [DEBUG] yt-dlp:  Proxy map: {}
+[2024-12-22T20:14:22.fZ] [DEBUG] yt-dlp:  Request Handlers: urllib, requests, websockets
+[2024-12-22T20:14:22.fZ] [DEBUG] yt-dlp:  Loaded 1839 extractors
+[2024-12-22T20:14:22.fZ] [DEBUG] src.transcription_manager: Starting YouTube audio download: 'https://www.youtube.com/watch?v=WsFOcu-yHTY'
+[2024-12-22T20:14:22.fZ] [DEBUG] yt-dlp: [youtube] Extracting URL: https://www.youtube.com/watch?v=WsFOcu-yHTY
+[2024-12-22T20:14:22.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading webpage
+[2024-12-22T20:14:23.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading ios player API JSON
+[2024-12-22T20:14:23.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading mweb player API JSON
+[2024-12-22T20:14:23.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading player 03dbdfab
+[2024-12-22T20:14:23.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:14:23.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = xgWR00JxX0MSa1ke4 ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:14:23.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:14:24.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:14:24.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = xJao1qAYGvDKirV9i ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:14:24.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:14:24.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:14:24.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:14:24.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:14:24.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:14:24.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:14:24.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading m3u8 information
+[2024-12-22T20:14:24.fZ] [DEBUG] yt-dlp:  Sort order given by extractor: quality, res, fps, hdr:12, source, vcodec:vp9.2, channels, acodec, lang, proto
+[2024-12-22T20:14:24.fZ] [DEBUG] yt-dlp:  Formats sorted by: hasvid, ie_pref, quality, res, fps, hdr:12(7), source, vcodec:vp9.2(10), channels, acodec, lang, proto, size, br, asr, vext, aext, hasaud, id
+[2024-12-22T20:14:24.fZ] [DEBUG] yt-dlp: [info] WsFOcu-yHTY: Downloading 1 format(s): 251
+[2024-12-22T20:14:24.fZ] [DEBUG] yt-dlp:  Invoking http downloader on "https://rr5---sn-ivuoxu-ua86.googlevideo.com/videoplayback?expire=1734912863&ei=_1ZoZ7DRI7GIvdIP1rHP8Qo&ip=2a00%3Aa041%3Ae660%3Ad800%3Af13d%3A8ca5%3Aa37b%3A925c&id=o-ANSKAxcGUH2S89knJd559lydYK8UUwYIHIU2VpQlmedM&itag=251&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&met=1734891263%2C&mh=3k&mm=31%2C29&mn=sn-ivuoxu-ua86%2Csn-ua87sn76&ms=au%2Crdu&mv=m&mvi=5&pl=48&rms=au%2Cau&initcwndbps=3233750&bui=AfMhrI8RF_QoDlJYSBcTlZ_C_ruJ7oL98Fg7N_BQBrjyFEjpfvvMIQcqfjUxFnIgn_SJvGMRoyJFCWXv&spc=x-caUOhhVlV3vE6jR0Jqdi4tFgG8g40PixcrZE3T9oHxo0TO97kI&vprv=1&svpuc=1&mime=audio%2Fwebm&rqh=1&gir=yes&clen=4456559&dur=292.581&lmt=1734748461111523&mt=1734890959&fvip=4&keepalive=yes&fexp=51326932%2C51335594%2C51371294&c=IOS&txp=6308224&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cbui%2Cspc%2Cvprv%2Csvpuc%2Cmime%2Crqh%2Cgir%2Cclen%2Cdur%2Clmt&sig=AJfQdSswRQIhAOjhCacomQy9bKKivdi8zrvoy2CbwZ8tObVSJ4TCgFMwAiApDwjU-Bg6LOPwqivnhsqRd0eJBa3TGVrqH7kvMQipVA%3D%3D&lsparams=met%2Cmh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Crms%2Cinitcwndbps&lsig=AGluJ3MwRAIgfU3LPkODHTa3rNjnsHAtkNyvzKMcF07kOH-VvQvyyCsCIDUElAUZMnPcJlh5-QwiE__d1P33Fn0O-JgXWHeAVL0T"
+[2024-12-22T20:14:24.fZ] [DEBUG] yt-dlp: [download] Destination: /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_b2x15iha/WsFOcu-yHTY.webm
+[2024-12-22T20:14:24.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.0%[0m of    4.25MiB at [0;32m Unknown B/s[0m ETA [0;33mUnknown[0m
+[2024-12-22T20:14:24.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.1%[0m of    4.25MiB at [0;32m   1.64MiB/s[0m ETA [0;33m00:02[0m
+[2024-12-22T20:14:24.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.2%[0m of    4.25MiB at [0;32m   2.66MiB/s[0m ETA [0;33m00:01[0m
+[2024-12-22T20:14:24.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.3%[0m of    4.25MiB at [0;32m   4.42MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:14:24.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.7%[0m of    4.25MiB at [0;32m   3.95MiB/s[0m ETA [0;33m00:01[0m
+[2024-12-22T20:14:24.fZ] [DEBUG] yt-dlp: [download] [0;94m  1.4%[0m of    4.25MiB at [0;32m   4.58MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:14:24.fZ] [DEBUG] yt-dlp: [download] [0;94m  2.9%[0m of    4.25MiB at [0;32m   5.77MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:14:24.fZ] [DEBUG] yt-dlp: [download] [0;94m  5.9%[0m of    4.25MiB at [0;32m   7.60MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:14:24.fZ] [DEBUG] yt-dlp: [download] [0;94m 11.7%[0m of    4.25MiB at [0;32m  10.73MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:14:24.fZ] [DEBUG] yt-dlp: [download] [0;94m 23.5%[0m of    4.25MiB at [0;32m  13.58MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:14:24.fZ] [DEBUG] yt-dlp: [download] [0;94m 47.0%[0m of    4.25MiB at [0;32m  20.83MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:14:24.fZ] [DEBUG] yt-dlp: [download] [0;94m 94.1%[0m of    4.25MiB at [0;32m  30.01MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:14:25.fZ] [DEBUG] yt-dlp: [download] [0;94m100.0%[0m of    4.25MiB at [0;32m  18.89MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:14:25.fZ] [DEBUG] yt-dlp: [download] 100% of    4.25MiB in [1;37m00:00:00[0m at [0;32m15.19MiB/s[0m
+[2024-12-22T20:14:25.fZ] [DEBUG] yt-dlp:  ffmpeg command line: ffprobe -show_streams file:/var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_b2x15iha/WsFOcu-yHTY.webm
+[2024-12-22T20:14:25.fZ] [DEBUG] yt-dlp: [ExtractAudio] Destination: /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_b2x15iha/WsFOcu-yHTY.mp3
+[2024-12-22T20:14:25.fZ] [DEBUG] yt-dlp:  ffmpeg command line: ffmpeg -y -loglevel repeat+info -i file:/var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_b2x15iha/WsFOcu-yHTY.webm -vn -acodec libmp3lame -b:a 192.0k -movflags +faststart -ar 44100 -ac 2 file:/var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_b2x15iha/WsFOcu-yHTY.mp3
+[2024-12-22T20:14:27.fZ] [DEBUG] yt-dlp: Deleting original file /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_b2x15iha/WsFOcu-yHTY.webm (pass -k to keep)
+[2024-12-22T20:14:27.fZ] [DEBUG] src.transcription_manager: Spawning child process for Whisper transcription, task_id=bc3da6e9-ed5c-43cf-b63e-820077cfd2c8
+[2024-12-22T20:15:27.fZ] [INFO] src.socket_handlers: WebSocket disconnected: J5W3QrkGZyzIu2rLAAAD
+[2024-12-22T20:15:32.fZ] [INFO] src.socket_handlers: WebSocket connected: BEpY_VSD9FwctI6YAAAF
+[2024-12-22T20:16:32.fZ] [INFO] src.socket_handlers: WebSocket disconnected: BEpY_VSD9FwctI6YAAAF
+[2024-12-22T20:17:16.fZ] [INFO] src.transcription_manager: Transcription completed successfully, task_id=bc3da6e9-ed5c-43cf-b63e-820077cfd2c8
+[2024-12-22T20:20:44.fZ] [INFO] root: Application logging configured.
+[2024-12-22T20:20:44.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+[2024-12-22T20:20:45.fZ] [DEBUG] app: Registering Flask routes...
+[2024-12-22T20:20:45.fZ] [DEBUG] app: Routes registered successfully.
+[2024-12-22T20:23:13.fZ] [INFO] root: Application logging configured.
+[2024-12-22T20:23:13.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+[2024-12-22T20:23:13.fZ] [DEBUG] app: Registering Flask routes...
+[2024-12-22T20:23:13.fZ] [DEBUG] app: Routes registered successfully.
+[2024-12-22T20:23:17.fZ] [INFO] src.socket_handlers: WebSocket connected: OKyqfbpPNcqYlCU2AAAB
+[2024-12-22T20:23:17.fZ] [DEBUG] src.transcription_manager: Started process_transcription, method=Whisper, task_id=81f37bb0-d452-4960-97e8-a0c51e76b27d
+[2024-12-22T20:23:17.fZ] [DEBUG] src.transcription_manager: Downloading audio to /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_ul2jxhw0/audio.mp3 for task_id=81f37bb0-d452-4960-97e8-a0c51e76b27d
+[2024-12-22T20:23:17.fZ] [DEBUG] yt-dlp:  Encodings: locale UTF-8, fs utf-8, pref UTF-8, out utf-8, error utf-8, screen utf-8
+[2024-12-22T20:23:17.fZ] [DEBUG] yt-dlp:  yt-dlp version stable@2024.10.22 from yt-dlp/yt-dlp [67adeb7ba] (pip) API
+[2024-12-22T20:23:17.fZ] [DEBUG] yt-dlp:  params: {'format': 'bestaudio/best', 'postprocessors': [{'key': 'FFmpegExtractAudio', 'preferredcodec': 'mp3', 'preferredquality': '192'}], 'outtmpl': '%(id)s.%(ext)s', 'paths': {'home': '/var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_ul2jxhw0'}, 'quiet': False, 'no_warnings': False, 'logger': <src.loggers.yt_dlp_logger.YTDLPLogger object at 0x122b44f50>, 'progress_hooks': [<function TranscriptionManager.download_audio.<locals>.<lambda> at 0x122b09e40>], 'verbose': True, 'extract_flat': False, 'retries': 3, 'fragment_retries': 3, 'skip_unavailable_fragments': False, 'keepvideo': False, 'writethumbnail': False, 'postprocessor_args': ['-ar', '44100', '-ac', '2'], 'compat_opts': set(), 'http_headers': {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.106 Safari/537.36', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Sec-Fetch-Mode': 'navigate'}}
+[2024-12-22T20:23:17.fZ] [DEBUG] yt-dlp:  Python 3.12.7 (CPython arm64 64bit) - macOS-15.1.1-arm64-arm-64bit (OpenSSL 3.4.0 22 Oct 2024)
+[2024-12-22T20:23:17.fZ] [DEBUG] yt-dlp:  exe versions: ffmpeg 7.1 (setts), ffprobe 7.1
+[2024-12-22T20:23:17.fZ] [DEBUG] yt-dlp:  Optional libraries: Cryptodome-3.21.0, brotli-1.1.0, certifi-2024.08.30, mutagen-1.47.0, requests-2.32.3, sqlite3-3.47.0, urllib3-2.2.3, websockets-13.1
+[2024-12-22T20:23:17.fZ] [DEBUG] yt-dlp:  Proxy map: {}
+[2024-12-22T20:23:17.fZ] [DEBUG] yt-dlp:  Request Handlers: urllib, requests, websockets
+[2024-12-22T20:23:17.fZ] [DEBUG] yt-dlp:  Loaded 1839 extractors
+[2024-12-22T20:23:17.fZ] [DEBUG] src.transcription_manager: Starting YouTube audio download: 'https://www.youtube.com/watch?v=WsFOcu-yHTY'
+[2024-12-22T20:23:17.fZ] [DEBUG] yt-dlp: [youtube] Extracting URL: https://www.youtube.com/watch?v=WsFOcu-yHTY
+[2024-12-22T20:23:17.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading webpage
+[2024-12-22T20:23:18.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading ios player API JSON
+[2024-12-22T20:23:18.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading mweb player API JSON
+[2024-12-22T20:23:18.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading player 03dbdfab
+[2024-12-22T20:23:18.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:23:18.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = anRf6W1Ns44g0FOV8 ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:23:18.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:23:18.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:23:18.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = UZpHrgZkRaI1YNvMj ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:23:18.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:23:18.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:23:18.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:23:18.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:23:18.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:23:18.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:23:18.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading m3u8 information
+[2024-12-22T20:23:19.fZ] [DEBUG] yt-dlp:  Sort order given by extractor: quality, res, fps, hdr:12, source, vcodec:vp9.2, channels, acodec, lang, proto
+[2024-12-22T20:23:19.fZ] [DEBUG] yt-dlp:  Formats sorted by: hasvid, ie_pref, quality, res, fps, hdr:12(7), source, vcodec:vp9.2(10), channels, acodec, lang, proto, size, br, asr, vext, aext, hasaud, id
+[2024-12-22T20:23:19.fZ] [DEBUG] yt-dlp: [info] WsFOcu-yHTY: Downloading 1 format(s): 251
+[2024-12-22T20:23:19.fZ] [DEBUG] yt-dlp:  Invoking http downloader on "https://rr5---sn-ivuoxu-ua86.googlevideo.com/videoplayback?expire=1734913398&ei=FlloZ7jHEfK_mLAPu_ybuQU&ip=2a00%3Aa041%3Ae660%3Ad800%3Af13d%3A8ca5%3Aa37b%3A925c&id=o-AHmrFYc_isKZZC9iCw2Zoihx_97PwvLoCVPTWt6myUQy&itag=251&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&met=1734891798%2C&mh=3k&mm=31%2C29&mn=sn-ivuoxu-ua86%2Csn-ua87zn7l&ms=au%2Crdu&mv=m&mvi=5&pl=48&rms=au%2Cau&initcwndbps=3331250&bui=AfMhrI_kgqsbMzCLMBHrLDGwShApxmBvn8EuUtUX2SiP1tZOWy1HcDusF4AEi5qkKoaoO2-Y4rl44KTF&spc=x-caUHSvGJhywGP6GI7T9OwnTiYj3r9M5NRAtI27FWakYajoZjYs&vprv=1&svpuc=1&mime=audio%2Fwebm&rqh=1&gir=yes&clen=4456559&dur=292.581&lmt=1734748461111523&mt=1734891195&fvip=4&keepalive=yes&fexp=51326932%2C51335594%2C51371294&c=IOS&txp=6308224&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cbui%2Cspc%2Cvprv%2Csvpuc%2Cmime%2Crqh%2Cgir%2Cclen%2Cdur%2Clmt&sig=AJfQdSswRQIgEOzGc4YTSB5-Z7wVdvGC48nx_BX29JamLCx8UbkGFccCIQDDcTVjtXqBTs3-20SOGQPyAkrVrHWtDii-19Eyho34bQ%3D%3D&lsparams=met%2Cmh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Crms%2Cinitcwndbps&lsig=AGluJ3MwRAIgbeHXmrMjibivGMUufX5DpOEzADeWp-V3fNOvmHs1Z7UCIExeUqijW2qH7caGjKXE53tUqGlpa5dFLf_5qnxkyqzc"
+[2024-12-22T20:23:19.fZ] [DEBUG] yt-dlp: [download] Destination: /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_ul2jxhw0/WsFOcu-yHTY.webm
+[2024-12-22T20:23:19.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.0%[0m of    4.25MiB at [0;32m 150.30KiB/s[0m ETA [0;33m00:28[0m
+[2024-12-22T20:23:19.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.1%[0m of    4.25MiB at [0;32m 374.61KiB/s[0m ETA [0;33m00:11[0m
+[2024-12-22T20:23:19.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.2%[0m of    4.25MiB at [0;32m 763.18KiB/s[0m ETA [0;33m00:05[0m
+[2024-12-22T20:23:19.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.3%[0m of    4.25MiB at [0;32m   1.43MiB/s[0m ETA [0;33m00:02[0m
+[2024-12-22T20:23:19.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.7%[0m of    4.25MiB at [0;32m   2.70MiB/s[0m ETA [0;33m00:01[0m
+[2024-12-22T20:23:19.fZ] [DEBUG] yt-dlp: [download] [0;94m  1.4%[0m of    4.25MiB at [0;32m   2.23MiB/s[0m ETA [0;33m00:01[0m
+[2024-12-22T20:23:19.fZ] [DEBUG] yt-dlp: [download] [0;94m  2.9%[0m of    4.25MiB at [0;32m   2.50MiB/s[0m ETA [0;33m00:01[0m
+[2024-12-22T20:23:19.fZ] [DEBUG] yt-dlp: [download] [0;94m  5.9%[0m of    4.25MiB at [0;32m   2.61MiB/s[0m ETA [0;33m00:01[0m
+[2024-12-22T20:23:19.fZ] [DEBUG] yt-dlp: [download] [0;94m 11.7%[0m of    4.25MiB at [0;32m   2.60MiB/s[0m ETA [0;33m00:01[0m
+[2024-12-22T20:23:20.fZ] [DEBUG] yt-dlp: [download] [0;94m 23.5%[0m of    4.25MiB at [0;32m   2.85MiB/s[0m ETA [0;33m00:01[0m
+[2024-12-22T20:23:20.fZ] [DEBUG] yt-dlp: [download] [0;94m 47.0%[0m of    4.25MiB at [0;32m   4.03MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:23:20.fZ] [DEBUG] yt-dlp: [download] [0;94m 94.1%[0m of    4.25MiB at [0;32m   6.91MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:23:20.fZ] [DEBUG] yt-dlp: [download] [0;94m100.0%[0m of    4.25MiB at [0;32m   7.27MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:23:20.fZ] [DEBUG] yt-dlp: [download] 100% of    4.25MiB in [1;37m00:00:00[0m at [0;32m6.10MiB/s[0m
+[2024-12-22T20:23:20.fZ] [DEBUG] yt-dlp:  ffmpeg command line: ffprobe -show_streams file:/var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_ul2jxhw0/WsFOcu-yHTY.webm
+[2024-12-22T20:23:20.fZ] [DEBUG] yt-dlp: [ExtractAudio] Destination: /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_ul2jxhw0/WsFOcu-yHTY.mp3
+[2024-12-22T20:23:20.fZ] [DEBUG] yt-dlp:  ffmpeg command line: ffmpeg -y -loglevel repeat+info -i file:/var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_ul2jxhw0/WsFOcu-yHTY.webm -vn -acodec libmp3lame -b:a 192.0k -movflags +faststart -ar 44100 -ac 2 file:/var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_ul2jxhw0/WsFOcu-yHTY.mp3
+[2024-12-22T20:23:22.fZ] [DEBUG] yt-dlp: Deleting original file /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_ul2jxhw0/WsFOcu-yHTY.webm (pass -k to keep)
+[2024-12-22T20:23:22.fZ] [DEBUG] src.transcription_manager: Spawning child process for Whisper transcription, task_id=81f37bb0-d452-4960-97e8-a0c51e76b27d
+[2024-12-22T20:24:22.fZ] [INFO] src.socket_handlers: WebSocket disconnected: OKyqfbpPNcqYlCU2AAAB
+[2024-12-22T20:24:27.fZ] [INFO] src.socket_handlers: WebSocket connected: 8exn82rgDk9ItZORAAAD
+[2024-12-22T20:25:27.fZ] [INFO] src.socket_handlers: WebSocket disconnected: 8exn82rgDk9ItZORAAAD
+[2024-12-22T20:26:28.fZ] [INFO] src.transcription_manager: Transcription completed successfully, task_id=81f37bb0-d452-4960-97e8-a0c51e76b27d
+[2024-12-22T20:32:18.fZ] [INFO] root: Application logging configured.
+[2024-12-22T20:32:18.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+[2024-12-22T20:32:19.fZ] [DEBUG] app: Registering Flask routes...
+[2024-12-22T20:32:19.fZ] [DEBUG] app: Routes registered successfully.
+[2024-12-22T20:32:34.fZ] [INFO] root: Application logging configured.
+[2024-12-22T20:32:34.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+[2024-12-22T20:32:35.fZ] [INFO] engineio.server: Server initialized for gevent.
+[2024-12-22T20:32:35.fZ] [DEBUG] app: Registering Flask routes...
+[2024-12-22T20:32:35.fZ] [DEBUG] app: Routes registered successfully.
+[2024-12-22T20:32:43.fZ] [INFO] root: Application logging configured.
+[2024-12-22T20:32:43.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+[2024-12-22T20:32:44.fZ] [INFO] engineio.server: Server initialized for gevent.
+[2024-12-22T20:32:44.fZ] [DEBUG] app: Registering Flask routes...
+[2024-12-22T20:32:44.fZ] [DEBUG] app: Routes registered successfully.
+[2024-12-22T20:33:46.fZ] [INFO] root: Application logging configured.
+[2024-12-22T20:33:46.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+[2024-12-22T20:33:47.fZ] [INFO] engineio.server: Server initialized for gevent.
+[2024-12-22T20:33:47.fZ] [DEBUG] app: Registering Flask routes...
+[2024-12-22T20:33:47.fZ] [DEBUG] app: Routes registered successfully.
+################################################################################
+2024-12-22 20:33:50 - APPLICATION START
+################################################################################
+[2024-12-22T20:33:50.fZ] [INFO] root: Application logging configured.
+[2024-12-22T20:33:50.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+[2024-12-22T20:33:51.fZ] [INFO] engineio.server: Server initialized for gevent.
+[2024-12-22T20:33:51.fZ] [DEBUG] app: Registering Flask routes...
+[2024-12-22T20:33:51.fZ] [DEBUG] app: Routes registered successfully.
+[2024-12-22T20:33:53.fZ] [INFO] engineio.server: AMWbXpTGWzhJXmCTAAAA: Sending packet OPEN data {'sid': 'AMWbXpTGWzhJXmCTAAAA', 'upgrades': [], 'pingTimeout': 120000, 'pingInterval': 15000}
+[2024-12-22T20:33:53.fZ] [INFO] engineio.server: AMWbXpTGWzhJXmCTAAAA: Received request to upgrade to websocket
+[2024-12-22T20:33:53.fZ] [INFO] engineio.server: AMWbXpTGWzhJXmCTAAAA: Upgrade to websocket successful
+[2024-12-22T20:33:53.fZ] [INFO] engineio.server: AMWbXpTGWzhJXmCTAAAA: Received packet MESSAGE data 0
+[2024-12-22T20:33:53.fZ] [INFO] src.socket_handlers: WebSocket connected: 6blMZyerVC8VKOkIAAAB
+[2024-12-22T20:33:53.fZ] [INFO] socketio.server: 6blMZyerVC8VKOkIAAAB is entering room 6blMZyerVC8VKOkIAAAB [/]
+[2024-12-22T20:33:53.fZ] [INFO] socketio.server: emitting event "connection_established" to 6blMZyerVC8VKOkIAAAB [/]
+[2024-12-22T20:33:53.fZ] [INFO] engineio.server: AMWbXpTGWzhJXmCTAAAA: Sending packet MESSAGE data 2["connection_established",{"status":"connected"}]
+[2024-12-22T20:33:53.fZ] [INFO] engineio.server: AMWbXpTGWzhJXmCTAAAA: Sending packet MESSAGE data 0{"sid":"6blMZyerVC8VKOkIAAAB"}
+[2024-12-22T20:33:53.fZ] [DEBUG] src.transcription_manager: Started process_transcription, method=Whisper, task_id=bac2fd14-9bc6-4aae-9b66-1e182a24c613
+[2024-12-22T20:33:53.fZ] [DEBUG] src.transcription_manager: Downloading audio to /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_sgj3a9ex/audio.mp3 for task_id=bac2fd14-9bc6-4aae-9b66-1e182a24c613
+[2024-12-22T20:33:53.fZ] [DEBUG] yt-dlp:  Encodings: locale UTF-8, fs utf-8, pref UTF-8, out utf-8, error utf-8, screen utf-8
+[2024-12-22T20:33:53.fZ] [DEBUG] yt-dlp:  yt-dlp version stable@2024.10.22 from yt-dlp/yt-dlp [67adeb7ba] (pip) API
+[2024-12-22T20:33:53.fZ] [DEBUG] yt-dlp:  params: {'format': 'bestaudio/best', 'postprocessors': [{'key': 'FFmpegExtractAudio', 'preferredcodec': 'mp3', 'preferredquality': '192'}], 'outtmpl': '%(id)s.%(ext)s', 'paths': {'home': '/var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_sgj3a9ex'}, 'quiet': False, 'no_warnings': False, 'logger': <src.loggers.yt_dlp_logger.YTDLPLogger object at 0x10e54ca40>, 'progress_hooks': [<function TranscriptionManager.download_audio.<locals>.<lambda> at 0x10e511d00>], 'verbose': True, 'extract_flat': False, 'retries': 3, 'fragment_retries': 3, 'skip_unavailable_fragments': False, 'keepvideo': False, 'writethumbnail': False, 'postprocessor_args': ['-ar', '44100', '-ac', '2'], 'compat_opts': set(), 'http_headers': {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Sec-Fetch-Mode': 'navigate'}}
+[2024-12-22T20:33:53.fZ] [DEBUG] yt-dlp:  Python 3.12.7 (CPython arm64 64bit) - macOS-15.1.1-arm64-arm-64bit (OpenSSL 3.4.0 22 Oct 2024)
+[2024-12-22T20:33:53.fZ] [DEBUG] yt-dlp:  exe versions: ffmpeg 7.1 (setts), ffprobe 7.1
+[2024-12-22T20:33:53.fZ] [DEBUG] yt-dlp:  Optional libraries: Cryptodome-3.21.0, brotli-1.1.0, certifi-2024.08.30, mutagen-1.47.0, requests-2.32.3, sqlite3-3.47.0, urllib3-2.2.3, websockets-13.1
+[2024-12-22T20:33:53.fZ] [DEBUG] yt-dlp:  Proxy map: {}
+[2024-12-22T20:33:53.fZ] [DEBUG] yt-dlp:  Request Handlers: urllib, requests, websockets
+[2024-12-22T20:33:53.fZ] [DEBUG] yt-dlp:  Loaded 1839 extractors
+[2024-12-22T20:33:53.fZ] [DEBUG] src.transcription_manager: Starting YouTube audio download: 'https://www.youtube.com/watch?v=WsFOcu-yHTY'
+[2024-12-22T20:33:53.fZ] [DEBUG] yt-dlp: [youtube] Extracting URL: https://www.youtube.com/watch?v=WsFOcu-yHTY
+[2024-12-22T20:33:53.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading webpage
+[2024-12-22T20:33:54.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading ios player API JSON
+[2024-12-22T20:33:54.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading mweb player API JSON
+[2024-12-22T20:33:54.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading player 03dbdfab
+[2024-12-22T20:33:54.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:33:54.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = HtaCiPuWPXvu_vnV2 ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:33:54.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:33:54.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:33:54.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = fKA0E8VsjWJUrJQN_ ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:33:54.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:33:54.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:33:54.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:33:54.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:33:54.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:33:54.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:33:54.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading m3u8 information
+[2024-12-22T20:33:55.fZ] [DEBUG] yt-dlp:  Sort order given by extractor: quality, res, fps, hdr:12, source, vcodec:vp9.2, channels, acodec, lang, proto
+[2024-12-22T20:33:55.fZ] [DEBUG] yt-dlp:  Formats sorted by: hasvid, ie_pref, quality, res, fps, hdr:12(7), source, vcodec:vp9.2(10), channels, acodec, lang, proto, size, br, asr, vext, aext, hasaud, id
+[2024-12-22T20:33:55.fZ] [DEBUG] yt-dlp: [info] WsFOcu-yHTY: Downloading 1 format(s): 251
+[2024-12-22T20:33:55.fZ] [DEBUG] yt-dlp:  Invoking http downloader on "https://rr5---sn-ivuoxu-ua86.googlevideo.com/videoplayback?expire=1734914034&ei=kltoZ_CDGI_3xN8Pi7O52QQ&ip=2a00%3Aa041%3Ae660%3Ad800%3Af13d%3A8ca5%3Aa37b%3A925c&id=o-APZb79nW7KYPntDWNMNW0PTNKEzVcz1WmOkiVg2_nlVO&itag=251&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&met=1734892434%2C&mh=3k&mm=31%2C29&mn=sn-ivuoxu-ua86%2Csn-ua87zn7l&ms=au%2Crdu&mv=m&mvi=5&pl=48&rms=au%2Cau&initcwndbps=3203750&bui=AfMhrI_RKchmSC9tLnsBXIRGNlK1AEZo0lSYWCd9FhFEzfnp9_HbGcqkchbOF15NOXyFOvUODF_BxpXp&spc=x-caUOIiVllEWBqkGzrAk0xNUjen1A8GPlffqckdb4RdK5B0_EpO&vprv=1&svpuc=1&mime=audio%2Fwebm&rqh=1&gir=yes&clen=4456559&dur=292.581&lmt=1734748461111523&mt=1734891922&fvip=4&keepalive=yes&fexp=51326932%2C51335594%2C51371294&c=IOS&txp=6308224&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cbui%2Cspc%2Cvprv%2Csvpuc%2Cmime%2Crqh%2Cgir%2Cclen%2Cdur%2Clmt&sig=AJfQdSswRQIgE-N8YDXBRXYRcJp6dC2CBmMc-RIgcosbX-kIYK3EuLMCIQC9AU3DgFgTmzrIllN1IwHEakxQTY1q8srL1Bn6z4tfNA%3D%3D&lsparams=met%2Cmh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Crms%2Cinitcwndbps&lsig=AGluJ3MwRQIhALhS9DMNVu45iVmxwNCaGoYmYr01eRuRUpVCrb45-JpsAiBWLJFTgOuJnNyrBjdsJO_j-3a33FS6EiPOTwMN6Zn-Ww%3D%3D"
+[2024-12-22T20:33:55.fZ] [DEBUG] yt-dlp: [download] Destination: /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_sgj3a9ex/WsFOcu-yHTY.webm
+[2024-12-22T20:33:55.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.0%[0m of    4.25MiB at [0;32m 398.43KiB/s[0m ETA [0;33m00:10[0m
+[2024-12-22T20:33:55.fZ] [INFO] socketio.server: emitting event "transcription_progress" to 6blMZyerVC8VKOkIAAAB [/]
+[2024-12-22T20:33:55.fZ] [INFO] engineio.server: AMWbXpTGWzhJXmCTAAAA: Sending packet MESSAGE data 2["transcription_progress",{"task_id":"bac2fd14-9bc6-4aae-9b66-1e182a24c613","progress":0.006893210658716736,"message":"Downloading audio...","download_speed":"0.4 MB/s","eta":"10s"}]
+[2024-12-22T20:33:55.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.1%[0m of    4.25MiB at [0;32m 497.76KiB/s[0m ETA [0;33m00:08[0m
+[2024-12-22T20:33:55.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.2%[0m of    4.25MiB at [0;32m1000.58KiB/s[0m ETA [0;33m00:04[0m
+[2024-12-22T20:33:55.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.3%[0m of    4.25MiB at [0;32m   1.77MiB/s[0m ETA [0;33m00:02[0m
+[2024-12-22T20:33:55.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.7%[0m of    4.25MiB at [0;32m   3.30MiB/s[0m ETA [0;33m00:01[0m
+[2024-12-22T20:33:55.fZ] [DEBUG] yt-dlp: [download] [0;94m  1.4%[0m of    4.25MiB at [0;32m   4.48MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:33:55.fZ] [DEBUG] yt-dlp: [download] [0;94m  2.9%[0m of    4.25MiB at [0;32m   5.86MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:33:55.fZ] [DEBUG] yt-dlp: [download] [0;94m  5.9%[0m of    4.25MiB at [0;32m   8.51MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:33:55.fZ] [DEBUG] yt-dlp: [download] [0;94m 11.7%[0m of    4.25MiB at [0;32m  12.03MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:33:55.fZ] [DEBUG] yt-dlp: [download] [0;94m 23.5%[0m of    4.25MiB at [0;32m  17.73MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:33:55.fZ] [DEBUG] yt-dlp: [download] [0;94m 47.0%[0m of    4.25MiB at [0;32m  26.72MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:33:55.fZ] [DEBUG] yt-dlp: [download] [0;94m 94.1%[0m of    4.25MiB at [0;32m  35.33MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:33:55.fZ] [DEBUG] yt-dlp: [download] [0;94m100.0%[0m of    4.25MiB at [0;32m  36.65MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:33:55.fZ] [DEBUG] yt-dlp: [download] 100% of    4.25MiB in [1;37m00:00:00[0m at [0;32m20.23MiB/s[0m
+[2024-12-22T20:33:55.fZ] [DEBUG] yt-dlp:  ffmpeg command line: ffprobe -show_streams file:/var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_sgj3a9ex/WsFOcu-yHTY.webm
+[2024-12-22T20:33:55.fZ] [DEBUG] yt-dlp: [ExtractAudio] Destination: /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_sgj3a9ex/WsFOcu-yHTY.mp3
+[2024-12-22T20:33:55.fZ] [DEBUG] yt-dlp:  ffmpeg command line: ffmpeg -y -loglevel repeat+info -i file:/var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_sgj3a9ex/WsFOcu-yHTY.webm -vn -acodec libmp3lame -b:a 192.0k -movflags +faststart -ar 44100 -ac 2 file:/var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_sgj3a9ex/WsFOcu-yHTY.mp3
+[2024-12-22T20:33:57.fZ] [DEBUG] yt-dlp: Deleting original file /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_sgj3a9ex/WsFOcu-yHTY.webm (pass -k to keep)
+[2024-12-22T20:33:57.fZ] [INFO] socketio.server: emitting event "transcription_progress" to 6blMZyerVC8VKOkIAAAB [/]
+[2024-12-22T20:33:57.fZ] [INFO] engineio.server: AMWbXpTGWzhJXmCTAAAA: Sending packet MESSAGE data 2["transcription_progress",{"task_id":"bac2fd14-9bc6-4aae-9b66-1e182a24c613","progress":30.0,"message":"Downloading audio...","download_speed":null,"eta":null}]
+[2024-12-22T20:33:57.fZ] [DEBUG] src.transcription_manager: Spawning child process for Whisper transcription, task_id=bac2fd14-9bc6-4aae-9b66-1e182a24c613
+[2024-12-22T20:34:08.fZ] [INFO] engineio.server: AMWbXpTGWzhJXmCTAAAA: Sending packet PING data None
+[2024-12-22T20:34:08.fZ] [INFO] engineio.server: AMWbXpTGWzhJXmCTAAAA: Received packet PONG data 
+[2024-12-22T20:34:23.fZ] [INFO] engineio.server: AMWbXpTGWzhJXmCTAAAA: Sending packet PING data None
+[2024-12-22T20:34:23.fZ] [INFO] engineio.server: AMWbXpTGWzhJXmCTAAAA: Received packet PONG data 
+[2024-12-22T20:34:31.fZ] [INFO] src.socket_handlers: WebSocket disconnected: 6blMZyerVC8VKOkIAAAB
+################################################################################
+2024-12-22 20:34:41 - APPLICATION START
+################################################################################
+[2024-12-22T20:34:41.fZ] [INFO] root: Application logging configured.
+[2024-12-22T20:34:41.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+[2024-12-22T20:34:43.fZ] [DEBUG] app: Registering Flask routes...
+[2024-12-22T20:34:43.fZ] [DEBUG] app: Routes registered successfully.
+[2024-12-22T20:34:47.fZ] [INFO] src.socket_handlers: WebSocket connected: 6ajubQDC2okalIbkAAAB
+[2024-12-22T20:34:47.fZ] [DEBUG] src.transcription_manager: Started process_transcription, method=YouTube, task_id=4881914a-39d5-445e-8efe-ac7987d575e0
+[2024-12-22T20:34:47.fZ] [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): www.youtube.com:443
+[2024-12-22T20:34:48.fZ] [DEBUG] urllib3.connectionpool: https://www.youtube.com:443 "GET /watch?v=WsFOcu-yHTY HTTP/11" 200 None
+[2024-12-22T20:34:48.fZ] [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): www.youtube.com:443
+[2024-12-22T20:34:48.fZ] [DEBUG] urllib3.connectionpool: https://www.youtube.com:443 "GET /api/timedtext?v=WsFOcu-yHTY&ei=yFtoZ43kCtGFvdIPq4bSsQE&caps=asr&opi=112496729&exp=xbt&xoaf=4&hl=en&ip=0.0.0.0&ipbits=0&expire=1734917688&sparams=ip,ipbits,expire,v,ei,caps,opi,exp,xoaf&signature=A1BB350B95BD545AD72518941D07246DED2EF280.C9298CEE05BEAFB8B3C4B256A2ACDCA849214C64&key=yt8&kind=asr&lang=en HTTP/11" 200 None
+[2024-12-22T20:34:48.fZ] [INFO] src.transcription_manager: YouTube transcript only method complete for task_id=4881914a-39d5-445e-8efe-ac7987d575e0
+[2024-12-22T20:34:48.fZ] [INFO] src.socket_handlers: WebSocket disconnected: 6ajubQDC2okalIbkAAAB
+[2024-12-22T20:34:56.fZ] [INFO] src.socket_handlers: WebSocket connected: f1eBsco6NP5o7ttcAAAD
+[2024-12-22T20:34:56.fZ] [DEBUG] src.transcription_manager: Started process_transcription, method=Whisper, task_id=2928ce20-cf9b-4b98-b909-9b5779030282
+[2024-12-22T20:34:56.fZ] [DEBUG] src.transcription_manager: Downloading audio to /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_2xxk7t7a/audio.mp3 for task_id=2928ce20-cf9b-4b98-b909-9b5779030282
+[2024-12-22T20:34:56.fZ] [DEBUG] yt-dlp:  Encodings: locale UTF-8, fs utf-8, pref UTF-8, out utf-8, error utf-8, screen utf-8
+[2024-12-22T20:34:56.fZ] [DEBUG] yt-dlp:  yt-dlp version stable@2024.10.22 from yt-dlp/yt-dlp [67adeb7ba] (pip) API
+[2024-12-22T20:34:56.fZ] [DEBUG] yt-dlp:  params: {'format': 'bestaudio/best', 'postprocessors': [{'key': 'FFmpegExtractAudio', 'preferredcodec': 'mp3', 'preferredquality': '192'}], 'outtmpl': '%(id)s.%(ext)s', 'paths': {'home': '/var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_2xxk7t7a'}, 'quiet': False, 'no_warnings': False, 'logger': <src.loggers.yt_dlp_logger.YTDLPLogger object at 0x124276c00>, 'progress_hooks': [<function TranscriptionManager.download_audio.<locals>.<lambda> at 0x124290c20>], 'verbose': True, 'extract_flat': False, 'retries': 3, 'fragment_retries': 3, 'skip_unavailable_fragments': False, 'keepvideo': False, 'writethumbnail': False, 'postprocessor_args': ['-ar', '44100', '-ac', '2'], 'compat_opts': set(), 'http_headers': {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.106 Safari/537.36', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Sec-Fetch-Mode': 'navigate'}}
+[2024-12-22T20:34:56.fZ] [DEBUG] yt-dlp:  Python 3.12.7 (CPython arm64 64bit) - macOS-15.1.1-arm64-arm-64bit (OpenSSL 3.4.0 22 Oct 2024)
+[2024-12-22T20:34:56.fZ] [DEBUG] yt-dlp:  exe versions: ffmpeg 7.1 (setts), ffprobe 7.1
+[2024-12-22T20:34:56.fZ] [DEBUG] yt-dlp:  Optional libraries: Cryptodome-3.21.0, brotli-1.1.0, certifi-2024.08.30, mutagen-1.47.0, requests-2.32.3, sqlite3-3.47.0, urllib3-2.2.3, websockets-13.1
+[2024-12-22T20:34:56.fZ] [DEBUG] yt-dlp:  Proxy map: {}
+[2024-12-22T20:34:56.fZ] [DEBUG] yt-dlp:  Request Handlers: urllib, requests, websockets
+[2024-12-22T20:34:56.fZ] [DEBUG] yt-dlp:  Loaded 1839 extractors
+[2024-12-22T20:34:56.fZ] [DEBUG] src.transcription_manager: Starting YouTube audio download: 'https://www.youtube.com/watch?v=WsFOcu-yHTY'
+[2024-12-22T20:34:56.fZ] [DEBUG] yt-dlp: [youtube] Extracting URL: https://www.youtube.com/watch?v=WsFOcu-yHTY
+[2024-12-22T20:34:56.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading webpage
+[2024-12-22T20:34:57.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading ios player API JSON
+[2024-12-22T20:34:57.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading mweb player API JSON
+[2024-12-22T20:34:57.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading player 03dbdfab
+[2024-12-22T20:34:58.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:34:58.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = kGXGiDiY5zMJNcm5O ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:34:58.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:34:58.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:34:58.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = saYWwzb8J6UJ69hLe ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:34:58.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:34:58.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:34:58.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:34:58.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:34:58.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:34:58.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:34:58.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading m3u8 information
+[2024-12-22T20:34:59.fZ] [DEBUG] yt-dlp:  Sort order given by extractor: quality, res, fps, hdr:12, source, vcodec:vp9.2, channels, acodec, lang, proto
+[2024-12-22T20:34:59.fZ] [DEBUG] yt-dlp:  Formats sorted by: hasvid, ie_pref, quality, res, fps, hdr:12(7), source, vcodec:vp9.2(10), channels, acodec, lang, proto, size, br, asr, vext, aext, hasaud, id
+[2024-12-22T20:34:59.fZ] [DEBUG] yt-dlp: [info] WsFOcu-yHTY: Downloading 1 format(s): 251
+[2024-12-22T20:34:59.fZ] [DEBUG] yt-dlp:  Invoking http downloader on "https://rr5---sn-ivuoxu-ua86.googlevideo.com/videoplayback?expire=1734914097&ei=0VtoZ8ORLffXxN8PysP70AM&ip=2a00%3Aa041%3Ae660%3Ad800%3Af13d%3A8ca5%3Aa37b%3A925c&id=o-AGnMr5ENtw_0YJ787yMWdykZth0aO2sfcUekzfWK3t4S&itag=251&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&met=1734892497%2C&mh=3k&mm=31%2C29&mn=sn-ivuoxu-ua86%2Csn-ua87sn76&ms=au%2Crdu&mv=m&mvi=5&pl=48&rms=au%2Cau&initcwndbps=3280000&bui=AfMhrI9VKknswyNkNl7LYfTr2H1jwNZVYLx6vnsSzr32yMKTXcyg1As1OLl-U083dmndx5PdSbag-muN&spc=x-caUIu_RDb5KgKSLdicKtoUWU_nKUkyTCAH8t6JeyXTUBfVDA5E&vprv=1&svpuc=1&mime=audio%2Fwebm&rqh=1&gir=yes&clen=4456559&dur=292.581&lmt=1734748461111523&mt=1734892159&fvip=4&keepalive=yes&fexp=51326932%2C51335594%2C51371294&c=IOS&txp=6308224&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cbui%2Cspc%2Cvprv%2Csvpuc%2Cmime%2Crqh%2Cgir%2Cclen%2Cdur%2Clmt&sig=AJfQdSswRQIgEYldLIF3QhzbgfrqHuo4Yqjqi_vT4fU1Spee6B_-kmoCIQDvp01N8NNOb1X5gzJPH0e1AAGZtsUYe-3AY43HqAvS-A%3D%3D&lsparams=met%2Cmh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Crms%2Cinitcwndbps&lsig=AGluJ3MwRgIhANnr9VcbQIani8AgClKB3HvpoxKAKMj03XI5O9dW9gwNAiEAl7OVgvW48pQPaLSmOr7Y9439CUuCxXL4z9zvIBuFW0s%3D"
+[2024-12-22T20:34:59.fZ] [DEBUG] yt-dlp: [download] Destination: /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_2xxk7t7a/WsFOcu-yHTY.webm
+[2024-12-22T20:34:59.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.0%[0m of    4.25MiB at [0;32m Unknown B/s[0m ETA [0;33mUnknown[0m
+[2024-12-22T20:34:59.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.1%[0m of    4.25MiB at [0;32m   1.72MiB/s[0m ETA [0;33m00:02[0m
+[2024-12-22T20:34:59.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.2%[0m of    4.25MiB at [0;32m   2.82MiB/s[0m ETA [0;33m00:01[0m
+[2024-12-22T20:34:59.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.3%[0m of    4.25MiB at [0;32m   4.70MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:34:59.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.7%[0m of    4.25MiB at [0;32m   3.94MiB/s[0m ETA [0;33m00:01[0m
+[2024-12-22T20:34:59.fZ] [DEBUG] yt-dlp: [download] [0;94m  1.4%[0m of    4.25MiB at [0;32m   4.43MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:34:59.fZ] [DEBUG] yt-dlp: [download] [0;94m  2.9%[0m of    4.25MiB at [0;32m   5.17MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:34:59.fZ] [DEBUG] yt-dlp: [download] [0;94m  5.9%[0m of    4.25MiB at [0;32m   6.97MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:34:59.fZ] [DEBUG] yt-dlp: [download] [0;94m 11.7%[0m of    4.25MiB at [0;32m  10.68MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:34:59.fZ] [DEBUG] yt-dlp: [download] [0;94m 23.5%[0m of    4.25MiB at [0;32m  16.16MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:34:59.fZ] [DEBUG] yt-dlp: [download] [0;94m 47.0%[0m of    4.25MiB at [0;32m  23.97MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:34:59.fZ] [DEBUG] yt-dlp: [download] [0;94m 94.1%[0m of    4.25MiB at [0;32m  34.56MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:34:59.fZ] [DEBUG] yt-dlp: [download] [0;94m100.0%[0m of    4.25MiB at [0;32m  34.78MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:34:59.fZ] [DEBUG] yt-dlp: [download] 100% of    4.25MiB in [1;37m00:00:00[0m at [0;32m25.51MiB/s[0m
+[2024-12-22T20:34:59.fZ] [DEBUG] yt-dlp:  ffmpeg command line: ffprobe -show_streams file:/var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_2xxk7t7a/WsFOcu-yHTY.webm
+[2024-12-22T20:34:59.fZ] [DEBUG] yt-dlp: [ExtractAudio] Destination: /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_2xxk7t7a/WsFOcu-yHTY.mp3
+[2024-12-22T20:34:59.fZ] [DEBUG] yt-dlp:  ffmpeg command line: ffmpeg -y -loglevel repeat+info -i file:/var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_2xxk7t7a/WsFOcu-yHTY.webm -vn -acodec libmp3lame -b:a 192.0k -movflags +faststart -ar 44100 -ac 2 file:/var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_2xxk7t7a/WsFOcu-yHTY.mp3
+[2024-12-22T20:35:01.fZ] [DEBUG] yt-dlp: Deleting original file /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_2xxk7t7a/WsFOcu-yHTY.webm (pass -k to keep)
+[2024-12-22T20:35:01.fZ] [DEBUG] src.transcription_manager: Spawning child process for Whisper transcription, task_id=2928ce20-cf9b-4b98-b909-9b5779030282
+[2024-12-22T20:35:56.fZ] [INFO] src.socket_handlers: WebSocket connected: 39aBNz-7I8BVvw-vAAAF
+[2024-12-22T20:36:01.fZ] [INFO] src.socket_handlers: WebSocket disconnected: f1eBsco6NP5o7ttcAAAD
+[2024-12-22T20:36:06.fZ] [INFO] src.socket_handlers: WebSocket connected: BC7TrcchynO7WryxAAAH
+[2024-12-22T20:36:56.fZ] [INFO] src.socket_handlers: WebSocket disconnected: 39aBNz-7I8BVvw-vAAAF
+[2024-12-22T20:37:06.fZ] [INFO] src.socket_handlers: WebSocket disconnected: BC7TrcchynO7WryxAAAH
+[2024-12-22T20:38:25.fZ] [INFO] src.transcription_manager: Transcription completed successfully, task_id=2928ce20-cf9b-4b98-b909-9b5779030282
+[2024-12-22T20:38:50.fZ] [INFO] root: Application logging configured.
+[2024-12-22T20:38:50.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+[2024-12-22T20:38:52.fZ] [DEBUG] app: Registering Flask routes...
+[2024-12-22T20:38:52.fZ] [DEBUG] app: Routes registered successfully.
+[2024-12-22T20:38:56.fZ] [INFO] root: Application logging configured.
+[2024-12-22T20:38:56.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+[2024-12-22T20:38:57.fZ] [DEBUG] app: Registering Flask routes...
+[2024-12-22T20:38:57.fZ] [DEBUG] app: Routes registered successfully.
+[2024-12-22T20:47:27.fZ] [INFO] root: Application logging configured.
+[2024-12-22T20:47:27.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+[2024-12-22T20:47:28.fZ] [DEBUG] app: Registering Flask routes...
+[2024-12-22T20:47:28.fZ] [DEBUG] app: Routes registered successfully.
+################################################################################
+2024-12-22 20:47:31 - APPLICATION START
+################################################################################
+[2024-12-22T20:47:31.fZ] [INFO] root: Application logging configured.
+[2024-12-22T20:47:31.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+[2024-12-22T20:47:31.fZ] [INFO] root: Application logging configured.
+[2024-12-22T20:47:31.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+[2024-12-22T20:47:31.fZ] [DEBUG] app: Registering Flask routes...
+[2024-12-22T20:47:31.fZ] [DEBUG] app: Routes registered successfully.
+[2024-12-22T20:47:31.fZ] [DEBUG] app: Registering Flask routes...
+[2024-12-22T20:47:31.fZ] [DEBUG] app: Routes registered successfully.
+[2024-12-22T20:54:56.fZ] [INFO] root: Application logging configured.
+[2024-12-22T20:54:56.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+[2024-12-22T20:54:56.fZ] [INFO] root: Application logging configured.
+[2024-12-22T20:54:56.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+################################################################################
+2024-12-22 20:55:00 - APPLICATION START
+################################################################################
+[2024-12-22T20:55:00.fZ] [INFO] root: Application logging configured.
+[2024-12-22T20:55:00.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+[2024-12-22T20:55:00.fZ] [INFO] root: Application logging configured.
+[2024-12-22T20:55:00.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+################################################################################
+2024-12-22 20:56:16 - APPLICATION START
+################################################################################
+[2024-12-22T20:56:16.fZ] [INFO] root: Application logging configured.
+[2024-12-22T20:56:16.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+[2024-12-22T20:56:16.fZ] [INFO] root: Application logging configured.
+[2024-12-22T20:56:16.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+################################################################################
+2024-12-22 20:56:23 - APPLICATION START
+################################################################################
+[2024-12-22T20:56:23.fZ] [INFO] root: Application logging configured.
+[2024-12-22T20:56:23.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+################################################################################
+2024-12-22 20:59:50 - APPLICATION START
+################################################################################
+[2024-12-22T20:59:50.fZ] [INFO] root: Application logging configured.
+[2024-12-22T20:59:50.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+[2024-12-22T20:59:50.fZ] [DEBUG] app: Registering Flask routes...
+[2024-12-22T20:59:50.fZ] [DEBUG] app: Routes registered successfully.
+[2024-12-22T20:59:55.fZ] [INFO] src.socket_handlers: WebSocket connected: 08yHY0Vj6b9z8OnVAAAB
+[2024-12-22T20:59:55.fZ] [DEBUG] src.transcription_manager: Started process_transcription, method=Whisper, task_id=1380932f-f102-4b34-9ba5-3de4155cd81d
+[2024-12-22T20:59:55.fZ] [DEBUG] src.transcription_manager: Downloading audio to /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_8o7dyd9h/audio.mp3 for task_id=1380932f-f102-4b34-9ba5-3de4155cd81d
+[2024-12-22T20:59:55.fZ] [DEBUG] yt-dlp:  Encodings: locale UTF-8, fs utf-8, pref UTF-8, out utf-8, error utf-8, screen utf-8
+[2024-12-22T20:59:55.fZ] [DEBUG] yt-dlp:  yt-dlp version stable@2024.10.22 from yt-dlp/yt-dlp [67adeb7ba] (pip) API
+[2024-12-22T20:59:55.fZ] [DEBUG] yt-dlp:  params: {'format': 'bestaudio/best', 'postprocessors': [{'key': 'FFmpegExtractAudio', 'preferredcodec': 'mp3', 'preferredquality': '192'}], 'outtmpl': '%(id)s.%(ext)s', 'paths': {'home': '/var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_8o7dyd9h'}, 'quiet': False, 'no_warnings': False, 'logger': <src.loggers.yt_dlp_logger.YTDLPLogger object at 0x10b51f200>, 'progress_hooks': [<function TranscriptionManager.download_audio.<locals>.<lambda> at 0x10c67e200>], 'verbose': True, 'extract_flat': False, 'retries': 3, 'fragment_retries': 3, 'skip_unavailable_fragments': False, 'keepvideo': False, 'writethumbnail': False, 'postprocessor_args': ['-ar', '44100', '-ac', '2'], 'compat_opts': set(), 'http_headers': {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.106 Safari/537.36', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5', 'Sec-Fetch-Mode': 'navigate'}}
+[2024-12-22T20:59:55.fZ] [DEBUG] yt-dlp:  Python 3.12.7 (CPython arm64 64bit) - macOS-15.1.1-arm64-arm-64bit (OpenSSL 3.4.0 22 Oct 2024)
+[2024-12-22T20:59:55.fZ] [DEBUG] yt-dlp:  exe versions: ffmpeg 7.1 (setts), ffprobe 7.1
+[2024-12-22T20:59:55.fZ] [DEBUG] yt-dlp:  Optional libraries: Cryptodome-3.21.0, brotli-1.1.0, certifi-2024.08.30, mutagen-1.47.0, requests-2.32.3, sqlite3-3.47.0, urllib3-2.2.3, websockets-13.1
+[2024-12-22T20:59:55.fZ] [DEBUG] yt-dlp:  Proxy map: {}
+[2024-12-22T20:59:55.fZ] [DEBUG] yt-dlp:  Request Handlers: urllib, requests, websockets
+[2024-12-22T20:59:55.fZ] [DEBUG] yt-dlp:  Loaded 1839 extractors
+[2024-12-22T20:59:55.fZ] [DEBUG] src.transcription_manager: Starting YouTube audio download: 'https://www.youtube.com/watch?v=WsFOcu-yHTY'
+[2024-12-22T20:59:55.fZ] [DEBUG] yt-dlp: [youtube] Extracting URL: https://www.youtube.com/watch?v=WsFOcu-yHTY
+[2024-12-22T20:59:55.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading webpage
+[2024-12-22T20:59:55.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading ios player API JSON
+[2024-12-22T20:59:55.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading mweb player API JSON
+[2024-12-22T20:59:56.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading player 03dbdfab
+[2024-12-22T20:59:56.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:59:56.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = btBI57iScR2fS80zR ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:59:56.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:59:56.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:59:56.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = vG-PyAx7NpuIZPAcC ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T20:59:56.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:59:56.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:59:56.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:59:56.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:59:56.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:59:56.fZ] [DEBUG] yt-dlp:  [youtube] Unable to extract nsig function code (caused by RegexNotFoundError('Unable to extract \x1b[0;94mInitial JS player n function name\x1b[0m; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+[2024-12-22T20:59:56.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading m3u8 information
+[2024-12-22T20:59:57.fZ] [DEBUG] yt-dlp:  Sort order given by extractor: quality, res, fps, hdr:12, source, vcodec:vp9.2, channels, acodec, lang, proto
+[2024-12-22T20:59:57.fZ] [DEBUG] yt-dlp:  Formats sorted by: hasvid, ie_pref, quality, res, fps, hdr:12(7), source, vcodec:vp9.2(10), channels, acodec, lang, proto, size, br, asr, vext, aext, hasaud, id
+[2024-12-22T20:59:57.fZ] [DEBUG] yt-dlp: [info] WsFOcu-yHTY: Downloading 1 format(s): 251
+[2024-12-22T20:59:57.fZ] [DEBUG] yt-dlp:  Invoking http downloader on "https://rr5---sn-ivuoxu-ua86.googlevideo.com/videoplayback?expire=1734915595&ei=q2FoZ56_NPH7xN8P_-e5yAM&ip=2a00%3Aa041%3Ae660%3Ad800%3Af13d%3A8ca5%3Aa37b%3A925c&id=o-ACgb38Sp7t38sf8RyGdUc9Y-YA8lsKwaa3-MKY9lozQD&itag=251&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&met=1734893995%2C&mh=3k&mm=31%2C29&mn=sn-ivuoxu-ua86%2Csn-ua87zn7l&ms=au%2Crdu&mv=m&mvi=5&pcm2cms=yes&pl=48&rms=au%2Cau&initcwndbps=3280000&bui=AfMhrI82vzbIx6Zw7Zpm7NlhiCh0CAr2wBjLa57cmZPO5DmrD6RkssllorqvvkpcYN_Ti6I_dXTV9xBz&spc=x-caUMkVlGgrL_1FjjM5wt4Bel01lMeCiwmqf-A41TEHEoAtKsXC&vprv=1&svpuc=1&mime=audio%2Fwebm&rqh=1&gir=yes&clen=4456559&dur=292.581&lmt=1734748461111523&mt=1734893595&fvip=4&keepalive=yes&fexp=51326932%2C51335594%2C51371294&c=IOS&txp=6308224&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cbui%2Cspc%2Cvprv%2Csvpuc%2Cmime%2Crqh%2Cgir%2Cclen%2Cdur%2Clmt&sig=AJfQdSswRQIgJqlaHjWTD_11PumOg3yp7ZCkC06NIRw1ShIgk8ucPmsCIQDL5wF6glibGsRzqWY1PYLJAurgskszdZRmgjR7tGFeHw%3D%3D&lsparams=met%2Cmh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpcm2cms%2Cpl%2Crms%2Cinitcwndbps&lsig=AGluJ3MwRgIhALgrVh7BN-3YGQmrFaVIDgIO_kDGldOeiVGkhoozIWY9AiEAw3IAKzj33s7zi82Vx0E9whJw7lIWyDfjol27TGZl018%3D"
+[2024-12-22T20:59:57.fZ] [DEBUG] yt-dlp: [download] Destination: /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_8o7dyd9h/WsFOcu-yHTY.webm
+[2024-12-22T20:59:57.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.0%[0m of    4.25MiB at [0;32m Unknown B/s[0m ETA [0;33mUnknown[0m
+[2024-12-22T20:59:57.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.1%[0m of    4.25MiB at [0;32m   1.69MiB/s[0m ETA [0;33m00:02[0m
+[2024-12-22T20:59:57.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.2%[0m of    4.25MiB at [0;32m   2.54MiB/s[0m ETA [0;33m00:01[0m
+[2024-12-22T20:59:57.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.3%[0m of    4.25MiB at [0;32m   4.21MiB/s[0m ETA [0;33m00:01[0m
+[2024-12-22T20:59:57.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.7%[0m of    4.25MiB at [0;32m   3.13MiB/s[0m ETA [0;33m00:01[0m
+[2024-12-22T20:59:57.fZ] [DEBUG] yt-dlp: [download] [0;94m  1.4%[0m of    4.25MiB at [0;32m   5.02MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:59:57.fZ] [DEBUG] yt-dlp: [download] [0;94m  2.9%[0m of    4.25MiB at [0;32m   4.36MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:59:57.fZ] [DEBUG] yt-dlp: [download] [0;94m  5.9%[0m of    4.25MiB at [0;32m   6.29MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:59:57.fZ] [DEBUG] yt-dlp: [download] [0;94m 11.7%[0m of    4.25MiB at [0;32m   9.89MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:59:57.fZ] [DEBUG] yt-dlp: [download] [0;94m 23.5%[0m of    4.25MiB at [0;32m  14.85MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:59:57.fZ] [DEBUG] yt-dlp: [download] [0;94m 47.0%[0m of    4.25MiB at [0;32m  23.53MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:59:57.fZ] [DEBUG] yt-dlp: [download] [0;94m 94.1%[0m of    4.25MiB at [0;32m  33.51MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:59:57.fZ] [DEBUG] yt-dlp: [download] [0;94m100.0%[0m of    4.25MiB at [0;32m  25.59MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T20:59:57.fZ] [DEBUG] yt-dlp: [download] 100% of    4.25MiB in [1;37m00:00:00[0m at [0;32m17.84MiB/s[0m
+[2024-12-22T20:59:57.fZ] [DEBUG] yt-dlp:  ffmpeg command line: ffprobe -show_streams file:/var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_8o7dyd9h/WsFOcu-yHTY.webm
+[2024-12-22T20:59:57.fZ] [DEBUG] yt-dlp: [ExtractAudio] Destination: /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_8o7dyd9h/WsFOcu-yHTY.mp3
+[2024-12-22T20:59:57.fZ] [DEBUG] yt-dlp:  ffmpeg command line: ffmpeg -y -loglevel repeat+info -i file:/var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_8o7dyd9h/WsFOcu-yHTY.webm -vn -acodec libmp3lame -b:a 192.0k -movflags +faststart -ar 44100 -ac 2 file:/var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_8o7dyd9h/WsFOcu-yHTY.mp3
+[2024-12-22T20:59:59.fZ] [DEBUG] yt-dlp: Deleting original file /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_8o7dyd9h/WsFOcu-yHTY.webm (pass -k to keep)
+[2024-12-22T20:59:59.fZ] [DEBUG] src.transcription_manager: Starting thread for Whisper transcription, task_id=1380932f-f102-4b34-9ba5-3de4155cd81d
+[2024-12-22T21:00:00.fZ] [WARNING] py.warnings: /Users/ark/Development/Tools/web-toolkit/.venv/lib/python3.12/site-packages/whisper/__init__.py:150: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(fp, map_location=device)
+
+[2024-12-22T21:00:07.fZ] [WARNING] py.warnings: /Users/ark/Development/Tools/web-toolkit/.venv/lib/python3.12/site-packages/whisper/transcribe.py:126: UserWarning: FP16 is not supported on CPU; using FP32 instead
+  warnings.warn("FP16 is not supported on CPU; using FP32 instead")
+
+[2024-12-22T21:03:11.fZ] [INFO] src.transcription_manager: Transcription completed successfully, task_id=1380932f-f102-4b34-9ba5-3de4155cd81d
+[2024-12-22T21:03:11.fZ] [INFO] src.socket_handlers: WebSocket disconnected: 08yHY0Vj6b9z8OnVAAAB
+[2024-12-22T21:03:11.fZ] [INFO] root: Application logging configured.
+[2024-12-22T21:03:11.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+[2024-12-22T21:03:12.fZ] [DEBUG] app: Registering Flask routes...
+[2024-12-22T21:03:12.fZ] [DEBUG] app: Routes registered successfully.
+[2024-12-22T21:05:24.fZ] [INFO] root: Application logging configured.
+[2024-12-22T21:05:24.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+[2024-12-22T21:05:24.fZ] [DEBUG] app: Registering Flask routes...
+[2024-12-22T21:05:24.fZ] [DEBUG] app: Routes registered successfully.
+[2024-12-22T21:05:35.fZ] [INFO] root: Application logging configured.
+[2024-12-22T21:05:35.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+[2024-12-22T21:05:36.fZ] [DEBUG] app: Registering Flask routes...
+[2024-12-22T21:05:36.fZ] [DEBUG] app: Routes registered successfully.
+[2024-12-22T21:06:12.fZ] [INFO] root: Application logging configured.
+[2024-12-22T21:06:12.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+[2024-12-22T21:06:13.fZ] [DEBUG] app: Registering Flask routes...
+[2024-12-22T21:06:13.fZ] [DEBUG] app: Routes registered successfully.
+################################################################################
+2024-12-22 21:06:17 - APPLICATION START
+################################################################################
+[2024-12-22T21:06:17.fZ] [INFO] root: Application logging configured.
+[2024-12-22T21:06:17.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+[2024-12-22T21:06:17.fZ] [DEBUG] app: Registering Flask routes...
+[2024-12-22T21:06:17.fZ] [DEBUG] app: Routes registered successfully.
+[2024-12-22T21:07:15.fZ] [INFO] root: Application logging configured.
+[2024-12-22T21:07:15.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+[2024-12-22T21:07:16.fZ] [DEBUG] app: Registering Flask routes...
+[2024-12-22T21:07:16.fZ] [DEBUG] app: Routes registered successfully.
+[2024-12-22T21:07:28.fZ] [INFO] root: Application logging configured.
+[2024-12-22T21:07:28.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+[2024-12-22T21:07:28.fZ] [DEBUG] app: Registering Flask routes...
+[2024-12-22T21:07:28.fZ] [DEBUG] app: Routes registered successfully.

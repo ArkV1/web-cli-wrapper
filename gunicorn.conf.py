@@ -3,9 +3,10 @@ import warnings
 import sys
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
+import time
 
 import colorlog
-from src.custom_logger import CustomGunicornLogger  # <-- Our custom Gunicorn logger
+from src.loggers.custom_gunicorn_logger import CustomGunicornLogger  # <-- Our custom Gunicorn logger
 
 ##############################################################################
 # Gunicorn Basic Settings
@@ -25,7 +26,7 @@ proc_name = "web-toolkit"
 default_proc_name = "web-toolkit"
 
 # Use our custom Gunicorn logger for Gunicorn's own logs
-logger_class = "src.custom_logger.CustomGunicornLogger"
+logger_class = "src.loggers.custom_gunicorn_logger.CustomGunicornLogger"
 
 ##############################################################################
 # Logging Settings
@@ -59,11 +60,12 @@ logs_dir.mkdir(exist_ok=True)
 ##############################################################################
 # Configure Application Logging (for your Flask or other Python logs)
 ##############################################################################
-def configure_app_logging(force=False):
+def configure_app_logging(force=False, is_worker=False):
     """
     This configures standard Python logging with colorlog for your app-level logs.
     `force=True` means we attach handlers even if they were attached previously—
     useful in worker processes that might share the same logger object.
+    `is_worker=True` indicates if this is being called from a worker process.
     """
     logging.captureWarnings(True)
     
@@ -129,10 +131,24 @@ def configure_app_logging(force=False):
         root_logger.addHandler(debug_handler)
         root_logger.addHandler(console_handler)
 
-    logging.info("Application logging configured.")
+        # Add a prominent separator for app starts, but only in log files
+        # Only add separator in the main process, not in workers
+        if not is_worker:
+            separator = "#" * 80
+            current_time = time.strftime("%Y-%m-%d %H:%M:%S")
+            separator_message = f"{separator}\n{current_time} - APPLICATION START\n{separator}"
+            
+            # Write separator directly to files, bypassing formatters
+            for handler in [access_handler, error_handler, debug_handler]:
+                handler.stream.write(f"{separator_message}\n")
+                handler.stream.flush()
+
+    # Only log the configuration message in the process that set up the handlers
+    if force or not root_logger.handlers:
+        logging.info("Application logging configured.")
 
 # Call it *once* in the master process (for good measure)
-configure_app_logging()
+configure_app_logging(is_worker=False)
 
 ##############################################################################
 # Gunicorn Lifecycle Hooks
@@ -143,5 +159,5 @@ def post_fork(server, worker):
     We re-invoke our app logging config, ensuring colorlog is attached 
     within the worker, so debug logs from the worker show up colorized.
     """
-    configure_app_logging(force=True)
+    configure_app_logging(force=True, is_worker=True)
     logging.debug("post_fork: Worker logging has been configured.")
