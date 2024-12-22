@@ -1,6 +1,5 @@
 from flask import Blueprint, request, jsonify, send_file
 from flask_socketio import SocketIO
-import logging
 import uuid
 from pathlib import Path
 import subprocess
@@ -8,8 +7,6 @@ import os
 import tempfile
 from .transcription_manager import manager
 from .text_comparison import compare_texts
-
-logger = logging.getLogger(__name__)
 
 def register_api_routes(app, socketio):
     def background_transcription(task_id: str, url: str, method: str, model_name: str, sid: str):
@@ -27,7 +24,7 @@ def register_api_routes(app, socketio):
                 progress_callback=progress_callback
             )
         except Exception as e:
-            logger.error(f"Error in background transcription: {str(e)}", exc_info=True)
+            print(f"Error in background transcription: {str(e)}")
             socketio.emit('transcription_progress', {
                 'task_id': task_id,
                 'progress': 100,
@@ -70,7 +67,7 @@ def register_api_routes(app, socketio):
             })
             
         except Exception as e:
-            logger.error(f"Error starting transcription: {str(e)}", exc_info=True)
+            print(f"Error starting transcription: {str(e)}")
             return jsonify({
                 'success': False,
                 'error': str(e)
@@ -258,7 +255,7 @@ def register_api_routes(app, socketio):
             })
 
         except Exception as e:
-            logger.error(f"Error comparing transcripts: {str(e)}")
+            print(f"Error comparing transcripts: {str(e)}")
             return jsonify({
                 'success': False,
                 'error': str(e)
@@ -292,7 +289,7 @@ def register_api_routes(app, socketio):
             })
 
         except Exception as e:
-            logger.error(f"Error comparing texts: {str(e)}")
+            print(f"Error comparing texts: {str(e)}")
             return jsonify({
                 'success': False,
                 'error': str(e)

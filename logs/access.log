@@ -1,6 +1,28 @@
 [2024-12-22T18:35:26.fZ] [INFO] root: Gunicorn logging configured.
 [2024-12-22T18:57:53.fZ] [INFO] root: Gunicorn logging configured.
 [2024-12-22T18:58:40.fZ] [INFO] root: Gunicorn logging configured.
+[2024-12-22T19:00:37.fZ] [INFO] root: Gunicorn logging configured with colored console output.
+[2024-12-22T19:02:44.fZ] [INFO] root: Gunicorn logging configured with colored console output.
+[2024-12-22T19:05:30.fZ] [INFO] src.transcription_manager: Transcription completed successfully, task_id=a1c86430-f4ef-4705-a0c2-e3a8cf6cac07
+[2024-12-22T19:26:05.fZ] [INFO] root: Application logging configured.
+[2024-12-22T19:27:54.fZ] [INFO] root: Application logging configured.
+[2024-12-22T19:30:36.fZ] [INFO] root: Application logging configured.
+[2024-12-22T19:30:36.fZ] [INFO] root: Application logging configured.
+[2024-12-22T19:30:46.fZ] [INFO] root: Application logging configured.
+[2024-12-22T19:30:46.fZ] [INFO] root: Application logging configured.
+[2024-12-22T19:40:26.fZ] [INFO] root: Application logging configured.
+[2024-12-22T19:40:38.fZ] [INFO] root: Application logging configured.
+[2024-12-22T19:43:36.fZ] [INFO] root: Application logging configured.
+[2024-12-22T19:43:36.fZ] [INFO] root: Application logging configured.
+[2024-12-22T19:47:26.fZ] [INFO] root: Application logging configured.
+[2024-12-22T19:47:26.fZ] [INFO] root: Application logging configured.
+[2024-12-22T19:50:50.fZ] [INFO] src.transcription_manager: Transcription completed successfully, task_id=ebb16b6d-83d2-4ef1-abe5-04e2497a0be1
+[2024-12-22T19:50:50.fZ] [INFO] root: Application logging configured.
+[2024-12-22T19:51:02.fZ] [INFO] root: Application logging configured.
+[2024-12-22T19:51:18.fZ] [INFO] root: Application logging configured.
+[2024-12-22T19:51:51.fZ] [INFO] root: Application logging configured.
+[2024-12-22T19:51:51.fZ] [INFO] root: Application logging configured.
+[2024-12-22T19:51:58.fZ] [INFO] src.socket_handlers: WebSocket connected: ACoZ8YI2_fyAX5W9AAAB
 [2024-12-22T19:52:00.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
          player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
 [2024-12-22T19:52:00.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
@@ -58,6 +80,10 @@ RuntimeError: Failed to load audio: ffmpeg version 7.1 Copyright (c) 2000-2024 t
 Error opening input file /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_xn8jlpo8/audio.mp3.
 Error opening input files: No such file or directory
 
+[2024-12-22T19:52:13.fZ] [INFO] src.socket_handlers: WebSocket disconnected: ACoZ8YI2_fyAX5W9AAAB
+[2024-12-22T19:52:39.fZ] [INFO] root: Application logging configured.
+[2024-12-22T19:52:39.fZ] [INFO] root: Application logging configured.
+[2024-12-22T19:52:46.fZ] [INFO] src.socket_handlers: WebSocket connected: u8itOQzwfuXEjH1GAAAB
 [2024-12-22T19:52:47.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
          player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
 [2024-12-22T19:52:47.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
@@ -115,3 +141,4 @@ RuntimeError: Failed to load audio: ffmpeg version 7.1 Copyright (c) 2000-2024 t
 Error opening input file /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_3_yvzsys/audio.mp3.
 Error opening input files: No such file or directory
 
+[2024-12-22T19:53:00.fZ] [INFO] src.socket_handlers: WebSocket disconnected: u8itOQzwfuXEjH1GAAAB

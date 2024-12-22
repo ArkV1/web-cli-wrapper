@@ -14,10 +14,11 @@ import json
 import time
 import tempfile
 import shutil
-import logging
 import re
 import threading
 import multiprocessing
+import logging
+import warnings
 from pathlib import Path
 from typing import Dict, Optional, Callable
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
@@ -26,13 +27,41 @@ import whisper
 import yt_dlp
 from youtube_transcript_api import YouTubeTranscriptApi
 
-logger = logging.getLogger(__name__)
+from .yt_dlp_logger import YTDLPLogger
 
 ##############################################################################
 # We'll create a spawn context for child processes, but avoid Manager-based IPC
 ##############################################################################
 ctx = multiprocessing.get_context("spawn")
 
+# Create a module-level logger
+logger = logging.getLogger(__name__)
+
+# Configure warning logging
+logging.captureWarnings(True)
+warnings_logger = logging.getLogger('py.warnings')
+
+# Create a filter for torch warnings
+class TorchWarningFilter(logging.Filter):
+    def filter(self, record):
+        return 'torch.load' in str(record.msg) or 'FP16' in str(record.msg)
+
+# Add the filter to the warnings logger
+warnings_logger.addFilter(TorchWarningFilter())
+
+def get_yt_dlp_opts(output_path: str) -> dict:
+    """Get yt-dlp options with proper logging configuration."""
+    return {
+        'format': 'bestaudio/best',
+        'postprocessors': [{
+            'key': 'FFmpegExtractAudio',
+            'preferredcodec': 'mp3',
+        }],
+        'outtmpl': output_path,
+        'quiet': True,
+        'no_warnings': True,
+        'logger': YTDLPLogger()
+    }
 
 def _transcribe_in_process(audio_path: str, model_name: str, verbose: bool,
                            progress_file: str) -> Dict:
@@ -54,7 +83,6 @@ def _transcribe_in_process(audio_path: str, model_name: str, verbose: bool,
     try:
         try:
             model = whisper.load_model(model_name)
-
             original_tqdm = tqdm.tqdm
 
             def progress_callback(num_frames: int, total_frames: int):
@@ -112,7 +140,8 @@ def _transcribe_in_process(audio_path: str, model_name: str, verbose: bool,
 
     except Exception as e:
         err_msg = str(e)
-        logger.error(f"Error in child transcription process: {err_msg}", exc_info=True)
+        # Log the error with stack trace
+        logger.exception("Error in child transcription process")
         write_update({"type": "error", "error": err_msg})
         return {"success": False, "error": err_msg}
 
@@ -175,6 +204,7 @@ class TranscriptionManager:
                 "segments": tx_list
             }
         except Exception as e:
+            logger.warning("Could not retrieve YouTube transcript for video_id=%s: %s", video_id, e)
             return {"success": False, "error": str(e)}
 
     def download_audio(self, url: str, output_path: Path, progress_cb: Optional[Callable]):
@@ -184,24 +214,14 @@ class TranscriptionManager:
         try:
             import yt_dlp
 
-            ydl_opts = {
-                "format": "bestaudio/best",
-                "postprocessors": [{
-                    "key": "FFmpegExtractAudio",
-                    "preferredcodec": "mp3",
-                    "preferredquality": "192"
-                }],
-                "outtmpl": str(output_path).replace(".mp3", ""),
-                "progress_hooks": [
-                    lambda d: self._yt_dlp_hook(d, progress_cb) if progress_cb else None
-                ]
-            }
+            ydl_opts = get_yt_dlp_opts(str(output_path))
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                logger.debug("Starting YouTube audio download: %s", url)
                 ydl.download([url])
             if progress_cb:
                 progress_cb({"progress": 100})
         except Exception as e:
-            logger.error(f"Error downloading audio: {e}")
+            logger.exception("Error downloading audio from %s", url)
             raise
 
     def _yt_dlp_hook(self, d: dict, cb: Optional[Callable]):
@@ -233,14 +253,20 @@ class TranscriptionManager:
         try:
             vid_id = self.extract_video_id(url)
             if not vid_id:
+                logger.error("Invalid YouTube URL: %s", url)
                 raise ValueError("Invalid YouTube URL")
+
+            logger.debug("Started process_transcription, method=%s, task_id=%s", method, task_id)
 
             # Maybe fetch YouTube transcript
             youtube_result = None
             if method in ["YouTube", "Both"]:
-                progress_callback({"task_id": task_id, "progress": 0, "message": "Fetching YouTube transcript..."})
+                progress_callback({"task_id": task_id, "progress": 0,
+                                   "message": "Fetching YouTube transcript..."})
                 youtube_result = self.get_youtube_transcript(vid_id)
                 if youtube_result["success"] and method == "YouTube":
+                    # We can return early
+                    logger.info("YouTube transcript only method complete for task_id=%s", task_id)
                     progress_callback({
                         "task_id": task_id,
                         "progress": 100,
@@ -272,6 +298,7 @@ class TranscriptionManager:
                     })
 
                 # Download the audio
+                logger.debug("Downloading audio to %s for task_id=%s", audio_path, task_id)
                 self.download_audio(url, audio_path, dl_cb)
 
                 progress_callback({
@@ -288,6 +315,7 @@ class TranscriptionManager:
                 progress_file = str(temp_dir / "progress.jsonl")
 
                 # Spawn child process
+                logger.debug("Spawning child process for Whisper transcription, task_id=%s", task_id)
                 future = self._process_pool.submit(
                     _transcribe_in_process,
                     str(audio_path),
@@ -325,6 +353,7 @@ class TranscriptionManager:
                                         "output": update["output"]
                                     })
                                 elif update["type"] == "error":
+                                    logger.error("Child process error: %s", update["error"])
                                     progress_callback({
                                         "task_id": task_id,
                                         "error": update["error"]
@@ -338,6 +367,7 @@ class TranscriptionManager:
                 # Retrieve final result
                 result = future.result()
                 if result["success"]:
+                    logger.info("Transcription completed successfully, task_id=%s", task_id)
                     self.update_progress(task_id, {
                         "progress": 100, "message": "Complete"
                     })
@@ -353,10 +383,11 @@ class TranscriptionManager:
                         "segments": result["segments"]
                     })
                 else:
+                    logger.error("Transcription failed for task_id=%s: %s", task_id, result.get("error"))
                     raise RuntimeError(result.get("error", "Transcription failed"))
 
         except Exception as e:
-            logger.error(f"Error in process_transcription: {e}", exc_info=True)
+            logger.exception("Error in process_transcription (task_id=%s, url=%s)", task_id, url)
             self.update_progress(task_id, {
                 "progress": 100, "message": "Error", "error": str(e)
             })
@@ -372,7 +403,7 @@ class TranscriptionManager:
                 try:
                     shutil.rmtree(temp_dir)
                 except Exception as ex:
-                    logger.error(f"Error cleaning up temp files: {ex}")
+                    logger.warning("Error cleaning up temp files in %s: %s", temp_dir, ex)
 
 
 manager = TranscriptionManager()

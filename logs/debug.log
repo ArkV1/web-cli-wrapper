@@ -1,6 +1,19 @@
-[2024-12-22T18:35:26.fZ] [INFO] root: Gunicorn logging configured.
-[2024-12-22T18:57:53.fZ] [INFO] root: Gunicorn logging configured.
-[2024-12-22T18:58:40.fZ] [INFO] root: Gunicorn logging configured.
+[2024-12-22T19:51:02.fZ] [INFO] root: Application logging configured.
+[2024-12-22T19:51:18.fZ] [INFO] root: Application logging configured.
+[2024-12-22T19:51:51.fZ] [INFO] root: Application logging configured.
+[2024-12-22T19:51:51.fZ] [INFO] root: Application logging configured.
+[2024-12-22T19:51:51.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+[2024-12-22T19:51:52.fZ] [DEBUG] app: Registering Flask routes...
+[2024-12-22T19:51:52.fZ] [DEBUG] app: Routes registered successfully.
+[2024-12-22T19:51:58.fZ] [INFO] src.socket_handlers: WebSocket connected: ACoZ8YI2_fyAX5W9AAAB
+[2024-12-22T19:51:58.fZ] [DEBUG] src.transcription_manager: Started process_transcription, method=Whisper, task_id=1a2c38e7-5d70-42f3-b809-b478b53cb9cd
+[2024-12-22T19:51:58.fZ] [DEBUG] src.transcription_manager: Downloading audio to /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_xn8jlpo8/audio.mp3 for task_id=1a2c38e7-5d70-42f3-b809-b478b53cb9cd
+[2024-12-22T19:51:58.fZ] [DEBUG] src.transcription_manager: Starting YouTube audio download: https://www.youtube.com/watch?v=WsFOcu-yHTY
+[2024-12-22T19:51:58.fZ] [DEBUG] yt-dlp: [youtube] Extracting URL: https://www.youtube.com/watch?v=WsFOcu-yHTY
+[2024-12-22T19:51:58.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading webpage
+[2024-12-22T19:51:59.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading ios player API JSON
+[2024-12-22T19:51:59.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading mweb player API JSON
+[2024-12-22T19:51:59.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading player 03dbdfab
 [2024-12-22T19:52:00.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
          player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
 [2024-12-22T19:52:00.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
@@ -9,6 +22,26 @@
          player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
 [2024-12-22T19:52:00.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
          n = F_NmR6UftZ0Rj9coM ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T19:52:00.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading m3u8 information
+[2024-12-22T19:52:00.fZ] [DEBUG] yt-dlp: [info] WsFOcu-yHTY: Downloading 1 format(s): 251
+[2024-12-22T19:52:01.fZ] [DEBUG] yt-dlp: [download] Destination: /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_xn8jlpo8/audio.mp3
+[2024-12-22T19:52:01.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.0%[0m of    4.25MiB at [0;32m 409.52KiB/s[0m ETA [0;33m00:10[0m
+[2024-12-22T19:52:01.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.1%[0m of    4.25MiB at [0;32m 816.28KiB/s[0m ETA [0;33m00:05[0m
+[2024-12-22T19:52:01.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.2%[0m of    4.25MiB at [0;32m   1.46MiB/s[0m ETA [0;33m00:02[0m
+[2024-12-22T19:52:01.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.3%[0m of    4.25MiB at [0;32m   2.59MiB/s[0m ETA [0;33m00:01[0m
+[2024-12-22T19:52:01.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.7%[0m of    4.25MiB at [0;32m   3.35MiB/s[0m ETA [0;33m00:01[0m
+[2024-12-22T19:52:01.fZ] [DEBUG] yt-dlp: [download] [0;94m  1.4%[0m of    4.25MiB at [0;32m   4.55MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T19:52:01.fZ] [DEBUG] yt-dlp: [download] [0;94m  2.9%[0m of    4.25MiB at [0;32m   5.34MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T19:52:01.fZ] [DEBUG] yt-dlp: [download] [0;94m  5.9%[0m of    4.25MiB at [0;32m   7.44MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T19:52:01.fZ] [DEBUG] yt-dlp: [download] [0;94m 11.7%[0m of    4.25MiB at [0;32m  11.32MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T19:52:01.fZ] [DEBUG] yt-dlp: [download] [0;94m 23.5%[0m of    4.25MiB at [0;32m  16.91MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T19:52:01.fZ] [DEBUG] yt-dlp: [download] [0;94m 47.0%[0m of    4.25MiB at [0;32m  25.40MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T19:52:01.fZ] [DEBUG] yt-dlp: [download] [0;94m 94.1%[0m of    4.25MiB at [0;32m  13.46MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T19:52:01.fZ] [DEBUG] yt-dlp: [download] [0;94m100.0%[0m of    4.25MiB at [0;32m  13.95MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T19:52:01.fZ] [DEBUG] yt-dlp: [download] 100% of    4.25MiB in [1;37m00:00:00[0m at [0;32m10.06MiB/s[0m
+[2024-12-22T19:52:01.fZ] [DEBUG] yt-dlp: [ExtractAudio] Destination: /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_xn8jlpo8/audio.mp3.mp3
+[2024-12-22T19:52:03.fZ] [DEBUG] yt-dlp: Deleting original file /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_xn8jlpo8/audio.mp3 (pass -k to keep)
+[2024-12-22T19:52:03.fZ] [DEBUG] src.transcription_manager: Spawning child process for Whisper transcription, task_id=1a2c38e7-5d70-42f3-b809-b478b53cb9cd
 [2024-12-22T19:52:13.fZ] [ERROR] src.transcription_manager: Child process error: Failed to load audio: ffmpeg version 7.1 Copyright (c) 2000-2024 the FFmpeg developers
   built with Apple clang version 16.0.0 (clang-1600.0.26.4)
   configuration: --prefix=/opt/homebrew/Cellar/ffmpeg/7.1_1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags='-Wl,-ld_classic' --enable-ffplay --enable-gnutls --enable-gpl --enable-libaom --enable-libaribb24 --enable-libbluray --enable-libdav1d --enable-libharfbuzz --enable-libjxl --enable-libmp3lame --enable-libopus --enable-librav1e --enable-librist --enable-librubberband --enable-libsnappy --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtesseract --enable-libtheora --enable-libvidstab --enable-libvmaf --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libxvid --enable-lzma --enable-libfontconfig --enable-libfreetype --enable-frei0r --enable-libass --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libspeex --enable-libsoxr --enable-libzmq --enable-libzimg --disable-libjack --disable-indev=jack --enable-videotoolbox --enable-audiotoolbox --enable-neon
@@ -58,6 +91,21 @@ RuntimeError: Failed to load audio: ffmpeg version 7.1 Copyright (c) 2000-2024 t
 Error opening input file /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_xn8jlpo8/audio.mp3.
 Error opening input files: No such file or directory
 
+[2024-12-22T19:52:13.fZ] [INFO] src.socket_handlers: WebSocket disconnected: ACoZ8YI2_fyAX5W9AAAB
+[2024-12-22T19:52:39.fZ] [INFO] root: Application logging configured.
+[2024-12-22T19:52:39.fZ] [INFO] root: Application logging configured.
+[2024-12-22T19:52:39.fZ] [DEBUG] root: post_fork: Worker logging has been configured.
+[2024-12-22T19:52:40.fZ] [DEBUG] app: Registering Flask routes...
+[2024-12-22T19:52:40.fZ] [DEBUG] app: Routes registered successfully.
+[2024-12-22T19:52:46.fZ] [INFO] src.socket_handlers: WebSocket connected: u8itOQzwfuXEjH1GAAAB
+[2024-12-22T19:52:46.fZ] [DEBUG] src.transcription_manager: Started process_transcription, method=Whisper, task_id=a9106f93-ea50-43dd-8743-9bf6c3869b1c
+[2024-12-22T19:52:46.fZ] [DEBUG] src.transcription_manager: Downloading audio to /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_3_yvzsys/audio.mp3 for task_id=a9106f93-ea50-43dd-8743-9bf6c3869b1c
+[2024-12-22T19:52:46.fZ] [DEBUG] src.transcription_manager: Starting YouTube audio download: https://www.youtube.com/watch?v=WsFOcu-yHTY
+[2024-12-22T19:52:46.fZ] [DEBUG] yt-dlp: [youtube] Extracting URL: https://www.youtube.com/watch?v=WsFOcu-yHTY
+[2024-12-22T19:52:46.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading webpage
+[2024-12-22T19:52:47.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading ios player API JSON
+[2024-12-22T19:52:47.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading mweb player API JSON
+[2024-12-22T19:52:47.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading player 03dbdfab
 [2024-12-22T19:52:47.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
          player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
 [2024-12-22T19:52:47.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
@@ -66,6 +114,26 @@ Error opening input files: No such file or directory
          player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
 [2024-12-22T19:52:48.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
          n = VNDobNGCTR4thGzbO ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-22T19:52:48.fZ] [DEBUG] yt-dlp: [youtube] WsFOcu-yHTY: Downloading m3u8 information
+[2024-12-22T19:52:48.fZ] [DEBUG] yt-dlp: [info] WsFOcu-yHTY: Downloading 1 format(s): 251
+[2024-12-22T19:52:48.fZ] [DEBUG] yt-dlp: [download] Destination: /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_3_yvzsys/audio.mp3
+[2024-12-22T19:52:48.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.0%[0m of    4.25MiB at [0;32m 371.60KiB/s[0m ETA [0;33m00:11[0m
+[2024-12-22T19:52:48.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.1%[0m of    4.25MiB at [0;32m 763.57KiB/s[0m ETA [0;33m00:05[0m
+[2024-12-22T19:52:48.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.2%[0m of    4.25MiB at [0;32m   1.37MiB/s[0m ETA [0;33m00:03[0m
+[2024-12-22T19:52:48.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.3%[0m of    4.25MiB at [0;32m   2.48MiB/s[0m ETA [0;33m00:01[0m
+[2024-12-22T19:52:48.fZ] [DEBUG] yt-dlp: [download] [0;94m  0.7%[0m of    4.25MiB at [0;32m   4.46MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T19:52:48.fZ] [DEBUG] yt-dlp: [download] [0;94m  1.4%[0m of    4.25MiB at [0;32m   4.66MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T19:52:48.fZ] [DEBUG] yt-dlp: [download] [0;94m  2.9%[0m of    4.25MiB at [0;32m   5.69MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T19:52:48.fZ] [DEBUG] yt-dlp: [download] [0;94m  5.9%[0m of    4.25MiB at [0;32m   8.03MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T19:52:48.fZ] [DEBUG] yt-dlp: [download] [0;94m 11.7%[0m of    4.25MiB at [0;32m  12.00MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T19:52:48.fZ] [DEBUG] yt-dlp: [download] [0;94m 23.5%[0m of    4.25MiB at [0;32m  16.65MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T19:52:48.fZ] [DEBUG] yt-dlp: [download] [0;94m 47.0%[0m of    4.25MiB at [0;32m  24.27MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T19:52:48.fZ] [DEBUG] yt-dlp: [download] [0;94m 94.1%[0m of    4.25MiB at [0;32m  33.62MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T19:52:48.fZ] [DEBUG] yt-dlp: [download] [0;94m100.0%[0m of    4.25MiB at [0;32m  34.32MiB/s[0m ETA [0;33m00:00[0m
+[2024-12-22T19:52:48.fZ] [DEBUG] yt-dlp: [download] 100% of    4.25MiB in [1;37m00:00:00[0m at [0;32m16.95MiB/s[0m
+[2024-12-22T19:52:49.fZ] [DEBUG] yt-dlp: [ExtractAudio] Destination: /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_3_yvzsys/audio.mp3.mp3
+[2024-12-22T19:52:51.fZ] [DEBUG] yt-dlp: Deleting original file /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_3_yvzsys/audio.mp3 (pass -k to keep)
+[2024-12-22T19:52:51.fZ] [DEBUG] src.transcription_manager: Spawning child process for Whisper transcription, task_id=a9106f93-ea50-43dd-8743-9bf6c3869b1c
 [2024-12-22T19:53:00.fZ] [ERROR] src.transcription_manager: Child process error: Failed to load audio: ffmpeg version 7.1 Copyright (c) 2000-2024 the FFmpeg developers
   built with Apple clang version 16.0.0 (clang-1600.0.26.4)
   configuration: --prefix=/opt/homebrew/Cellar/ffmpeg/7.1_1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags='-Wl,-ld_classic' --enable-ffplay --enable-gnutls --enable-gpl --enable-libaom --enable-libaribb24 --enable-libbluray --enable-libdav1d --enable-libharfbuzz --enable-libjxl --enable-libmp3lame --enable-libopus --enable-librav1e --enable-librist --enable-librubberband --enable-libsnappy --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtesseract --enable-libtheora --enable-libvidstab --enable-libvmaf --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libxvid --enable-lzma --enable-libfontconfig --enable-libfreetype --enable-frei0r --enable-libass --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libspeex --enable-libsoxr --enable-libzmq --enable-libzimg --disable-libjack --disable-indev=jack --enable-videotoolbox --enable-audiotoolbox --enable-neon
@@ -115,3 +183,4 @@ RuntimeError: Failed to load audio: ffmpeg version 7.1 Copyright (c) 2000-2024 t
 Error opening input file /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_3_yvzsys/audio.mp3.
 Error opening input files: No such file or directory
 
+[2024-12-22T19:53:00.fZ] [INFO] src.socket_handlers: WebSocket disconnected: u8itOQzwfuXEjH1GAAAB
