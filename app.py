@@ -1,3 +1,13 @@
+##############################################################################
+# We rely on gevent monkey-patching so that Flask-SocketIO can handle real-time
+# WebSocket connections under Gunicorn's gevent worker.
+#
+# Note: Because gevent patches low-level sockets, it can conflict with
+# `multiprocessing.Manager()` on macOS. If you need CPU-heavy tasks plus progress
+# updates, consider:
+#  - A file-based approach or external queue (like Redis) for progress, or
+#  - Running a separate transcription service using a sync/gthread worker.
+##############################################################################
 from gevent import monkey
 monkey.patch_all()
 
@@ -24,13 +34,17 @@ def setup_logging():
         datefmt='%Y-%m-%dT%H:%M:%S.%fZ'
     )
     file_formatter = logging.Formatter(
-        '[%(asctime)s] %(levelname)s [%(name)s.%(funcName)s:%(lineno)d] %(message)s',
+        '[%(asctime)s] %(levelname)s [%(name)s.%(funcName)s:%(lineno)d] [%(threadName)s] %(message)s',
         datefmt='%Y-%m-%dT%H:%M:%S.%fZ'
     )
 
     # Configure root logger
     root_logger = logging.getLogger()
-    root_logger.setLevel(logging.INFO)
+    root_logger.setLevel(logging.DEBUG)
+
+    # Remove any existing handlers
+    for handler in root_logger.handlers[:]:
+        root_logger.removeHandler(handler)
 
     # Console handler
     console_handler = logging.StreamHandler()
@@ -46,7 +60,7 @@ def setup_logging():
         backupCount=5
     )
     file_handler.setFormatter(file_formatter)
-    file_handler.setLevel(logging.INFO)
+    file_handler.setLevel(logging.DEBUG)
     root_logger.addHandler(file_handler)
 
     # File handler for error logs
@@ -60,27 +74,29 @@ def setup_logging():
     error_handler.setLevel(logging.ERROR)
     root_logger.addHandler(error_handler)
 
-    # Configure Flask logger
-    app.logger.handlers = []
-    for handler in root_logger.handlers:
-        app.logger.addHandler(handler)
-
-    # Configure Socket.IO logging
+    # Let child loggers inherit from root logger
+    app.logger.handlers = []  # Remove default Flask handlers
+    
+    # Configure Socket.IO and Engine.IO logging levels
     socketio_logger = logging.getLogger('socketio')
-    socketio_logger.setLevel(logging.INFO)
-    for handler in root_logger.handlers:
-        socketio_logger.addHandler(handler)
+    socketio_logger.setLevel(logging.DEBUG)
+    socketio_logger.propagate = True
 
-    # Configure Engine.IO logging
     engineio_logger = logging.getLogger('engineio')
-    engineio_logger.setLevel(logging.INFO)
-    for handler in root_logger.handlers:
-        engineio_logger.addHandler(handler)
+    engineio_logger.setLevel(logging.DEBUG)
+    engineio_logger.propagate = True
+
+    # Also enable websocket logging
+    logging.getLogger('websockets').setLevel(logging.DEBUG)
+    logging.getLogger('geventwebsocket').setLevel(logging.DEBUG)
 
 # Set up logging before anything else
 setup_logging()
 
-# Configure SocketIO with logging enabled
+##############################################################################
+# Because we are using gevent workers, we can now set `async_mode='gevent'`.
+# This ensures native WebSocket support rather than falling back to long-polling.
+##############################################################################
 socketio = SocketIO(
     app,
     async_mode='gevent',
@@ -88,8 +104,8 @@ socketio = SocketIO(
     ping_interval=25,
     cors_allowed_origins="*",
     max_http_buffer_size=50 * 1024 * 1024,  # 50MB buffer
-    logger=True,
-    engineio_logger=True,
+    logger=True,  # Let our custom logging handle this
+    engineio_logger=True,  # Let our custom logging handle this
     path='/socket.io/',
     message_queue=None
 )
@@ -103,10 +119,11 @@ register_routes(app)
 register_api_routes(app, socketio)
 
 if __name__ == '__main__':
-    # Increase worker timeout
+    # If you run "python app.py" directly, it will run with gevent locally,
+    # but in production you typically do: `gunicorn -c gunicorn.conf.py app:app`
     socketio.run(
         app,
         host='0.0.0.0',
         port=int(os.getenv('FLASK_RUN_PORT', 5000)),
-        worker_timeout=300  # 5 minutes timeout
+        worker_timeout=300  # 5 minutes
     )

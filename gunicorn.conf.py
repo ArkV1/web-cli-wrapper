@@ -1,16 +1,24 @@
 import multiprocessing
 
-# Server socket settings
 bind = "0.0.0.0:3003"
 backlog = 2048
 
-# Worker processes
-workers = 2  # Use 2 workers to handle WebSocket connections
+##############################################################################
+# We are using gevent to support real-time WebSocket connections with Flask-SocketIO.
+# This enables asynchronous concurrency needed to keep long-lived connections open.
+#
+# Note:
+#  - gevent monkey-patches Python's I/O, which commonly breaks `multiprocessing.Manager()`
+#    on macOS (the dreaded "[Errno 35]" error).
+#  - If you want CPU-heavy tasks with a Manager-based queue, you must avoid gevent
+#    or use a file/Redis-based solution for progress updates.
+##############################################################################
+workers = 2
 worker_class = "gevent"
 worker_connections = 1000
 
 # Timeout settings
-timeout = 3600  # 1 hour timeout
+timeout = 3600  # 1 hour
 graceful_timeout = 120
 keepalive = 5
 
@@ -23,7 +31,7 @@ accesslog = "-"
 errorlog = "-"
 loglevel = "info"
 
-# Development settings
+# Development auto-reload
 reload = True
 reload_engine = "auto"
 
@@ -42,7 +50,3 @@ websocket_ping_timeout = 60
 # SSL (uncomment if using HTTPS)
 # keyfile = "path/to/keyfile"
 # certfile = "path/to/certfile"
-
-# SSL (uncomment if using HTTPS)
-# keyfile = "path/to/keyfile"
-# certfile = "path/to/certfile" 

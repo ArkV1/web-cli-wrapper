@@ -20,4 +20,4 @@ COPY . .
 EXPOSE 3003
 
 # Command to run the application
-CMD ["gunicorn", "--worker-class", "gevent", "--workers", "2", "--bind", "0.0.0.0:3003", "--reload", "app:app"]
+CMD ["gunicorn", "--worker-class", "gevent", "--workers", "1", "--bind", "0.0.0.0:3003", "--reload", "app:app"]

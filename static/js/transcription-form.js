@@ -73,9 +73,12 @@ document.addEventListener('DOMContentLoaded', function() {
     function addDebugLog(message, data = null) {
         const timestamp = new Date().toISOString();
         let logMessage = `[${timestamp}] ${message}`;
-        if (data) {
+        
+        // Only log the data once, and only if it's not already part of the message
+        if (data && !message.includes(JSON.stringify(data))) {
             logMessage += '\n' + JSON.stringify(data, null, 2);
         }
+        
         debugContent.textContent = logMessage + '\n\n' + debugContent.textContent;
     }
 
@@ -89,12 +92,6 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Hide any previous error messages
-        const errorContainer = document.getElementById('error-container');
-        if (errorContainer) {
-            errorContainer.classList.add('hidden');
-        }
-
         // Show progress container if hidden
         const progressBarContainer = document.getElementById('progress-bar-container');
         if (progressBarContainer) {
@@ -105,10 +102,27 @@ document.addEventListener('DOMContentLoaded', function() {
         const progressText = document.getElementById('progress');
         const downloadSpeed = document.getElementById('download-speed');
         const eta = document.getElementById('eta');
+        const errorContainer = document.getElementById('error-container');
 
-        if (data.error) {
-            handleTranscriptionError(data.error);
-            return;
+        // Handle completion first
+        if (data.complete) {
+            if (data.success) {
+                // Hide error container on success
+                if (errorContainer) {
+                    errorContainer.classList.add('hidden');
+                }
+                handleTranscriptionComplete(data);
+                processedTaskIds.add(data.task_id);
+                return;
+            } else if (data.error) {
+                handleTranscriptionError(data.error || 'Transcription failed');
+                return;
+            }
+        }
+
+        // For non-complete states, hide error container and show progress
+        if (errorContainer) {
+            errorContainer.classList.add('hidden');
         }
 
         // Update progress bar and text
@@ -127,16 +141,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (eta && data.eta) {
             eta.textContent = formatETA(data.eta);
             eta.classList.remove('hidden');
-        }
-
-        // Handle completion
-        if (data.complete) {
-            if (data.success) {
-                handleTranscriptionComplete(data);
-                processedTaskIds.add(data.task_id);
-            } else {
-                handleTranscriptionError(data.error || 'Transcription failed');
-            }
         }
     }
 
@@ -174,7 +178,13 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!socketService) {
             socketService = new WebSocketService({
                 debug: true,
-                onDebug: addDebugLog,
+                onDebug: (message, data) => {
+                    // Skip our own connection message since the service will log it
+                    if (message === 'Connected to WebSocket server') {
+                        return;
+                    }
+                    addDebugLog(message, data);
+                },
                 reconnectionAttempts: 10,
                 reconnectionDelay: 3000
             });
@@ -182,10 +192,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
         try {
             await socketService.connect();
-            addDebugLog('WebSocket connected successfully');
             
             // Register progress handler
-            socketService.on('transcription_progress', handleTranscriptionProgress);
+            socketService.on('transcription_progress', (data) => {
+                addDebugLog('Received transcription progress:', data);
+                handleTranscriptionProgress(data);
+            });
             
             // If we have a current task, request its status
             if (currentTaskId) {
@@ -313,6 +325,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const modelSelect = document.getElementById('whisper-model');
             const modelName = modelSelect ? modelSelect.value : 'large';
             
+            // Initialize WebSocket connection first
+            await initializeWebSocket();
+            
+            // Make API request
             const response = await fetch('/api/transcribe', {
                 method: 'POST',
                 headers: {
@@ -322,7 +338,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     url: url,
                     method: method,
                     use_whisper: method === 'Whisper' || method === 'Both',
-                    model_name: modelName
+                    model_name: modelName,
+                    sid: socketService.socket.id
                 })
             });
 
@@ -331,10 +348,9 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!data.success) {
                 throw new Error(data.error || 'Failed to start transcription');
             }
-
-            // Initialize WebSocket connection
+            
+            // Store task ID for progress tracking
             currentTaskId = data.task_id;
-            await initializeWebSocket();
             
         } catch (error) {
             handleTranscriptionError(error.message);
@@ -401,8 +417,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // Clear current task ID since we're done
+        // Clear current task ID and disconnect socket since we're done
         currentTaskId = null;
+        if (socketService) {
+            socketService.disconnect();
+            socketService = null;
+        }
     }
 
     function handleTranscriptionError(error) {
@@ -437,82 +457,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // Clear current task ID since we're done
+        // Clear current task ID and disconnect socket since we're done
         currentTaskId = null;
+        if (socketService) {
+            socketService.disconnect();
+            socketService = null;
+        }
     }
-
-    // Initialize WebSocket connection
-    const socket = new WebSocketService({
-        debug: true,
-        onDebug: (message, ...args) => {
-            const debugContent = document.getElementById('debug-content');
-            if (debugContent) {
-                const timestamp = new Date().toISOString();
-                const formattedMessage = typeof message === 'object' ? JSON.stringify(message, null, 2) : message;
-                const formattedArgs = args.map(arg => typeof arg === 'object' ? JSON.stringify(arg, null, 2) : arg).join(' ');
-                debugContent.textContent += `[${timestamp}] ${formattedMessage} ${formattedArgs}\n`;
-                debugContent.scrollTop = debugContent.scrollHeight;
-            }
-        }
-    });
-
-    // Set up event listeners
-    socket.on('transcription_progress', handleTranscriptionProgress);
-
-    // Handle form submission
-    document.getElementById('transcription-form')?.addEventListener('submit', async function(e) {
-        e.preventDefault();
-
-        // Clear previous results and errors
-        document.getElementById('youtube-result-box')?.classList.add('hidden');
-        document.getElementById('whisper-result-box')?.classList.add('hidden');
-        document.getElementById('error-container')?.classList.add('hidden');
-        document.getElementById('compare-button')?.classList.add('hidden');
-
-        // Show progress container
-        const progressContainer = document.getElementById('progress-container');
-        if (progressContainer) {
-            progressContainer.classList.remove('hidden');
-        }
-
-        // Disable form while processing
-        this.classList.add('processing');
-        const submitButton = this.querySelector('button[type="submit"]');
-        if (submitButton) {
-            submitButton.disabled = true;
-        }
-
-        try {
-            // Get form data
-            const url = document.getElementById('video-url').value;
-            const method = Array.from(document.getElementsByName('transcription-method'))
-                .find(radio => radio.checked)?.value || 'YouTube';
-            const modelName = document.getElementById('whisper-model')?.value || 'base';
-
-            // Ensure socket is connected
-            await socket.connect();
-
-            // Make API request
-            const response = await fetch('/api/transcribe', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    url,
-                    method,
-                    model_name: modelName,
-                    sid: socket.socket.id
-                })
-            });
-
-            const data = await response.json();
-            if (!data.success) {
-                throw new Error(data.error || 'Failed to start transcription');
-            }
-
-        } catch (error) {
-            handleTranscriptionError(error.message);
-        }
-    });
 });

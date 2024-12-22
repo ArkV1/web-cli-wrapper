@@ -18,4 +18,4 @@ services:
           memory: 8G
         reservations:
           memory: 4G
-    command: gunicorn --worker-class gevent --workers 2 --bind 0.0.0.0:3003 --timeout 300 --reload app:app
+    command: gunicorn --worker-class gevent --workers 1 --bind 0.0.0.0:3003 --timeout 300 --reload app:app

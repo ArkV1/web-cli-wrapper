@@ -1,0 +1,51 @@
+Detecting language using up to the first 30 seconds. Use `--language` to specify the language
+Detected language: English
+[00:00.000 --> 00:13.920]  Hi, it's Puzzle here, and today I'm sharing my experience with the new patch for the game.
+[00:13.920 --> 00:17.920]  This is the so-called big fix that the developers have been talking about for quite a while.
+[00:17.920 --> 00:21.840]  As soon as it came out, I jumped into the game, played for a bit, and now I've put together
+[00:21.840 --> 00:26.000]  this video to show you my gameplay, and figure out whether the update actually improved
+[00:26.000 --> 00:27.000]  the game.
+[00:27.000 --> 00:30.600]  For those who don't know, I live 2.0 is supposed to be a system that brings the game
+[00:30.600 --> 00:31.800]  world to life.
+[00:31.800 --> 00:33.680]  In theory, everything works like this.
+[00:33.680 --> 00:38.720]  Factions live their own lives, radii-chother, fight, mutants, and enemies behave independently,
+[00:38.720 --> 00:42.000]  and situations unfold without your involvement sounds great, right?
+[00:42.000 --> 00:44.880]  But in reality, well, let's just say it's a little different.
+[00:44.880 --> 00:48.800]  I loaded one of my saves and started walking to see how everything works now.
+[00:48.800 --> 00:51.800]  The first thing I noticed was how linear the game feels.
+[00:51.800 --> 00:54.200]  It's striking how empty and boring it can be here.
+[00:54.200 --> 00:57.960]  I spent 10 minutes just walking to find someone or something and eventually stumbled upon
+[00:57.960 --> 00:59.200]  a group of NPCs.
+[00:59.200 --> 01:03.600]  Now here's the thing, one of the patch updates promised that NPCs would spawn more realistically,
+[01:03.600 --> 01:14.160]  not just appear behind your back, while this group spawned right next to me.
+[01:14.160 --> 01:18.200]  And there they were, running in perfect sync, moving like robots, it looked incredibly
+[01:18.200 --> 01:19.200]  strange.
+[01:19.200 --> 01:21.800]  What's your plan for about 5-6 minutes and do you know where?
+[01:21.800 --> 01:22.800]  To kill a single rat.
+[01:22.800 --> 01:35.080]  Yep, an entire group of NPCs ran across half the map to take down a rat.
+[01:35.080 --> 01:39.760]  I decided to head to what's supposed to be a lively area, zalashia.
+[01:39.760 --> 01:44.680]  This is supposedly a hotspot for NPCs, monsters and activity, but what did I find?
+[01:44.680 --> 01:45.680]  Nothing.
+[01:45.680 --> 01:49.680]  15 minutes of running across empty fields were absolutely nothing happens.
+[01:49.680 --> 01:54.040]  No monsters, no enemies, no quests, it immediately reminded me of Fallout where even in
+[01:54.040 --> 01:57.360]  the empty-slokations something always happens.
+[01:57.360 --> 01:59.600]  Random encounters, ambushes or events.
+[01:59.600 --> 02:01.440]  Here it's just a complete void.
+[02:01.440 --> 02:05.840]  After a long journey I stumbled upon an NPC camp, my first impression was, oh cool, at
+[02:05.840 --> 02:08.480]  least they're doing something.
+[02:08.480 --> 02:19.760]  One character was tossing a bolt into the air and two others entered a house.
+[02:19.760 --> 02:41.840]  But as soon as enemies attacked, my allies just stood there.
+[02:41.840 --> 02:42.840]  Not reacting at all.
+[02:42.840 --> 02:45.640]  I decided to hide behind one of them to see what would happen.
+[02:45.640 --> 02:49.360]  When he got hit, he simply stood up and walked in a random direction as if nothing had
+[02:49.360 --> 02:57.080]  happened.
+[02:57.080 --> 03:11.920]  That was weird enough, but then it got worse.
+[03:11.920 --> 03:37.440]  I encountered another group of enemies, and my allies froze again, completely ignoring
+[03:37.520 --> 03:55.320]  the threat.
+[03:55.320 --> 04:05.240]  Kevin said that my enemies were hit by handsh Denny as killing others.
+[04:05.240 --> 04:10.680]  more. I thought I'd see a vibrant world where NPCs interact, factions fight, and the world reacts
+[04:10.680 --> 04:15.080]  to my actions. Instead, it's just a collection of bugs and empty locations, and I'm curious what
+[04:15.080 --> 04:19.320]  about you? Have any of you played after the patch? What's your experience? Maybe I'm just unlucky,
+[04:19.320 --> 04:22.840]  and things work differently for you. Let me know in the comments, and let's discuss it.
+[04:22.840 --> 04:26.920]  Thanks for watching, supporting, and sharing your thoughts. Don't forget to check out the channel,
+[04:26.920 --> 04:30.440]  there's much more to come. That's all for today. Take care, and see you around.

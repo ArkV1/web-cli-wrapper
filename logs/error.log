@@ -1,11 +1,39 @@
-[2024-12-22T00:13:37.fZ] ERROR [src.transcription_manager.process_transcription:222] Error in transcription process: A process in the process pool was terminated abruptly while the future was running or pending.
+[2024-12-22T16:32:59.fZ] ERROR [src.transcription_manager.process_transcription:396] [ThreadPoolExecutor-0_0] Error in transcription process: [Errno 35] Resource temporarily unavailable
 Traceback (most recent call last):
-  File "/Users/ark/Development/Tools/web-toolkit/src/transcription_manager.py", line 207, in process_transcription
-    result = future.result()
-             ^^^^^^^^^^^^^^^
-  File "/opt/homebrew/Cellar/python@3.12/3.12.7_1/Frameworks/Python.framework/Versions/3.12/lib/python3.12/concurrent/futures/_base.py", line 449, in result
-    return self.__get_result()
-           ^^^^^^^^^^^^^^^^^^^
-  File "/opt/homebrew/Cellar/python@3.12/3.12.7_1/Frameworks/Python.framework/Versions/3.12/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
-    raise self._exception
-concurrent.futures.process.BrokenProcessPool: A process in the process pool was terminated abruptly while the future was running or pending.
+  File "/Users/ark/Development/Tools/web-toolkit/src/transcription_manager.py", line 338, in process_transcription
+    progress_queue = _global_manager.Queue()
+                     ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.7_1/Frameworks/Python.framework/Versions/3.12/lib/python3.12/multiprocessing/managers.py", line 726, in temp
+    token, exp = self._create(typeid, *args, **kwds)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.7_1/Frameworks/Python.framework/Versions/3.12/lib/python3.12/multiprocessing/managers.py", line 606, in _create
+    conn = self._Client(self._address, authkey=self._authkey)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.7_1/Frameworks/Python.framework/Versions/3.12/lib/python3.12/multiprocessing/connection.py", line 525, in Client
+    answer_challenge(c, authkey)
+  File "/opt/homebrew/Cellar/python@3.12/3.12.7_1/Frameworks/Python.framework/Versions/3.12/lib/python3.12/multiprocessing/connection.py", line 953, in answer_challenge
+    message = connection.recv_bytes(256)         # reject large message
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.7_1/Frameworks/Python.framework/Versions/3.12/lib/python3.12/multiprocessing/connection.py", line 216, in recv_bytes
+    buf = self._recv_bytes(maxlength)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.7_1/Frameworks/Python.framework/Versions/3.12/lib/python3.12/multiprocessing/connection.py", line 430, in _recv_bytes
+    buf = self._recv(4)
+          ^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.7_1/Frameworks/Python.framework/Versions/3.12/lib/python3.12/multiprocessing/connection.py", line 395, in _recv
+    chunk = read(handle, remaining)
+            ^^^^^^^^^^^^^^^^^^^^^^^
+BlockingIOError: [Errno 35] Resource temporarily unavailable
+[2024-12-22T16:43:21.fZ] ERROR [src.api_routes.start_transcription:73] [Dummy-2] Error starting transcription: 'TranscriptionManager' object has no attribute '_thread_pool'
+Traceback (most recent call last):
+  File "/Users/ark/Development/Tools/web-toolkit/src/api_routes.py", line 57, in start_transcription
+    manager._thread_pool.submit(
+    ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TranscriptionManager' object has no attribute '_thread_pool'
+[2024-12-22T16:44:42.fZ] ERROR [src.api_routes.start_transcription:73] [Dummy-3] Error starting transcription: 'TranscriptionManager' object has no attribute '_thread_pool'
+Traceback (most recent call last):
+  File "/Users/ark/Development/Tools/web-toolkit/src/api_routes.py", line 57, in start_transcription
+    manager._thread_pool.submit(
+    ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TranscriptionManager' object has no attribute '_thread_pool'
+[2024-12-22T16:47:41.fZ] ERROR [src.socket_handlers.error_handler:56] [Dummy-8] WebSocket error: 'TranscriptionManager' object has no attribute 'get_progress'

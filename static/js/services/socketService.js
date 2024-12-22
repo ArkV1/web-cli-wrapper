@@ -16,6 +16,7 @@ class WebSocketService {
         this.lastEventTime = Date.now();
         this.eventListeners = new Map();
         this.lastProgressUpdate = null;
+        this.cleanDisconnect = false;  // Flag to indicate a clean disconnect
     }
 
     async connect(url = window.location.origin) {
@@ -30,6 +31,7 @@ class WebSocketService {
         }
 
         this.isConnecting = true;
+        this.cleanDisconnect = false;  // Reset the clean disconnect flag
 
         return new Promise((resolve, reject) => {
             try {
@@ -105,8 +107,11 @@ class WebSocketService {
 
     setupEventListeners() {
         this.socket.on('disconnect', () => {
-            this.log('Disconnected from WebSocket server');
-            this.handleReconnect();
+            // Only log if it's not a clean disconnect
+            if (!this.cleanDisconnect) {
+                this.log('Disconnected from WebSocket server');
+                this.handleReconnect();
+            }
         });
 
         this.socket.on('error', (error) => {
@@ -137,16 +142,16 @@ class WebSocketService {
         this.socket.on('transcription_progress', (data) => {
             this.lastEventTime = Date.now();
             this.lastProgressUpdate = data;
-            this.log('Received transcription progress:', data);
 
             // Update current task ID if not set
             if (data.task_id && !this.currentTaskId) {
                 this.currentTaskId = data.task_id;
             }
 
-            // Clear task ID if transcription is complete
+            // Clear task ID and set clean disconnect if transcription is complete
             if (data.complete) {
                 this.currentTaskId = null;
+                this.cleanDisconnect = true;
             }
         });
     }
@@ -160,7 +165,6 @@ class WebSocketService {
 
         this.socket?.on(event, (...args) => {
             this.lastEventTime = Date.now();
-            this.log(`Received event: ${event}`, ...args);
             callback(...args);
         });
     }
@@ -199,8 +203,9 @@ class WebSocketService {
             }
             this.currentTaskId = null;
             this.reconnectAttempts = 0;
+            this.cleanDisconnect = true;  // Set the clean disconnect flag
             this.socket.disconnect();
-            this.log('Disconnected from server');
+            this.log('Disconnected from server');  // This will be the only disconnect message
         }
     }
 
