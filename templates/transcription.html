@@ -26,6 +26,15 @@
             <p id="progress" data-ui-state="progressBarVisible" class="text-gray-700 hidden">Waiting for input...</p>
             <p id="download-speed" data-ui-state="progressBarVisible" class="text-gray-700 hidden"></p>
             <p id="eta" data-ui-state="progressBarVisible" class="text-gray-700 hidden"></p>
+            <div id="language-detection" class="hidden mt-2 text-sm">
+                <span class="inline-flex items-center">
+                    <svg class="w-4 h-4 mr-1 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+                    </svg>
+                    <span class="font-medium text-gray-700">Detected Language:</span>
+                    <span id="detected-language" class="ml-1 text-indigo-600 font-semibold">Detecting...</span>
+                </span>
+            </div>
         </div>
 
         <div class="mt-4 mb-4 w-full">
@@ -36,14 +45,24 @@
                     </svg>
                     Debug Logs
                 </button>
-                <button id="copy-debug" class="px-2 py-1 text-sm text-gray-600 hover:text-gray-800 focus:outline-none hidden">
-                    <span class="flex items-center">
-                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/>
-                        </svg>
-                        Copy
-                    </span>
-                </button>
+                <div class="flex space-x-2">
+                    <button id="submit-debug" class="px-2 py-1 text-sm text-gray-600 hover:text-gray-800 focus:outline-none hidden">
+                        <span class="flex items-center">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3 3m0 0l-3-3m3 3V8" />
+                            </svg>
+                            Submit Logs
+                        </span>
+                    </button>
+                    <button id="copy-debug" class="px-2 py-1 text-sm text-gray-600 hover:text-gray-800 focus:outline-none hidden">
+                        <span class="flex items-center">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/>
+                            </svg>
+                            Copy
+                        </span>
+                    </button>
+                </div>
             </div>
             <div id="debug-logs" class="hidden mt-2 mb-4 p-4 bg-gray-50 rounded-lg border border-gray-200 max-h-60 overflow-y-auto">
                 <pre id="debug-content" class="text-xs font-mono text-gray-700 whitespace-pre-wrap"></pre>
@@ -135,7 +154,7 @@
                                 <button class="copy-button px-2 py-1 bg-blue-500 text-white rounded-md text-sm">Copy</button>
                             </div>
                         </div>
-                        <pre id="whisper-result" class="whitespace-pre-wrap w-full"></pre>
+                        <pre id="whisper-result" class="whitespace-pre-wrap w-full max-h-[60vh] overflow-y-auto font-mono text-sm"></pre>
                     </div>
                 </div>
 
@@ -180,5 +199,6 @@
 {% block scripts %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
 <script src="{{ url_for('static', filename='js/services/socketService.js') }}"></script>
+<script src="{{ url_for('static', filename='js/client-logger.js') }}"></script>
 <script src="{{ url_for('static', filename='js/transcription-form.js') }}"></script>
 {% endblock %}

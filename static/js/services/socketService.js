@@ -2,8 +2,7 @@ class WebSocketService {
     constructor(options = {}) {
         this.socket = null;
         this.options = {
-            debug: options.debug || false,
-            timeout: options.timeout || 60000,
+            debug: true,  // Force debug mode on
             reconnectionAttempts: options.reconnectionAttempts || 10,
             reconnectionDelay: options.reconnectionDelay || 1000,
             maxReconnectionDelay: 30000  // Maximum delay between reconnection attempts
@@ -18,67 +17,121 @@ class WebSocketService {
         this.lastProgressUpdate = null;
         this.cleanDisconnect = false;  // Flag to indicate a clean disconnect
         this.isCompleting = false;  // Flag to indicate we're in the completion process
-        this.heartbeatInterval = null;  // Store interval reference for cleanup
     }
 
-    async connect(url = window.location.origin) {
-        // Prevent multiple simultaneous connection attempts
-        if (this.isConnecting) {
-            this.log('Connection attempt already in progress');
-            return;
-        }
+    setupEventHandlers() {
+        if (!this.socket) return;
 
-        if (this.socket?.connected) {
-            return Promise.resolve(this.socket);
-        }
-
-        this.isConnecting = true;
-        this.cleanDisconnect = false;  // Reset the clean disconnect flag
-
-        return new Promise((resolve, reject) => {
-            try {
-                // Clear any existing socket
-                if (this.socket) {
-                    this.socket.removeAllListeners();
-                    this.socket.disconnect();
-                }
-
-                this.socket = io(url, {
-                    transports: ['websocket'],
-                    timeout: this.options.timeout,
-                    reconnection: false,  // We'll handle reconnection ourselves
-                    forceNew: true  // Force a new connection
-                });
-
-                this.socket.on('connect', () => {
-                    this.log('Connected to WebSocket server');
-                    this.reconnectAttempts = 0;
-                    this.isConnecting = false;
-                    this.lastEventTime = Date.now();
-                    
-                    // Request latest status for current task if any
-                    if (this.currentTaskId) {
-                        this.emit('check_progress', { task_id: this.currentTaskId });
-                    }
-                    
-                    resolve(this.socket);
-                });
-
-                this.socket.on('connect_error', (error) => {
-                    this.logError('Connection error:', error);
-                    this.isConnecting = false;
-                    if (!this.socket.connected) {
-                        this.handleReconnect();
-                        reject(error);
-                    }
-                });
-
-                this.setupEventListeners();
-            } catch (error) {
-                this.isConnecting = false;
-                reject(error);
+        this.socket.on('disconnect', () => {
+            if (!this.cleanDisconnect) {
+                this.log('Disconnected from WebSocket server');
+                this.handleReconnect();
             }
         });
+
+        this.socket.on('error', (error) => {
+            this.logError('Socket error:', error);
+            this.handleReconnect();
+        });
+
+        this.socket.on('join_request', (data) => {
+            if (data && data.task_id && (!this.currentTaskId || this.currentTaskId !== data.task_id)) {
+                this.log('Received join request for room:', data.task_id);
+                this.socket.emit('join', { task_id: data.task_id });
+            }
+        });
+
+        this.socket.on('joined', (data) => {
+            this.log('Successfully joined room:', data);
+        });
+
+        this.socket.on('ping', () => {
+            this.log('Received ping');
+            this.lastEventTime = Date.now();
+        });
+
+        this.socket.on('pong', () => {
+            this.log('Received pong');
+            this.lastEventTime = Date.now();
+        });
+
+        this.socket.on('progress_update', (data) => {
+            this.log('Received progress update:', data);
+            this.lastEventTime = Date.now();
+            this.lastProgressUpdate = data;
+
+            if (data.task_id && !this.currentTaskId) {
+                this.currentTaskId = data.task_id;
+            }
+
+            if (data.segments && data.segments.length > 0) {
+                this.log(`Received ${data.segments.length} new transcript segments`);
+            }
+
+            if (data.complete) {
+                this.isCompleting = true;
+            }
+
+            const listeners = this.eventListeners.get('progress_update') || new Set();
+            this.log(`Notifying ${listeners.size} progress_update listeners`);
+            for (const listener of listeners) {
+                listener(data);
+            }
+
+            if (data.complete) {
+                setTimeout(() => {
+                    this.currentTaskId = null;
+                    this.cleanDisconnect = true;
+                    this.isCompleting = false;
+                    this.disconnect();
+                }, 2000);
+            }
+        });
+    }
+
+    connect() {
+        if (this.connectPromise) {
+            return this.connectPromise;
+        }
+
+        this.connectPromise = new Promise((resolve, reject) => {
+            if (this.socket?.connected) {
+                resolve(this.socket);
+                return;
+            }
+
+            if (!this.socket) {
+                this.socket = io();
+                this.setupEventHandlers();
+            }
+
+            const timeout = setTimeout(() => {
+                reject(new Error('Connection timeout'));
+                this.connectPromise = null;
+            }, 5000);
+
+            this.socket.once('connect', () => {
+                clearTimeout(timeout);
+                this.log('Connected to server');
+                resolve(this.socket);
+                this.connectPromise = null;
+
+                // Rejoin room if we had a task ID
+                if (this.currentTaskId) {
+                    this.socket.emit('join', { task_id: this.currentTaskId });
+                    this.log(`Rejoining room for task: ${this.currentTaskId}`);
+                }
+            });
+
+            this.socket.once('connect_error', (error) => {
+                clearTimeout(timeout);
+                this.log('Connection error:', error);
+                reject(error);
+                this.connectPromise = null;
+            });
+        });
+
+        return this.connectPromise;
     }
 
     handleReconnect() {
@@ -107,85 +160,30 @@ class WebSocketService {
         }, delay);
     }
 
-    setupEventListeners() {
-        this.socket.on('disconnect', () => {
-            // Only log if it's not a clean disconnect
-            if (!this.cleanDisconnect) {
-                this.log('Disconnected from WebSocket server');
-                this.handleReconnect();
-            }
-        });
-
-        this.socket.on('error', (error) => {
-            this.logError('Socket error:', error);
-            this.handleReconnect();
-        });
-
-        // Monitor for activity
-        this.socket.on('ping', () => {
-            this.lastEventTime = Date.now();
-        });
-
-        this.socket.on('pong', () => {
-            this.lastEventTime = Date.now();
-        });
-
-        // Set up a heartbeat to detect stale connections
-        this.heartbeatInterval = setInterval(() => {
-            const now = Date.now();
-            // Only check for stale connections if we're not in the process of completing
-            if (!this.isCompleting && now - this.lastEventTime > this.options.timeout) {
-                this.log('Connection appears stale, attempting reconnect');
-                this.socket.disconnect();
-                this.handleReconnect();
-            }
-        }, 5000);  // Check every 5 seconds
-
-        // Handle transcription progress updates
-        this.socket.on('transcription_progress', (data) => {
-            this.lastEventTime = Date.now();
-            this.lastProgressUpdate = data;
-
-            // Update current task ID if not set
-            if (data.task_id && !this.currentTaskId) {
-                this.currentTaskId = data.task_id;
-            }
-
-            // If this is a completion message, set the flag
-            if (data.complete) {
-                this.isCompleting = true;
-            }
-
-            // Notify all registered listeners first
-            const listeners = this.eventListeners.get('transcription_progress') || new Set();
-            for (const listener of listeners) {
-                listener(data);
-            }
-
-            // Only after listeners have processed the data, handle completion
-            if (data.complete) {
-                // Small delay to ensure UI updates are complete
-                setTimeout(() => {
-                    this.currentTaskId = null;
-                    this.cleanDisconnect = true;
-                    this.isCompleting = false;
-                    this.disconnect();
-                }, 2000);  // Increased delay to 2 seconds
-            }
-        });
-    }
-
     on(event, callback) {
         // Store the callback in our map
         if (!this.eventListeners.has(event)) {
             this.eventListeners.set(event, new Set());
         }
-        this.eventListeners.get(event).add(callback);
+        
+        // Check if this callback is already registered
+        const listeners = this.eventListeners.get(event);
+        if (listeners.has(callback)) {
+            this.log(`Callback already registered for event: ${event}`);
+            return;
+        }
+        
+        listeners.add(callback);
+        this.log(`Registered new listener for event: ${event}, total listeners: ${this.eventListeners.get(event).size}`);
 
-        this.socket?.on(event, (...args) => {
-            this.lastEventTime = Date.now();
-            callback(...args);
-        });
+        // Only add the socket listener if we have a socket
+        if (this.socket) {
+            this.socket.on(event, (...args) => {
+                this.log(`Received ${event} event:`, ...args);
+                this.lastEventTime = Date.now();
+                callback(...args);
+            });
+        }
     }
 
     off(event, callback) {
@@ -201,15 +199,18 @@ class WebSocketService {
             return this.connect().then(() => this.emit(event, data, callback));
         }
         
-        // Store task ID if this is a transcription request
-        if (data && data.task_id) {
+        // Store task ID if this is a transcription request and it's different from current
+        if (data && data.task_id && (!this.currentTaskId || this.currentTaskId !== data.task_id)) {
             this.currentTaskId = data.task_id;
+            // Join the room for this task
+            this.socket.emit('join', { task_id: data.task_id });
+            this.log(`Joining room for task: ${data.task_id}`);
         }
         
         this.log(`Emitting event: ${event}`, data);
         this.lastEventTime = Date.now();
         this.socket.emit(event, data, (...args) => {
-            this.log(`Response for ${event}:`, ...args);
+            this.log(`Response received for ${event}:`, ...args);
             if (callback) callback(...args);
         });
     }
@@ -220,10 +221,15 @@ class WebSocketService {
                 clearTimeout(this.reconnectTimeout);
                 this.reconnectTimeout = null;
             }
-            if (this.heartbeatInterval) {
-                clearInterval(this.heartbeatInterval);
-                this.heartbeatInterval = null;
-            }
+            
+            // Remove all event listeners
+            this.eventListeners.forEach((listeners, event) => {
+                listeners.forEach(callback => {
+                    this.socket.off(event, callback);
+                });
+            });
+            this.eventListeners.clear();
+            
             this.currentTaskId = null;
             this.reconnectAttempts = 0;
             this.cleanDisconnect = true;  // Set the clean disconnect flag

@@ -1,261 +1,119 @@
 ################################################################################
-2024-12-22 20:09:21 - APPLICATION START
+2024-12-23 01:06:37 - APPLICATION START
 ################################################################################
-[2024-12-22T20:09:41.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+[2024-12-23T01:06:47.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
          player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:09:41.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
-         n = QDFW0uE6xUm7oCPit ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:09:41.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+[2024-12-23T01:06:47.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = UpxXeU70M7qoi4ClZ ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-23T01:06:47.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
          player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:09:41.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
-         n = KIYqycsLmrdUJT9vM ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:09:53.fZ] [ERROR] src.transcription_manager: Child process error: Failed to load audio: ffmpeg version 7.1 Copyright (c) 2000-2024 the FFmpeg developers
-  built with Apple clang version 16.0.0 (clang-1600.0.26.4)
-  configuration: --prefix=/opt/homebrew/Cellar/ffmpeg/7.1_1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags='-Wl,-ld_classic' --enable-ffplay --enable-gnutls --enable-gpl --enable-libaom --enable-libaribb24 --enable-libbluray --enable-libdav1d --enable-libharfbuzz --enable-libjxl --enable-libmp3lame --enable-libopus --enable-librav1e --enable-librist --enable-librubberband --enable-libsnappy --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtesseract --enable-libtheora --enable-libvidstab --enable-libvmaf --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libxvid --enable-lzma --enable-libfontconfig --enable-libfreetype --enable-frei0r --enable-libass --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libspeex --enable-libsoxr --enable-libzmq --enable-libzimg --disable-libjack --disable-indev=jack --enable-videotoolbox --enable-audiotoolbox --enable-neon
-  libavutil      59. 39.100 / 59. 39.100
-  libavcodec     61. 19.100 / 61. 19.100
-  libavformat    61.  7.100 / 61.  7.100
-  libavdevice    61.  3.100 / 61.  3.100
-  libavfilter    10.  4.100 / 10.  4.100
-  libswscale      8.  3.100 /  8.  3.100
-  libswresample   5.  3.100 /  5.  3.100
-  libpostproc    58.  3.100 / 58.  3.100
-[in#0 @ 0x14701e470] Error opening input: No such file or directory
-Error opening input file /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_98o3hgkj/audio.mp3.
-Error opening input files: No such file or directory
-
-[2024-12-22T20:09:53.fZ] [ERROR] src.transcription_manager: Transcription failed for task_id=ca8d2363-c50f-483d-8fc1-e93758d1c966: Failed to load audio: ffmpeg version 7.1 Copyright (c) 2000-2024 the FFmpeg developers
-  built with Apple clang version 16.0.0 (clang-1600.0.26.4)
-  configuration: --prefix=/opt/homebrew/Cellar/ffmpeg/7.1_1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags='-Wl,-ld_classic' --enable-ffplay --enable-gnutls --enable-gpl --enable-libaom --enable-libaribb24 --enable-libbluray --enable-libdav1d --enable-libharfbuzz --enable-libjxl --enable-libmp3lame --enable-libopus --enable-librav1e --enable-librist --enable-librubberband --enable-libsnappy --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtesseract --enable-libtheora --enable-libvidstab --enable-libvmaf --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libxvid --enable-lzma --enable-libfontconfig --enable-libfreetype --enable-frei0r --enable-libass --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libspeex --enable-libsoxr --enable-libzmq --enable-libzimg --disable-libjack --disable-indev=jack --enable-videotoolbox --enable-audiotoolbox --enable-neon
-  libavutil      59. 39.100 / 59. 39.100
-  libavcodec     61. 19.100 / 61. 19.100
-  libavformat    61.  7.100 / 61.  7.100
-  libavdevice    61.  3.100 / 61.  3.100
-  libavfilter    10.  4.100 / 10.  4.100
-  libswscale      8.  3.100 /  8.  3.100
-  libswresample   5.  3.100 /  5.  3.100
-  libpostproc    58.  3.100 / 58.  3.100
-[in#0 @ 0x14701e470] Error opening input: No such file or directory
-Error opening input file /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_98o3hgkj/audio.mp3.
-Error opening input files: No such file or directory
-
-[2024-12-22T20:09:53.fZ] [ERROR] src.transcription_manager: Error in process_transcription (task_id=ca8d2363-c50f-483d-8fc1-e93758d1c966, url=https://www.youtube.com/watch?v=WsFOcu-yHTY)
-Traceback (most recent call last):
-  File "/Users/ark/Development/Tools/web-toolkit/src/transcription_manager.py", line 387, in process_transcription
-    raise RuntimeError(result.get("error", "Transcription failed"))
-RuntimeError: Failed to load audio: ffmpeg version 7.1 Copyright (c) 2000-2024 the FFmpeg developers
-  built with Apple clang version 16.0.0 (clang-1600.0.26.4)
-  configuration: --prefix=/opt/homebrew/Cellar/ffmpeg/7.1_1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags='-Wl,-ld_classic' --enable-ffplay --enable-gnutls --enable-gpl --enable-libaom --enable-libaribb24 --enable-libbluray --enable-libdav1d --enable-libharfbuzz --enable-libjxl --enable-libmp3lame --enable-libopus --enable-librav1e --enable-librist --enable-librubberband --enable-libsnappy --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtesseract --enable-libtheora --enable-libvidstab --enable-libvmaf --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libxvid --enable-lzma --enable-libfontconfig --enable-libfreetype --enable-frei0r --enable-libass --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libspeex --enable-libsoxr --enable-libzmq --enable-libzimg --disable-libjack --disable-indev=jack --enable-videotoolbox --enable-audiotoolbox --enable-neon
-  libavutil      59. 39.100 / 59. 39.100
-  libavcodec     61. 19.100 / 61. 19.100
-  libavformat    61.  7.100 / 61.  7.100
-  libavdevice    61.  3.100 / 61.  3.100
-  libavfilter    10.  4.100 / 10.  4.100
-  libswscale      8.  3.100 /  8.  3.100
-  libswresample   5.  3.100 /  5.  3.100
-  libpostproc    58.  3.100 / 58.  3.100
-[in#0 @ 0x14701e470] Error opening input: No such file or directory
-Error opening input file /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_98o3hgkj/audio.mp3.
-Error opening input files: No such file or directory
-
+[2024-12-23T01:06:47.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = XkPKf2eiOyHV8HZRh ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
 ################################################################################
-2024-12-22 20:11:01 - APPLICATION START
+2024-12-23 01:08:47 - APPLICATION START
 ################################################################################
-[2024-12-22T20:11:06.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+[2024-12-23T01:08:52.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
          player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:11:06.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
-         n = APFsM7PfGvV_3EbYB ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:11:06.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+[2024-12-23T01:08:52.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = tQ3v2eIrxP9lurYpD ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-23T01:08:53.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
          player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:11:06.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
-         n = 6l4LRoGkX37isftao ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:11:08.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+[2024-12-23T01:08:53.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = 3lzJzq0G8fBWFdDhK ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+################################################################################
+2024-12-23 01:10:50 - APPLICATION START
+################################################################################
+[2024-12-23T01:10:54.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
          player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:11:08.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
-         n = FfYpFqdnxWrzDfcNc ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:11:08.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+[2024-12-23T01:10:54.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = IzbyEQCG5gepTH3ym ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-23T01:10:54.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
          player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:11:08.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
-         n = qOwFOdDeZFoILr4d_ ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:11:11.fZ] [ERROR] src.transcription_manager: Error downloading audio from https://www.youtube.com/watch?v=WsFOcu-yHTY: Download completed but file not found at /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_lgi2z7az/audio.mp3
-Traceback (most recent call last):
-  File "/Users/ark/Development/Tools/web-toolkit/src/transcription_manager.py", line 234, in download_audio
-    raise RuntimeError(f"Download completed but file not found at {output_path}")
-RuntimeError: Download completed but file not found at /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_lgi2z7az/audio.mp3
-[2024-12-22T20:11:11.fZ] [ERROR] src.transcription_manager: Error in process_transcription (task_id=a31e0e65-b93f-4e6c-a9c3-07c34f95eef7, url=https://www.youtube.com/watch?v=WsFOcu-yHTY)
-Traceback (most recent call last):
-  File "/Users/ark/Development/Tools/web-toolkit/src/transcription_manager.py", line 234, in download_audio
-    raise RuntimeError(f"Download completed but file not found at {output_path}")
-RuntimeError: Download completed but file not found at /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_lgi2z7az/audio.mp3
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/Users/ark/Development/Tools/web-toolkit/src/transcription_manager.py", line 318, in process_transcription
-    self.download_audio(url, audio_path, dl_cb)
-  File "/Users/ark/Development/Tools/web-toolkit/src/transcription_manager.py", line 241, in download_audio
-    raise RuntimeError(f"Failed to download audio: {str(e)}")
-RuntimeError: Failed to download audio: Download completed but file not found at /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_lgi2z7az/audio.mp3
+[2024-12-23T01:10:54.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = FtPHkHkc60saBMdf2 ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
 ################################################################################
-2024-12-22 20:12:50 - APPLICATION START
+2024-12-23 01:13:21 - APPLICATION START
 ################################################################################
-[2024-12-22T20:12:55.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+[2024-12-23T01:13:27.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
          player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:12:55.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
-         n = AjidgC5kMExzmH1V9 ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:12:56.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+[2024-12-23T01:13:27.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = H91yO10v3BtgDwbcc ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-23T01:13:28.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
          player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:12:56.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
-         n = NnZB64rFjWcTRKT4M ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:12:57.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+[2024-12-23T01:13:28.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = -OOOFGIOCz9JCWw5n ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-23T01:16:10.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
          player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:12:57.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
-         n = MY9UPxc4DQEpqL3NV ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:12:57.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+[2024-12-23T01:16:10.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = nh3k8Blv0NlLyuqnt ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-23T01:16:10.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
          player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:12:57.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
-         n = Lqbf6AJOzXwTi6rRw ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:13:00.fZ] [ERROR] src.transcription_manager: Error downloading audio from https://www.youtube.com/watch?v=WsFOcu-yHTY: Download completed but file not found at /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_fjesf17f/audio.mp3
-Traceback (most recent call last):
-  File "/Users/ark/Development/Tools/web-toolkit/src/transcription_manager.py", line 258, in download_audio
-    raise RuntimeError(f"Download completed but file not found at {output_path}")
-RuntimeError: Download completed but file not found at /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_fjesf17f/audio.mp3
-[2024-12-22T20:13:00.fZ] [ERROR] src.transcription_manager: Error in process_transcription (task_id=22103aee-e9f5-4305-bc69-5966d71aaadb, url=https://www.youtube.com/watch?v=WsFOcu-yHTY)
-Traceback (most recent call last):
-  File "/Users/ark/Development/Tools/web-toolkit/src/transcription_manager.py", line 258, in download_audio
-    raise RuntimeError(f"Download completed but file not found at {output_path}")
-RuntimeError: Download completed but file not found at /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_fjesf17f/audio.mp3
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/Users/ark/Development/Tools/web-toolkit/src/transcription_manager.py", line 354, in process_transcription
-    self.download_audio(url, audio_path, dl_cb)
-  File "/Users/ark/Development/Tools/web-toolkit/src/transcription_manager.py", line 277, in download_audio
-    raise RuntimeError(f"Failed to download audio: {str(e)}")
-RuntimeError: Failed to download audio: Download completed but file not found at /var/folders/kl/xmdxbqmx11n_9fl210238dj80000gn/T/transcription_fjesf17f/audio.mp3
+[2024-12-23T01:16:10.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = AWJGB3H6BX31N0G1a ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
 ################################################################################
-2024-12-22 20:14:02 - APPLICATION START
+2024-12-23 01:19:05 - APPLICATION START
 ################################################################################
-[2024-12-22T20:14:23.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+[2024-12-23T01:19:50.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
          player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:14:23.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
-         n = xgWR00JxX0MSa1ke4 ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:14:24.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+[2024-12-23T01:19:50.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = uhpiW9YbZvS73-678 ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-23T01:19:50.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
          player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:14:24.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
-         n = xJao1qAYGvDKirV9i ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:23:18.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+[2024-12-23T01:19:50.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = xYiWP6KtXEQqu3kYZ ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+################################################################################
+2024-12-23 16:50:54 - APPLICATION START
+################################################################################
+[2024-12-23T16:51:15.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
          player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:23:18.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
-         n = anRf6W1Ns44g0FOV8 ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:23:18.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+[2024-12-23T16:51:15.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = 5pLCEuh-_enEd01ZV ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-23T16:51:15.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
          player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:23:18.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
-         n = UZpHrgZkRaI1YNvMj ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-################################################################################
-2024-12-22 20:33:50 - APPLICATION START
-################################################################################
-[2024-12-22T20:33:54.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+[2024-12-23T16:51:15.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = EhUMiQt5wx1mOKKYB ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-23T17:15:55.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
          player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:33:54.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
-         n = HtaCiPuWPXvu_vnV2 ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:33:54.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+[2024-12-23T17:15:55.fZ] [WARNING] yt-dlp: [youtube] RrHGX1wwSYM: nsig extraction failed: Some formats may be missing
+         n = OzrW03SN7shY51YdZ ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-23T17:15:55.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
          player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:33:54.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
-         n = fKA0E8VsjWJUrJQN_ ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2024-12-23T17:15:55.fZ] [WARNING] yt-dlp: [youtube] RrHGX1wwSYM: nsig extraction failed: Some formats may be missing
+         n = C3DYRlMe5M6W9GzW4 ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
 ################################################################################
-2024-12-22 20:34:41 - APPLICATION START
+2025-01-01 03:03:42 - APPLICATION START
 ################################################################################
-[2024-12-22T20:34:58.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+[2025-01-01T03:04:14.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
          player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:34:58.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
-         n = kGXGiDiY5zMJNcm5O ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:34:58.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+[2025-01-01T03:04:14.fZ] [WARNING] yt-dlp: [youtube] xRMPKQweySE: nsig extraction failed: Some formats may be missing
+         n = N1ZlSzQx_AqNJWT7N ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2025-01-01T03:04:14.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
          player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:34:58.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
-         n = saYWwzb8J6UJ69hLe ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-################################################################################
-2024-12-22 20:47:31 - APPLICATION START
-################################################################################
-################################################################################
-2024-12-22 20:55:00 - APPLICATION START
-################################################################################
-################################################################################
-2024-12-22 20:56:16 - APPLICATION START
-################################################################################
-################################################################################
-2024-12-22 20:56:23 - APPLICATION START
-################################################################################
-################################################################################
-2024-12-22 20:59:50 - APPLICATION START
-################################################################################
-[2024-12-22T20:59:56.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+[2025-01-01T03:04:14.fZ] [WARNING] yt-dlp: [youtube] xRMPKQweySE: nsig extraction failed: Some formats may be missing
+         n = RHMY4UYEZnBbgd7c_ ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2025-01-01T03:58:53.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
          player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:59:56.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
-         n = btBI57iScR2fS80zR ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:59:56.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+[2025-01-01T03:58:53.fZ] [WARNING] yt-dlp: [youtube] MFhxShGxHWc: nsig extraction failed: Some formats may be missing
+         n = Wb-Vim9Det56K9dMB ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2025-01-01T03:58:54.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
          player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T20:59:56.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
-         n = vG-PyAx7NpuIZPAcC ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T21:00:00.fZ] [WARNING] py.warnings: /Users/ark/Development/Tools/web-toolkit/.venv/lib/python3.12/site-packages/whisper/__init__.py:150: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
-  checkpoint = torch.load(fp, map_location=device)
-
-[2024-12-22T21:00:07.fZ] [WARNING] py.warnings: /Users/ark/Development/Tools/web-toolkit/.venv/lib/python3.12/site-packages/whisper/transcribe.py:126: UserWarning: FP16 is not supported on CPU; using FP32 instead
-  warnings.warn("FP16 is not supported on CPU; using FP32 instead")
-
+[2025-01-01T03:58:54.fZ] [WARNING] yt-dlp: [youtube] MFhxShGxHWc: nsig extraction failed: Some formats may be missing
+         n = pbcoTVQtcLm1Eq10A ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
 ################################################################################
-2024-12-22 21:06:17 - APPLICATION START
+2025-01-02 19:04:29 - APPLICATION START
+################################################################################
+[2025-01-02T19:05:28.fZ] [WARNING] yt-dlp: [youtube] RfXt_qHDEPw: Signature extraction failed: Some formats may be missing
+################################################################################
+2025-01-08 22:43:51 - APPLICATION START
 ################################################################################
 ################################################################################
-2024-12-22 21:25:47 - APPLICATION START
+2025-01-08 22:56:28 - APPLICATION START
 ################################################################################
-[2024-12-22T21:25:58.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
-         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T21:25:58.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
-         n = xpcdeHSAsIPlVrSxm ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T21:25:58.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
-         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T21:25:58.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
-         n = WOE3wxcl464s7JiW8 ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T21:30:50.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
-         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T21:30:50.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
-         n = qUYOkYabROQUT1jmh ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T21:30:50.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
-         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T21:30:50.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
-         n = Gd_vi3f4k_a1FhzLL ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-################################################################################
-2024-12-22 21:35:17 - APPLICATION START
-################################################################################
-[2024-12-22T21:35:22.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
-         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T21:35:22.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
-         n = XMA8NSgIFvjGAWONa ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T21:35:22.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
-         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T21:35:22.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
-         n = hg9AB71SlAt8cNorF ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-################################################################################
-2024-12-22 21:40:39 - APPLICATION START
-################################################################################
-[2024-12-22T21:40:44.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
-         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T21:40:44.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
-         n = uG5AeA7VHL8R3YSQz ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T21:40:44.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
-         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T21:40:44.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
-         n = P29Nuzd5KM01mOJZa ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-################################################################################
-2024-12-22 22:16:01 - APPLICATION START
-################################################################################
-[2024-12-22T22:16:15.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
-         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T22:16:15.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
-         n = ZH_gNtmUMkrmAEi59 ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T22:16:15.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
-         player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
-[2024-12-22T22:16:15.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
-         n = vH4g9U0pkARfDCFv3 ; player = https://www.youtube.com/s/player/03dbdfab/player_ias.vflset/en_US/base.js
+[2025-01-08T23:25:04.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/a5032d18/player_ias.vflset/en_US/base.js
+[2025-01-08T23:25:04.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = goe9-1U6CBc0zMIM ; player = https://www.youtube.com/s/player/a5032d18/player_ias.vflset/en_US/base.js
+[2025-01-08T23:25:04.fZ] [WARNING] yt-dlp: [youtube] Falling back to generic n function search
+         player = https://www.youtube.com/s/player/a5032d18/player_ias.vflset/en_US/base.js
+[2025-01-08T23:25:04.fZ] [WARNING] yt-dlp: [youtube] WsFOcu-yHTY: nsig extraction failed: Some formats may be missing
+         n = 0TYWVcvxORZWP4RY ; player = https://www.youtube.com/s/player/a5032d18/player_ias.vflset/en_US/base.js

@@ -18,6 +18,10 @@ def register_routes(app):
     def transcription():
         return render_template('transcription.html')
     
+    @app.route('/video-transcription')
+    def video_transcription():
+        return render_template('video-transcription.html')
+    
     @app.route('/text-compare')
     def text_compare():
         return render_template('text-compare.html')

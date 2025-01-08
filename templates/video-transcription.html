@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% block title %}Video Transcriber{% endblock %}
+
+{% block content %}
+<div id="main-container"
+    class="bg-white shadow-md rounded-lg p-8 w-full mx-auto transition-all duration-500 ease-in-out"
+    style="max-width: 672px;"
+    data-expanded="false">
+
+    <h1 class="text-2xl font-bold mb-6 text-center">Video Transcriber</h1>
+
+    <div class="max-w-2xl mx-auto">
+        <div id="error-container" class="hidden mb-4">
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <span id="error-message" class="block sm:inline"></span>
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <div id="progress-bar-container" data-ui-state="progressBarVisible"
+                class="hidden w-full bg-gray-200 rounded-full h-2.5 mb-2">
+                <div id="progress-bar" class="bg-indigo-600 h-2.5 rounded-full transition-all duration-300 ease-in-out"
+                    style="width: 0%"></div>
+            </div>
+            <p id="progress" data-ui-state="progressBarVisible" class="text-gray-700 hidden">Waiting for input...</p>
+            <div id="language-detection" class="hidden mt-2 text-sm">
+                <span class="inline-flex items-center">
+                    <svg class="w-4 h-4 mr-1 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+                    </svg>
+                    <span class="font-medium text-gray-700">Detected Language:</span>
+                    <span id="detected-language" class="ml-1 text-indigo-600 font-semibold">Detecting...</span>
+                </span>
+            </div>
+        </div>
+
+        <div class="mt-4 mb-4 w-full">
+            <div class="flex justify-between items-center">
+                <button id="toggle-debug" class="flex items-center text-sm text-gray-600 hover:text-gray-800 focus:outline-none">
+                    <svg class="w-4 h-4 mr-1 transform transition-transform" id="debug-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                    Debug Logs
+                </button>
+                <div class="flex space-x-2">
+                    <button id="submit-debug" class="px-2 py-1 text-sm text-gray-600 hover:text-gray-800 focus:outline-none hidden">
+                        <span class="flex items-center">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3 3m0 0l-3-3m3 3V8" />
+                            </svg>
+                            Submit Logs
+                        </span>
+                    </button>
+                    <button id="copy-debug" class="px-2 py-1 text-sm text-gray-600 hover:text-gray-800 focus:outline-none hidden">
+                        <span class="flex items-center">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/>
+                            </svg>
+                            Copy
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <div id="debug-logs" class="hidden mt-2 mb-4 p-4 bg-gray-50 rounded-lg border border-gray-200 max-h-60 overflow-y-auto">
+                <pre id="debug-content" class="text-xs font-mono text-gray-700 whitespace-pre-wrap"></pre>
+            </div>
+        </div>
+
+        <form id="transcription-form" class="space-y-4">
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Choose Video File:</label>
+                    <div class="flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md hover:border-indigo-500 transition-colors duration-200">
+                        <div class="space-y-1 text-center">
+                            <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                                <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4-4m4-4h.01" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <div class="flex text-sm text-gray-600">
+                                <label for="file-upload" class="relative cursor-pointer rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none">
+                                    <span>Upload a file</span>
+                                    <input id="file-upload" name="file" type="file" class="sr-only" accept="video/*,audio/*">
+                                </label>
+                                <p class="pl-1">or drag and drop</p>
+                            </div>
+                            <p class="text-xs text-gray-500">Video or audio files up to 2GB</p>
+                        </div>
+                    </div>
+                    <div id="file-info" class="mt-2 text-sm text-gray-500 hidden">
+                        Selected file: <span id="file-name" class="font-medium text-gray-900"></span>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="whisper-model" class="block text-sm font-medium text-gray-700">
+                        Select Whisper Model:
+                    </label>
+                    <select id="whisper-model" name="whisper-model" 
+                            class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                        <option value="tiny">Tiny (Fastest, Least Accurate)</option>
+                        <option value="base">Base</option>
+                        <option value="small">Small</option>
+                        <option value="medium">Medium</option>
+                        <option value="large" selected>Large (Slowest, Most Accurate)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="flex justify-center mt-4">
+                <button type="submit"
+                    class="btn px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    Transcribe
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div id="results-section" class="mt-8 hidden w-full">
+        <div class="w-full mb-4">
+            <div id="results-container" class="flex flex-col mt-4 space-y-4 hidden">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-semibold">Transcription Results:</h2>
+                </div>
+                
+                <div id="transcripts-container">
+                    <div id="whisper-result-box" class="result-box bg-gray-50 p-4 border border-gray-200 rounded-lg w-full min-h-[200px]">
+                        <div class="flex justify-between items-center mb-2 h-8">
+                            <h4 class="font-bold text-gray-800">Whisper Transcript:</h4>
+                            <div class="flex items-center space-x-2">
+                                <button class="refresh-button px-2 py-1 bg-gray-200 text-gray-700 rounded-md text-sm hidden">Refresh</button>
+                                <button class="copy-button px-2 py-1 bg-blue-500 text-white rounded-md text-sm">Copy</button>
+                            </div>
+                        </div>
+                        <pre id="whisper-result" class="whitespace-pre-wrap w-full max-h-[60vh] overflow-y-auto font-mono text-sm"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
+<script src="{{ url_for('static', filename='js/services/socketService.js') }}"></script>
+<script src="{{ url_for('static', filename='js/client-logger.js') }}"></script>
+<script src="{{ url_for('static', filename='js/video-transcription-form.js') }}"></script>
+{% endblock %} 
