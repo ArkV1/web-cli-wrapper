@@ -22,6 +22,7 @@ from flask_socketio import SocketIO
 # Import route registration functions
 from src.routes import register_routes
 from src.api_routes import register_api_routes
+from src.queue_routes import register_queue_routes
 from src.client_logging import register_client_logging_routes
 from src.transcription_manager import TranscriptionManager  # Import the class
 
@@ -69,6 +70,7 @@ manager = TranscriptionManager(socketio=socketio)
 logger.debug("Registering Flask routes...")
 register_routes(app)
 register_api_routes(app, socketio, manager)
+register_queue_routes(app, socketio, manager)
 register_client_logging_routes(app)
 logger.debug("Routes registered successfully.")
 

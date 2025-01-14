@@ -1,0 +1,230 @@
+{% extends "base.html" %}
+
+{% block title %}Transcription Queue{% endblock %}
+
+{% block content %}
+<style>
+    .section-content {
+        transition: all 0.3s ease-in-out;
+        overflow: hidden;
+    }
+    
+    .section-content.collapsed {
+        max-height: 0 !important;
+        opacity: 0;
+    }
+    
+    .section-content.expanded {
+        max-height: none;
+        opacity: 1;
+    }
+    
+    .section-toggle {
+        transition: transform 0.3s ease-in-out;
+    }
+    
+    .section-header:hover {
+        background-color: rgba(0, 0, 0, 0.02);
+    }
+
+    .file-list-container {
+        position: relative;
+        z-index: 10;
+    }
+
+    .queue-status-container {
+        position: relative;
+        z-index: 5;
+    }
+</style>
+
+<div class="container mx-auto px-4 py-8 max-w-6xl">
+    <h1 class="text-3xl font-bold mb-8">Transcription Queue</h1>
+
+    <!-- URL Input Form -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+        <div class="flex justify-between items-center mb-4 cursor-pointer rounded-md p-2 section-header" id="url-section-header">
+            <h2 class="text-xl font-semibold">Add URLs to Queue</h2>
+            <button class="text-gray-500 hover:text-gray-700 section-toggle" id="url-section-toggle">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+            </button>
+        </div>
+        <div id="url-section-content" class="section-content">
+            <form id="url-queue-form" class="space-y-4">
+                <div id="url-inputs" class="space-y-4">
+                    <div class="url-input-group">
+                        <div class="flex gap-4">
+                            <div class="flex-1">
+                                <input type="text" placeholder="Enter YouTube URL" 
+                                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+                            </div>
+                            <select class="px-3 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+                                <option value="Both">Both</option>
+                                <option value="YouTube">YouTube Only</option>
+                                <option value="Whisper">Whisper Only</option>
+                            </select>
+                            <button type="button" class="remove-url px-3 py-2 text-red-600 hover:text-red-800">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label for="url-whisper-model" class="block text-sm font-medium text-gray-700">
+                            Select Whisper Model:
+                        </label>
+                        <select id="url-whisper-model" name="whisper-model" 
+                                class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                            <option value="tiny">Tiny (Fastest, Least Accurate)</option>
+                            <option value="base">Base</option>
+                            <option value="small">Small</option>
+                            <option value="medium">Medium</option>
+                            <option value="large" selected>Large (Slowest, Most Accurate)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="flex gap-4">
+                    <button type="button" id="add-url" 
+                            class="px-4 py-2 text-sm text-indigo-600 hover:text-indigo-800 focus:outline-none">
+                        + Add Another URL
+                    </button>
+                    <div class="flex-1"></div>
+                    <button type="submit" 
+                            class="px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        Add URLs to Queue
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- File Upload Form -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+        <div class="flex justify-between items-center mb-4 cursor-pointer rounded-md p-2 section-header" id="file-section-header">
+            <h2 class="text-xl font-semibold">Upload Video Files</h2>
+            <button class="text-gray-500 hover:text-gray-700 section-toggle" id="file-section-toggle">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+            </button>
+        </div>
+        <div id="file-section-content" class="section-content">
+            <form id="file-queue-form" class="space-y-4">
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Choose Video Files:</label>
+                        <div class="flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md hover:border-indigo-500 transition-colors duration-200">
+                            <div class="space-y-1 text-center">
+                                <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4-4m4-4h.01" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                <div class="flex text-sm text-gray-600">
+                                    <label for="file-upload" class="relative cursor-pointer rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none">
+                                        <span>Upload files</span>
+                                        <input id="file-upload" name="files" type="file" class="sr-only" accept="video/*,audio/*" multiple>
+                                    </label>
+                                    <p class="pl-1">or drag and drop</p>
+                                </div>
+                                <p class="text-xs text-gray-500">Multiple video or audio files up to 2GB each</p>
+                            </div>
+                        </div>
+                        <div id="files-info" class="mt-2 text-sm text-gray-500 hidden file-list-container">
+                            <div class="font-medium text-gray-900 mb-1">Selected files:</div>
+                            <div class="max-h-[40vh] overflow-y-auto border border-gray-200 rounded-md p-4 bg-white shadow-lg">
+                                <div id="file-list" class="space-y-1"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="whisper-model" class="block text-sm font-medium text-gray-700 mt-4">
+                            Select Whisper Model:
+                        </label>
+                        <select id="whisper-model" name="whisper-model" 
+                                class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                            <option value="tiny">Tiny (Fastest, Least Accurate)</option>
+                            <option value="base">Base</option>
+                            <option value="small">Small</option>
+                            <option value="medium">Medium</option>
+                            <option value="large" selected>Large (Slowest, Most Accurate)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex justify-center mt-4">
+                    <button type="submit"
+                        class="btn px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        Add Files to Queue
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Queue Status -->
+    <div class="bg-white rounded-lg shadow-md p-6 queue-status-container">
+        <div class="flex justify-between items-center mb-6">
+            <div>
+                <h2 class="text-xl font-semibold">Queue Status</h2>
+                <div class="mt-2 text-sm text-gray-600" id="queue-stats">
+                    <!-- Queue stats will be inserted here -->
+                </div>
+            </div>
+            <div class="flex gap-4">
+                <button id="clear-queue" 
+                        class="px-4 py-2 text-sm text-red-600 hover:text-red-800 focus:outline-none flex items-center">
+                    <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                    </svg>
+                    Clear Completed
+                </button>
+                <button id="refresh-queue" 
+                        class="px-4 py-2 text-sm text-gray-600 hover:text-gray-800 focus:outline-none">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                              d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead>
+                    <tr>
+                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Source
+                        </th>
+                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Status
+                        </th>
+                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Progress
+                        </th>
+                        <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="queue-tasks" class="bg-white divide-y divide-gray-200">
+                    <!-- Tasks will be inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
+<script src="{{ url_for('static', filename='js/services/socketService.js') }}"></script>
+<script src="{{ url_for('static', filename='js/queue.js') }}"></script>
+{% endblock %} 

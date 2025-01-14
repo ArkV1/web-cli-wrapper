@@ -22,7 +22,7 @@ import multiprocessing
 import logging
 import warnings
 from pathlib import Path
-from typing import Dict, Optional, Callable
+from typing import Dict, Optional, Callable, List
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 
 import whisper
@@ -182,15 +182,20 @@ class TranscriptionManager:
     def __init__(self, socketio=None):
         self._lock = threading.Lock()
         self.socketio = socketio
-
+        
         # store ephemeral task states
         self.tasks: Dict[str, Dict] = {}
+        
+        # Create results directory if it doesn't exist
+        self.results_dir = Path('transcription_results')
+        self.results_dir.mkdir(exist_ok=True)
 
         # A thread pool so you can offload non-CPU-bound tasks:
         self._thread_pool = ThreadPoolExecutor(max_workers=4)
 
         # A process pool for CPU-bound tasks like Whisper transcription
-        self._whisper_pool = ProcessPoolExecutor(max_workers=2, mp_context=ctx)
+        # Using single worker to ensure sequential processing
+        self._whisper_pool = ProcessPoolExecutor(max_workers=1, mp_context=ctx)
 
         # Ensure executors are shutdown gracefully
         import atexit
@@ -257,8 +262,10 @@ class TranscriptionManager:
             Dict containing transcription results or error information
         """
         try:
+            logger.info(f"Starting file transcription for task {task_id}")
             if progress_callback:
                 progress_callback({
+                    "status": "processing",
                     "progress": 0,
                     "message": "Starting transcription..."
                 })
@@ -266,9 +273,11 @@ class TranscriptionManager:
             # Create a temporary file for progress tracking
             with tempfile.NamedTemporaryFile(mode='w', suffix='.jsonl', delete=False) as progress_file:
                 progress_path = progress_file.name
+                logger.debug(f"Created progress file at {progress_path}")
 
                 try:
                     # Run transcription in a separate process
+                    logger.debug(f"Submitting transcription task to process pool for {task_id}")
                     future = self._whisper_pool.submit(
                         _transcribe_in_process,
                         str(file_path),
@@ -286,6 +295,7 @@ class TranscriptionManager:
                                 for line in lines[last_progress:]:
                                     update = json.loads(line)
                                     if progress_callback:
+                                        update['status'] = 'transcribing'
                                         progress_callback(update)
                                 last_progress = len(lines)
                         except Exception as e:
@@ -293,11 +303,33 @@ class TranscriptionManager:
                         time.sleep(0.1)
 
                     # Get the result
+                    logger.debug(f"Getting transcription result for task {task_id}")
                     result = future.result()
 
                     if result.get("success"):
+                        logger.info(f"Transcription successful for task {task_id}")
+                        # Prepare the complete result
+                        complete_result = {
+                            'task_id': task_id,
+                            'filename': Path(file_path).name,
+                            'model_name': model_name,
+                            'whisper_transcript': result["text"],
+                            'segments': result.get("segments", []),
+                            'completed_at': time.strftime('%Y-%m-%d %H:%M:%S')
+                        }
+
+                        # Save the result to file
+                        logger.info(f"Attempting to save result for task {task_id}")
+                        try:
+                            self.save_transcription_result(task_id, complete_result)
+                            logger.info(f"Successfully saved result for task {task_id}")
+                        except Exception as save_error:
+                            logger.error(f"Failed to save result for task {task_id}: {save_error}")
+                            raise save_error
+
                         if progress_callback:
                             progress_callback({
+                                "status": "completed",
                                 "progress": 100,
                                 "message": "Transcription complete",
                                 "complete": True,
@@ -308,8 +340,10 @@ class TranscriptionManager:
                         return result
                     else:
                         error = result.get("error", "Unknown error during transcription")
+                        logger.error(f"Transcription failed for task {task_id}: {error}")
                         if progress_callback:
                             progress_callback({
+                                "status": "failed",
                                 "progress": 100,
                                 "message": f"Error: {error}",
                                 "complete": True,
@@ -322,6 +356,7 @@ class TranscriptionManager:
                     # Clean up progress file
                     try:
                         os.unlink(progress_path)
+                        logger.debug(f"Cleaned up progress file for task {task_id}")
                     except Exception as e:
                         logger.warning(f"Failed to delete progress file {progress_path}: {e}")
 
@@ -330,6 +365,7 @@ class TranscriptionManager:
             logger.exception(error_msg)
             if progress_callback:
                 progress_callback({
+                    "status": "failed",
                     "progress": 100,
                     "message": error_msg,
                     "complete": True,
@@ -579,6 +615,18 @@ class TranscriptionManager:
         # Update in-memory state
         self.update_progress(task_id, data)
         
+        # If task is complete and successful, save result to file
+        if extra and extra.get('complete') and extra.get('success'):
+            result = {
+                'task_id': task_id,
+                'youtube_transcript': extra.get('youtube_transcript'),
+                'whisper_transcript': extra.get('whisper_transcript'),
+                'segments': extra.get('segments'),
+                'method': self.tasks.get(task_id, {}).get('method', 'unknown'),
+                'url': self.tasks.get(task_id, {}).get('url', 'unknown')
+            }
+            self.save_transcription_result(task_id, result)
+        
         # Log the progress data
         logger.debug("Sending progress update for task_id=%s: %s", task_id, data)
         
@@ -599,3 +647,76 @@ class TranscriptionManager:
                                  attempt + 1, str(e))
                     time.sleep(retry_delay)
                     retry_delay *= 2  # Exponential backoff
+
+    def save_transcription_result(self, task_id: str, result: dict):
+        """Save transcription result to a JSON file."""
+        try:
+            logger.info(f"Starting to save transcription result for task {task_id}")
+            result_file = self.results_dir / f"{task_id}.json"
+            logger.debug(f"Result will be saved to {result_file}")
+
+            # Ensure directory exists
+            self.results_dir.mkdir(exist_ok=True)
+            logger.debug(f"Ensured results directory exists at {self.results_dir}")
+
+            # Add timestamp to result if not already present
+            if 'completed_at' not in result:
+                result['completed_at'] = time.strftime('%Y-%m-%d %H:%M:%S')
+
+            # Write the file
+            logger.debug(f"Writing result to file for task {task_id}")
+            with open(result_file, 'w', encoding='utf-8') as f:
+                json.dump(result, f, ensure_ascii=False, indent=2)
+            
+            # Verify file was written
+            if result_file.exists():
+                file_size = result_file.stat().st_size
+                logger.info(f"Successfully saved transcription result to {result_file} (size: {file_size} bytes)")
+            else:
+                raise RuntimeError(f"File {result_file} was not created")
+
+        except Exception as e:
+            logger.error(f"Failed to save transcription result for task {task_id}: {e}")
+            logger.exception("Detailed error:")
+            raise  # Re-raise the exception to be handled by the caller
+
+    def get_transcription_result(self, task_id: str) -> Optional[dict]:
+        """Retrieve a transcription result from file."""
+        try:
+            result_file = self.results_dir / f"{task_id}.json"
+            if result_file.exists():
+                with open(result_file, 'r', encoding='utf-8') as f:
+                    return json.load(f)
+        except Exception as e:
+            logger.error(f"Failed to read transcription result: {e}")
+        return None
+
+    def get_all_results(self) -> List[dict]:
+        """Get all completed transcription results."""
+        results = []
+        for file in self.results_dir.glob('*.json'):
+            try:
+                with open(file, 'r', encoding='utf-8') as f:
+                    result = json.load(f)
+                    result['task_id'] = file.stem  # Add task_id from filename
+                    results.append(result)
+            except Exception as e:
+                logger.error(f"Failed to read result file {file}: {e}")
+        return sorted(results, key=lambda x: x.get('completed_at', ''), reverse=True)
+
+    def clear_completed_results(self) -> int:
+        """
+        Clear all completed transcription results from storage.
+        Returns the number of results cleared.
+        """
+        cleared_count = 0
+        try:
+            for file in self.results_dir.glob('*.json'):
+                try:
+                    file.unlink()
+                    cleared_count += 1
+                except Exception as e:
+                    logger.error(f"Failed to delete result file {file}: {e}")
+        except Exception as e:
+            logger.error(f"Error clearing completed results: {e}")
+        return cleared_count
